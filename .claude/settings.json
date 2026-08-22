@@ -1,0 +1,7 @@
+{
+  "env": {
+    "ANTHROPIC_BASE_URL": "https://api.apimart.ai",
+    "ANTHROPIC_MODEL": "claude-sonnet-4-6-apimart",
+    "CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC": "1"
+  }
+}
