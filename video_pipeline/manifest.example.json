@@ -1,0 +1,36 @@
+{
+  "project_name": "demo_project",
+  "music_file": "background_music.mp3",
+  "scenes": [
+    {
+      "scene_id": 1,
+      "order": 1,
+      "visual_prompt": "Toma aerea de una ciudad futurista al amanecer, luz calida, drone shot cinematografico",
+      "audio_prompt": "Voz en off masculina, tono narrativo y calido, en espanol neutro",
+      "music_prompt": "Ambiente electronico suave, buildup progresivo",
+      "duration_seconds": 6.5,
+      "file_name": "01_scene.mp4",
+      "narration_file": "01_narration.mp3"
+    },
+    {
+      "scene_id": 2,
+      "order": 2,
+      "visual_prompt": "Primer plano de un robot ensamblando piezas en una fabrica automatizada",
+      "audio_prompt": "Voz en off continua explicando el proceso de fabricacion",
+      "music_prompt": "Mismo ambiente electronico, intensidad media",
+      "duration_seconds": 5.0,
+      "file_name": "02_scene.mp4",
+      "narration_file": "02_narration.mp3"
+    },
+    {
+      "scene_id": 3,
+      "order": 3,
+      "visual_prompt": "Interior de un centro de datos con servidores iluminados en azul",
+      "audio_prompt": "Voz en off cerrando la idea con tono conclusivo",
+      "music_prompt": "Ambiente electronico con climax final",
+      "duration_seconds": 4.2,
+      "file_name": "03_scene.mp4",
+      "narration_file": "03_narration.mp3"
+    }
+  ]
+}
