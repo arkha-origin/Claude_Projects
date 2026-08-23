@@ -1,15 +1,98 @@
-# Pipeline de edicion automatica con DaVinci Resolve + n8n
+# Pipeline de creacion y edicion automatica: Gemini + Veo + Lyria + DaVinci Resolve + n8n
 
-Este directorio contiene el script `davinci_auto_edit.py`, que arma una
-timeline en DaVinci Resolve Studio a partir de clips generados por IA y un
-`manifest.json` con el guion estructurado.
+Pipeline end-to-end orquestado desde n8n:
+
+```
+[n8n Trigger] -> generate_content_pipeline.py -> davinci_auto_edit.py -> (proyecto listo en Resolve)
+                  (Gemini guion + Veo video          (arma la timeline)
+                   + Lyria musica -> descarga)
+```
 
 ## Archivos
 
-- `davinci_auto_edit.py` — script principal (CLI).
+- `generate_content_pipeline.py` — genera el guion (Gemini), el video de cada
+  escena (Veo 3.1) y la musica de fondo (Lyria 3), y descarga todo a una
+  carpeta local junto con un `manifest.json`.
+- `davinci_auto_edit.py` — arma la timeline en DaVinci Resolve Studio a
+  partir de esos medios y el `manifest.json`.
 - `manifest.example.json` — ejemplo de guion estructurado.
+- `requirements.txt` — dependencia `google-genai` para el script de generacion.
 
-## Requisitos previos
+## Nota importante sobre Google Flow
+
+**Google Flow (labs.google/flow) no tiene API publica** — es una interfaz web
+cerrada pensada para uso manual, sin forma oficial de automatizarla (los
+"wrappers" que existen son proyectos de terceros no oficiales que controlan
+tu cuenta por scraping/CAPTCHA, no recomendados para un pipeline de
+produccion). En vez de eso, este pipeline llama **directamente a los mismos
+modelos que usa Flow por detras** a traves de la Gemini API, que si es
+100% programable con una API key:
+
+- **Veo 3.1** — genera el video de cada escena, incluyendo audio nativo
+  sincronizado (dialogo/efectos), asi que no hace falta un paso aparte de
+  locucion: el `audio_prompt` de cada escena se inyecta en el prompt de Veo.
+- **Lyria 3** — genera la musica de fondo (clips de 30s) a partir de
+  `music_prompt`.
+
+Ambos requieren una API key de **Google AI Studio en tier de pago** (Veo y
+Lyria no estan disponibles en el tier gratuito).
+
+## Requisitos previos — generacion de contenido (Gemini/Veo/Lyria)
+
+1. Crear una API key en [Google AI Studio](https://aistudio.google.com/apikey)
+   con un proyecto de Google Cloud que tenga **facturacion habilitada**
+   (tier de pago; Veo y Lyria no funcionan con el tier gratuito).
+2. `pip install -r requirements.txt` (instala `google-genai`).
+3. Exportar la key como variable de entorno:
+   ```bash
+   export GEMINI_API_KEY="tu-api-key"
+   ```
+
+## Uso manual — generacion de contenido
+
+```bash
+python3 generate_content_pipeline.py \
+  --topic "Como funciona un centro de datos moderno" \
+  --project_id "demo_project" \
+  --output_dir "/path/to/media/demo_project" \
+  --scene_count 4 \
+  --verbose
+```
+
+Esto deja en `/path/to/media/demo_project/`: `01_scene.mp4`, `02_scene.mp4`,
+..., `background_music.wav` y `manifest.json` — listo como entrada directa
+de `davinci_auto_edit.py`.
+
+Argumentos principales:
+
+| Argumento | Requerido | Descripcion |
+|---|---|---|
+| `--topic` | si* | Tema/brief del video. *No requerido si se pasa `--manifest_json` para reusar un guion ya generado. |
+| `--project_id` | si | Identificador del proyecto (nombre de carpeta). |
+| `--output_dir` | si | Carpeta destino de los medios + manifest.json. |
+| `--scene_count` | no | Cantidad de escenas a generar (default 4). |
+| `--manifest_json` | no | Reusa un guion existente y solo genera video/musica (saltea el paso de Gemini texto). |
+| `--music_prompt` | no | Prompt global de musica (default: combina los `music_prompt` de las escenas). |
+| `--aspect_ratio` | no | Default `16:9`. |
+| `--skip_video` / `--skip_music` | no | Para correr solo una parte del pipeline. |
+| `--dry_run` | no | Genera solo el guion/manifest.json, sin llamar a Veo/Lyria (util para revisar el guion antes de gastar cuota). |
+| `--verbose` | no | Logging en modo debug. |
+
+Limitaciones a tener en cuenta:
+- Veo solo soporta duraciones discretas (4/6/8s); `duration_seconds` del
+  guion se ajusta automaticamente al valor soportado mas cercano.
+- Lyria genera clips fijos de 30s; si el video final es mas largo, hay que
+  recortar/loopear la musica manualmente en Resolve (el script de Resolve no
+  hace loop automatico).
+- Los nombres de modelo (`veo-3.1-generate-preview`, `lyria-3-pro-preview`)
+  son *preview* y cambian con el tiempo; revisa
+  [ai.google.dev/gemini-api/docs/models](https://ai.google.dev/gemini-api/docs/models)
+  si el script empieza a fallar por modelo no encontrado, y ajusta
+  `--text_model` / `--veo_model` / `--lyria_model`.
+
+---
+
+## Requisitos previos — edicion en DaVinci Resolve
 
 1. **DaVinci Resolve Studio** instalado (la version gratuita no habilita
    scripting externo completo en todas las plataformas; se recomienda Studio).
@@ -84,27 +167,45 @@ detecte errores del nodo `Execute Command`).
 También podés pasar el manifest como una lista simple de escenas (sin el
 wrapper `{"scenes": [...]}`); el script lo detecta automáticamente.
 
-## Invocacion desde n8n (nodo "Execute Command")
+## Invocacion desde n8n (nodos "Execute Command")
 
-1. Agregar un nodo **Execute Command** despues del paso que descarga los
-   medios generados (video/audio) al directorio local.
-2. Command:
+Workflow recomendado con dos nodos `Execute Command` encadenados:
+
+**Nodo 1 — Generar contenido (Gemini + Veo + Lyria):**
+
+```bash
+python3 /ruta/al/script/generate_content_pipeline.py --topic "{{$json.topic}}" --project_id "{{$json.project_id}}" --output_dir "/path/to/media/{{$json.project_id}}" --scene_count {{$json.scene_count || 4}}
+```
+
+**Nodo 2 — Armar timeline en DaVinci Resolve** (encadenado despues del nodo 1):
 
 ```bash
 python3 /ruta/al/script/davinci_auto_edit.py --project_name "{{$json.project_id}}" --media_folder "/path/to/media/{{$json.project_id}}" --manifest_json "/path/to/media/{{$json.project_id}}/manifest.json" --timeline_name "Timeline_{{$json.project_id}}"
 ```
 
-3. En **Options**, activar "Continue on Fail" solo si querés capturar el
-   error y manejarlo en un nodo siguiente (por ejemplo notificando por
-   Slack/email); de lo contrario dejalo desactivado para que el workflow se
-   detenga si DaVinci Resolve no pudo procesar el proyecto.
-4. El `stdout`/`stderr` del nodo va a contener el log del script
-   (`[INFO]`, `[WARNING]`, `[ERROR]`), util para debugging directo desde la
-   ejecucion de n8n.
-5. Recomendado: agregar un nodo previo que valide (`IF`) que la cantidad de
-   archivos descargados coincide con la cantidad de escenas del manifest,
-   antes de invocar el script, para evitar ejecutar la automatizacion con
-   medios incompletos.
+Notas:
+
+1. En el nodo 1, definir `GEMINI_API_KEY` como variable de entorno del
+   proceso (en **Options > Environment Variables** del nodo, o a nivel del
+   worker de n8n) — **no** pasarla como argumento de linea de comandos para
+   que no quede expuesta en logs/histórico de ejecuciones de n8n.
+2. Ambos nodos necesitan poder ejecutarse en la maquina correcta: el nodo 1
+   solo necesita salida a internet (puede correr en el VPS de n8n); el
+   nodo 2 **debe** correr en la maquina donde esta abierto DaVinci Resolve
+   (ver seccion siguiente) — si son maquinas distintas, el nodo 2 tiene que
+   ejecutarse via un worker de n8n instalado en la estacion de edicion, o
+   via SSH/Remote hacia esa maquina.
+3. En **Options** de cada nodo, activar "Continue on Fail" solo si querés
+   capturar el error y manejarlo en un nodo siguiente (por ejemplo
+   notificando por Slack/email); de lo contrario dejalo desactivado para que
+   el workflow se detenga ante un fallo.
+4. El `stdout`/`stderr` de ambos nodos contiene el log estructurado del
+   script (`[INFO]`, `[WARNING]`, `[ERROR]`), util para debugging directo
+   desde la ejecucion de n8n.
+5. Recomendado: agregar un nodo `IF` entre el nodo 1 y el nodo 2 que valide
+   que `manifest.json` y los archivos de video/musica esperados existen
+   antes de invocar `davinci_auto_edit.py`, para evitar armar una timeline
+   con medios incompletos (por ejemplo si alguna escena de Veo fallo).
 
 ### Variables de entorno opcionales
 
