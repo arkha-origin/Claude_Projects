@@ -97,7 +97,15 @@ ejemplo generado en una corrida anterior, o armado a mano siguiendo el
 formato de `manifest.example.json`): usar `--manifest_json`, que salta el
 paso de Gemini texto por completo.
 
-Cualquiera de las tres opciones deja en `/path/to/media/<project_id>/`:
+**Opcion D — guion en Google Sheets:** si tu guion mensual vive en una hoja
+de calculo de Google Drive, es en realidad el mejor caso posible: al ser
+data ya estructurada en filas/columnas, no hace falta que Gemini interprete
+nada — se mapea directo al `manifest.json` (mismo mecanismo que la Opcion C)
+sin gastar ni un llamado a la API de texto. Ver la seccion
+["Cargar el guion desde Google Sheets"](#cargar-el-guion-desde-google-sheets)
+mas abajo para el layout de columnas y el workflow de n8n completo.
+
+Cualquiera de las cuatro opciones deja en `/path/to/media/<project_id>/`:
 `01_scene.mp4`, `02_scene.mp4`, ..., `background_music.wav` y
 `manifest.json` — listo como entrada directa de `davinci_auto_edit.py`.
 
@@ -105,9 +113,9 @@ Argumentos principales:
 
 | Argumento | Requerido | Descripcion |
 |---|---|---|
-| `--topic` | uno de los tres* | Tema/brief para que Gemini invente el guion. |
-| `--script_file` | uno de los tres* | Ruta a un guion propio en texto/markdown; Gemini lo segmenta sin inventar contenido. |
-| `--manifest_json` | uno de los tres* | Reusa un guion ya estructurado; saltea el paso de Gemini texto. |
+| `--topic` | uno de los cuatro* | Tema/brief para que Gemini invente el guion. |
+| `--script_file` | uno de los cuatro* | Ruta a un guion propio en texto/markdown; Gemini lo segmenta sin inventar contenido. |
+| `--manifest_json` | uno de los cuatro* | Reusa un guion ya estructurado (a mano, de una corrida previa, o exportado desde Google Sheets); saltea el paso de Gemini texto. |
 | `--project_id` | si | Identificador del proyecto (nombre de carpeta). |
 | `--output_dir` | si | Carpeta destino de los medios + manifest.json. |
 | `--scene_count` | no | Cantidad de escenas a generar con `--topic` (default 4); con `--script_file` es solo una referencia, Gemini segmenta segun el contenido. |
@@ -120,6 +128,95 @@ Argumentos principales:
 | `--verbose` | no | Logging en modo debug. |
 
 *Se requiere exactamente uno de `--topic` / `--script_file` / `--manifest_json`.
+
+## Cargar el guion desde Google Sheets
+
+No hace falta descargar ni convertir nada a mano: n8n lee la hoja directo de
+Drive con su nodo nativo de Google Sheets, la transforma al formato de
+`manifest.json`, y se la pasa a `generate_content_pipeline.py` via
+`--manifest_json` (Opcion D de arriba).
+
+### Layout de columnas esperado
+
+Una fila por escena. Si el mes entero esta en una sola hoja/pestaña, agregar
+una columna `project_id` que identifique a que video/dia pertenece cada
+escena (asi una unica hoja alcanza para los 30 videos):
+
+| project_id | scene_id | order | visual_prompt | audio_prompt | music_prompt | duration_seconds |
+|---|---|---|---|---|---|---|
+| dia_01 | 1 | 1 | Toma aerea de una ciudad... | Voz en off explicando... | Ambiente electronico suave | 6 |
+| dia_01 | 2 | 2 | Primer plano de un robot... | Voz en off continuando... | Mismo ambiente, mas intenso | 5 |
+| dia_02 | 1 | 1 | ... | ... | ... | 8 |
+
+Si tu hoja ya tiene otros nombres de columna, alcanza con renombrarlas o
+mapearlas en el Code node del paso 2 (abajo); no hace falta que el archivo
+fuente coincida exactamente con esos headers.
+
+### Workflow en n8n
+
+1. **Nodo Google Sheets** (operacion *Read/Get rows*, con tu credencial de
+   Google conectada) — apuntado a la hoja/pestaña del guion. Devuelve un
+   item de n8n por fila.
+
+2. **Nodo Code** (modo *Run Once for All Items*) — agrupa las filas por
+   `project_id` y arma el objeto `manifest` de cada video:
+
+   ```js
+   const grouped = {};
+   for (const item of items) {
+     const row = item.json;
+     const pid = row.project_id;
+     if (!grouped[pid]) grouped[pid] = [];
+     grouped[pid].push({
+       scene_id: row.scene_id,
+       order: Number(row.order),
+       visual_prompt: row.visual_prompt,
+       audio_prompt: row.audio_prompt || "",
+       music_prompt: row.music_prompt || "",
+       duration_seconds: Number(row.duration_seconds) || 6,
+     });
+   }
+
+   return Object.entries(grouped).map(([project_id, scenes]) => ({
+     json: {
+       project_id,
+       manifest: {
+         project_name: project_id,
+         music_file: null,
+         scenes: scenes.sort((a, b) => a.order - b.order),
+       },
+     },
+   }));
+   ```
+
+   Esto deja un item por video (por `project_id`), cada uno con su propio
+   guion ya armado — de aca en mas el workflow se ramifica en un ciclo por
+   video (n8n lo hace automaticamente, un item = una ejecucion de los nodos
+   siguientes).
+
+3. **Nodo Execute Command** — crea la carpeta y escribe el `manifest.json`
+   en un solo paso (el heredoc con comillas simples en `'EOF'` evita que la
+   shell interprete `$`/backticks que puedan aparecer dentro de los
+   prompts, asi que es seguro aunque el guion tenga texto libre):
+
+   ```bash
+   mkdir -p "/path/to/media/{{$json.project_id}}" && cat > "/path/to/media/{{$json.project_id}}/manifest.json" <<'EOF'
+   {{ JSON.stringify($json.manifest) }}
+   EOF
+   ```
+
+4. **Nodo Execute Command** — genera video (Omni Flash) y musica (Lyria)
+   reusando ese manifest, sin volver a pasar por Gemini texto:
+
+   ```bash
+   python3 /ruta/al/script/generate_content_pipeline.py --manifest_json "/path/to/media/{{$json.project_id}}/manifest.json" --project_id "{{$json.project_id}}" --output_dir "/path/to/media/{{$json.project_id}}" --video_engine omni
+   ```
+
+5. **Nodo Execute Command** — arma la timeline en Resolve (igual que en el
+   resto del pipeline, ver seccion de n8n mas abajo).
+
+Con esto, correr el workflow una vez procesa el mes entero: un proyecto de
+Resolve por fila de `project_id` distinta en la hoja.
 
 Limitaciones a tener en cuenta:
 - Veo solo soporta duraciones discretas (4/6/8s); `duration_seconds` del
