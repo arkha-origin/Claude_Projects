@@ -1,1 +1,9 @@
 .claude/settings.local.json
+
+# Artefactos que Playwright escribe al correr las pruebas del proyecto.
+#
+# Caen aquí y no en el proyecto porque el directorio de trabajo de la sesión es
+# este, y son el resultado de UNA corrida: versionarlos guardaría el estado de
+# una ejecución concreta en un repositorio que solo lleva configuración.
+test-results/
+playwright-report/
