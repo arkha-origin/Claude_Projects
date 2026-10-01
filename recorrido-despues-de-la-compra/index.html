@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Recorrido del cliente después de la compra · Cosplay Inc</title>
+<style>
+  :root { --tinta:#14141c; --tenue:#5e6070; --borde:#e3e3ea; --acento:#c8102e; --fondo:#f6f6f9; --ok:#1f8a5b; --media:#b26a00; }
+  * { box-sizing: border-box; }
+  body { margin:0; font:15px/1.6 system-ui,-apple-system,"Segoe UI",sans-serif; color:var(--tinta); background:var(--fondo); }
+  main { max-width: 1180px; margin: 0 auto; padding: 40px 24px 80px; }
+  h1 { font-size: 30px; line-height:1.2; margin: 0 0 6px; }
+  h2 { font-size: 22px; margin: 0 0 4px; }
+  h3 { font-size: 15px; margin: 0 0 6px; }
+  .bajada { color: var(--tenue); max-width: 760px; }
+  .nota { font-size: 13px; color: var(--tenue); }
+  .mapa { display:flex; flex-wrap:wrap; gap:8px; margin: 22px 0 8px; padding:0; list-style:none; }
+  .mapa li { background:#fff; border:1px solid var(--borde); border-radius:999px; padding:6px 14px; font-size:13px; }
+  .mapa li b { color: var(--acento); margin-right:4px; }
+  .caja { background:#fff; border:1px solid var(--borde); border-radius:18px; padding:20px 22px; margin: 18px 0; }
+  .caja.ok { border-color:#bfe6d3; background:#f2fbf6; }
+  .etapa { margin-top: 56px; }
+  .etapa > .num { display:inline-block; font-size:12px; font-weight:700; letter-spacing:.12em; color:var(--acento); text-transform:uppercase; }
+  .fila { display:flex; gap:22px; overflow-x:auto; padding: 14px 2px 10px; align-items:flex-start; }
+  figure { margin:0; flex: 0 0 280px; }
+  .telefono { width:280px; height:560px; overflow-y:auto; border-radius:28px; border:8px solid #111; background:#fff; box-shadow: 0 18px 40px -22px rgba(0,0,0,.45); }
+  .telefono img { width:100%; display:block; }
+  .telefono.correo { border-color:#3a3a46; }
+  figcaption { font-size:13px; color:var(--tenue); margin-top:8px; }
+  figcaption b { color:var(--tinta); display:block; }
+  ul.mejoras { margin: 8px 0 0; padding-left: 0; list-style: none; }
+  ul.mejoras li { padding: 8px 0 8px 0; border-top: 1px solid var(--borde); }
+  ul.mejoras li:first-child { border-top: 0; }
+  .p { display:inline-block; font-size:11px; font-weight:700; border-radius:999px; padding:1px 8px; margin-right:6px; vertical-align:1px; }
+  .alta { background:#fde6ea; color:var(--acento); }
+  .media { background:#fff1dc; color:var(--media); }
+  .baja { background:#eceef3; color:var(--tenue); }
+  .hecho { background:#dff4ea; color:var(--ok); }
+  table { border-collapse: collapse; width:100%; font-size:14px; }
+  th, td { text-align:left; padding:8px 10px; border-top:1px solid var(--borde); vertical-align:top; }
+  th { color:var(--tenue); font-weight:600; font-size:12px; text-transform:uppercase; letter-spacing:.06em; border-top:0; }
+  @media print {
+    body { background:#fff; }
+    .fila { flex-wrap: wrap; overflow: visible; }
+    .telefono { height:auto; max-height:none; overflow: visible; }
+    .etapa { break-before: page; }
+    figure { break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+<main>
+  <h1>Así vive el cliente su compra, de principio a fin</h1>
+  <p class="bajada">Recorrido real del sitio en un celular, desde que la compra queda pagada hasta que descarga sus fotos editadas. Se hizo en una copia de prueba con datos ficticios y fotos de muestra: nada de esto salió a clientes reales. Las pantallas tienen <b>desplazamiento</b>: baja dentro de cada teléfono para verla completa.</p>
+
+  <ol class="mapa">
+    <li><b>1</b>Compra confirmada</li>
+    <li><b>2</b>Antes del evento</li>
+    <li><b>3</b>El día de la sesión</li>
+    <li><b>4</b>Llegan sus fotos</li>
+    <li><b>5</b>Elige sus fotos</li>
+    <li><b>6</b>Edición y entrega</li>
+  </ol>
+
+  <div class="caja">
+    <h3>Dónde está cada cosa (lo que hoy existe)</h3>
+    <table>
+      <tr><th>Pantalla</th><th>Para qué sirve</th><th>Cómo llega el cliente</th></tr>
+      <tr><td><b>Su reserva</b> <span class="nota">/r/…</span></td><td>El QR, su día, lo que compró y, después de la sesión, la tarjeta «Tus fotos» con miniaturas y avance.</td><td>Enlace del correo de confirmación.</td></tr>
+      <tr><td><b>Su galería</b> <span class="nota">/g/…</span></td><td>Ver las fotos con marca de agua, elegir, pagar fotos de más, subir acabado y descargar las editadas.</td><td>Correo «Ya puedes ver tus fotos» o el botón de su reserva.</td></tr>
+      <tr><td><b>Su perfil</b> <span class="nota">/p/…</span></td><td>Su rango y la lista de sus compras.</td><td>«Ver todo tu historial» en su reserva.</td></tr>
+    </table>
+    <p class="nota" style="margin-top:10px">Ojo: el <b>perfil no muestra las miniaturas ni el avance</b> de las fotos; eso vive en la página de la reserva y en la galería. Es una de las mejoras propuestas abajo.</p>
+  </div>
+
+  <div class="caja ok">
+    <h3>Ya corregido durante esta revisión (en producción)</h3>
+    <p style="margin:0"><span class="p hecho">HECHO</span>Después del check-in o de la sesión, la página de la reserva volvía a decir <b>«Falta un paso»</b> y <b>«el pago sigue pendiente»</b> a quien ya había pagado. Ahora dice «Gracias por venir», quita el QR de entrada y deja sus fotos arriba. También se cambió el texto de la galería vacía, que prometía un aviso por WhatsApp cuando los avisos salen por correo.</p>
+  </div>
+
+  <!-- 1 -->
+  <section class="etapa">
+    <span class="num">Etapa 1</span>
+    <h2>Compra confirmada</h2>
+    <p class="bajada">Apenas se aprueba el pago ve su reserva con el QR, y le llega el correo de confirmación con el QR adentro.</p>
+    <div class="fila">
+      <figure><div class="telefono"><img src="capturas/02-reserva-pagada.jpg" alt=""></div><figcaption><b>Su reserva, ya pagada</b>QR, día, total y su rango.</figcaption></figure>
+      <figure><div class="telefono correo"><img src="capturas/correo-01-cliente.jpg" alt=""></div><figcaption><b>Correo: «Tu sesión está confirmada»</b>Lo que compró, su agenda, el enlace y el QR.</figcaption></figure>
+      <figure><div class="telefono correo"><img src="capturas/correo-02-equipo.jpg" alt=""></div><figcaption><b>Al equipo: «Venta confirmada»</b>Quién compró, contacto y agenda.</figcaption></figure>
+    </div>
+    <div class="caja">
+      <h3>Qué mejorar</h3>
+      <ul class="mejoras">
+        <li><span class="p alta">ALTA</span>Los botones flotantes (asistente y WhatsApp) <b>tapan contenido en el celular</b>: aquí cubren el «Gracias» y, más adelante, el total de «Tu compra» y las fotos de la galería. Dejarles un margen abajo o esconderlos en reserva y galería.</li>
+        <li><span class="p media">MEDIA</span>«Con esta compra eres <b>PASS</b>» no dice qué significa. Explicar en una línea qué incluye su rango y qué ganaría con el siguiente.</li>
+        <li><span class="p media">MEDIA</span>En el correo, un <b>botón</b> «Ver mi reserva» en lugar del enlace largo, y el QR más arriba: es lo que se busca en la fila.</li>
+        <li><span class="p baja">BAJA</span>La página saluda con el nombre legal («Gracias, Cliente») y el correo con el nombre cosplay («Hola Kitsune Demo»). Usar el mismo en los dos.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 2 -->
+  <section class="etapa">
+    <span class="num">Etapa 2</span>
+    <h2>Antes del evento</h2>
+    <p class="bajada">Su perfil muestra el rango y la compra. Si intenta abrir la galería antes de la sesión, ve una página de error.</p>
+    <div class="fila">
+      <figure><div class="telefono"><img src="capturas/03-perfil-antes-del-evento.jpg" alt=""></div><figcaption><b>Su perfil</b>Rango, barra hacia el siguiente y la compra.</figcaption></figure>
+      <figure><div class="telefono"><img src="capturas/04-galeria-antes-del-evento-404.jpg" alt=""></div><figcaption><b>La galería antes de la sesión</b>Hoy responde «404 · Esta página se salió del encuadre».</figcaption></figure>
+    </div>
+    <div class="caja">
+      <h3>Qué mejorar</h3>
+      <ul class="mejoras">
+        <li><span class="p alta">ALTA</span>El <b>perfil se ve vacío</b>: sin QR, sin enlace a la galería, sin miniaturas ni avance. Convertirlo en «mi espacio»: cada compra con su estado, su QR, sus fotos y un botón a la galería.</li>
+        <li><span class="p media">MEDIA</span>Galería antes de la sesión: en vez del 404, «Tu galería se abre después de tu sesión del jueves 8 de octubre» con enlace a su reserva.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 3 -->
+  <section class="etapa">
+    <span class="num">Etapa 3</span>
+    <h2>El día de la sesión</h2>
+    <p class="bajada">Hace check-in con su QR y, al terminar, el equipo marca la sesión como atendida. Le llega un correo de agradecimiento.</p>
+    <div class="fila">
+      <figure><div class="telefono"><img src="capturas/05-reserva-despues-de-la-sesion.jpg" alt=""></div><figcaption><b>Su reserva, ya atendida (corregida)</b>«Gracias por venir» y la tarjeta de sus fotos.</figcaption></figure>
+      <figure><div class="telefono correo"><img src="capturas/correo-03-cliente.jpg" alt=""></div><figcaption><b>Correo: «Gracias por tu sesión»</b>Qué sigue y el enlace a su reserva.</figcaption></figure>
+      <figure><div class="telefono"><img src="capturas/06-galeria-sin-fotos-aun.jpg" alt=""></div><figcaption><b>Galería antes de subir las fotos</b>Fecha de cierre y un aviso de espera.</figcaption></figure>
+    </div>
+    <div class="caja">
+      <h3>Qué mejorar</h3>
+      <ul class="mejoras">
+        <li><span class="p alta">ALTA</span>«Tus fotos están en camino · <b>0 fotos</b>» con un botón «Ver y elegir mis fotos» que lleva a una galería vacía. Mientras no haya fotos: «Estamos subiendo tu sesión, te avisamos por correo» y la fecha estimada, sin botón.</li>
+        <li><span class="p alta">ALTA</span><b>Una línea de tiempo del pedido para el cliente</b>: Pagada → Sesión hecha → Fotos subidas → Elegiste → En edición → Listas para descargar, con fechas. El admin ya tiene esa misma línea en «Ventas y pedidos»; se puede mostrar al cliente en su reserva y en su perfil. Es lo que responde «¿y mis fotos?» sin escribir por WhatsApp.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 4 -->
+  <section class="etapa">
+    <span class="num">Etapa 4</span>
+    <h2>Llegan sus fotos</h2>
+    <p class="bajada">El equipo sube las miniaturas, con marca de agua, desde «Subir miniaturas», y le llega el aviso.</p>
+    <div class="fila">
+      <figure><div class="telefono correo"><img src="capturas/correo-04-cliente.jpg" alt=""></div><figcaption><b>Correo: «Ya puedes ver tus fotos»</b>Enlace a su galería privada.</figcaption></figure>
+      <figure><div class="telefono"><img src="capturas/07-galeria-con-miniaturas.jpg" alt=""></div><figcaption><b>Su galería</b>Cuántas fotos, cuántas incluye, hasta cuándo, y los 3 pasos.</figcaption></figure>
+      <figure><div class="telefono"><img src="capturas/08-visor-en-grande.jpg" alt=""></div><figcaption><b>Viendo una foto en grande</b>Pasa de una a otra y la elige desde aquí.</figcaption></figure>
+    </div>
+    <div class="caja">
+      <h3>Qué mejorar</h3>
+      <ul class="mejoras">
+        <li><span class="p media">MEDIA</span>Al correo de la galería le faltan los datos que crean urgencia: <b>cuántas fotos incluye, hasta qué fecha puede elegir</b>, una miniatura y un botón grande.</li>
+        <li><span class="p baja">BAJA</span>Los 3 pasos ocupan la primera pantalla del celular. Mostrarlos la primera vez y luego plegarlos, para que las fotos aparezcan antes.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 5 -->
+  <section class="etapa">
+    <span class="num">Etapa 5</span>
+    <h2>Elige sus fotos</h2>
+    <p class="bajada">Si elige más de las incluidas, la de más aparece como «Ampliación» con su precio y el botón para pagarla. Al enviar, el equipo recibe la lista y ella un correo de confirmación.</p>
+    <div class="fila">
+      <figure><div class="telefono"><img src="capturas/09-eligiendo-una-de-mas.jpg" alt=""></div><figcaption><b>Eligiendo una de más</b>«Te llevas 4, te falta 1 por pagar» y el botón «Pagar».</figcaption></figure>
+      <figure><div class="telefono"><img src="capturas/10-seleccion-enviada.jpg" alt=""></div><figcaption><b>Selección enviada</b>Confirmación y la oferta para subir el acabado de cada foto.</figcaption></figure>
+      <figure><div class="telefono correo"><img src="capturas/correo-05-cliente.jpg" alt=""></div><figcaption><b>Correo: «Recibimos tu selección»</b>Cuántas eligió y qué sigue.</figcaption></figure>
+      <figure><div class="telefono correo"><img src="capturas/correo-06-equipo.jpg" alt=""></div><figcaption><b>Al equipo: «eligió sus fotos»</b>Con los nombres de archivo para el editor.</figcaption></figure>
+    </div>
+    <div class="caja">
+      <h3>Qué mejorar</h3>
+      <ul class="mejoras">
+        <li><span class="p media">MEDIA</span>Después de enviar, el botón «Enviar mi selección (3)» sigue igual de llamativo, como si faltara algo. Cambiarlo a «Selección enviada ✓ · cambiarla».</li>
+        <li><span class="p baja">BAJA</span>La oferta de acabados dice «Foto 1, Foto 2, Foto 3» sin miniatura: poner la foto al lado para que sepa cuál está mejorando.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 6 -->
+  <section class="etapa">
+    <span class="num">Etapa 6</span>
+    <h2>Edición y entrega</h2>
+    <p class="bajada">Cada foto elegida muestra «Preparando» hasta que el editor la entrega, y entonces «Descargar». Aquí se simularon dos fotos entregadas y una en edición.</p>
+    <div class="fila">
+      <figure><div class="telefono"><img src="capturas/11-reserva-con-sus-fotos.jpg" alt=""></div><figcaption><b>Su reserva con sus fotos</b>Miniaturas, elegidas, «Nada por pagar».</figcaption></figure>
+      <figure><div class="telefono"><img src="capturas/13-galeria-con-entregas.jpg" alt=""></div><figcaption><b>Galería con entregas</b>«Descargar» en las listas, «Preparando» en la otra.</figcaption></figure>
+      <figure><div class="telefono"><img src="capturas/12-perfil-con-fotos.jpg" alt=""></div><figcaption><b>Su perfil, ya con fotos</b>Igual que antes del evento: no muestra nada de las fotos.</figcaption></figure>
+    </div>
+    <div class="caja">
+      <h3>Qué mejorar</h3>
+      <ul class="mejoras">
+        <li><span class="p media">MEDIA</span>La etiqueta roja <b>«Preparando · en cualquier momento»</b> sobre la foto es confusa y parece una alerta. Mejor «En edición · lista aprox. el 20 de oct.» en tono neutro, y «Lista ✓ Descargar» en verde.</li>
+        <li><span class="p media">MEDIA</span>Un botón «<b>Descargar todas</b>» cuando ya hay varias listas.</li>
+        <li><span class="p alta">ALTA</span>El perfil no se entera de nada de esto (ver etapa 2).</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="etapa">
+    <span class="num">Para el equipo</span>
+    <h2>Cómo verlo ustedes mismos con un cliente real</h2>
+    <ul>
+      <li><b>Su perfil:</b> en la ficha del cliente (Ventas y pedidos → abrir) hay un enlace a su portal.</li>
+      <li><b>Su galería, tal como la ve:</b> en «Subir miniaturas» → buscar el código → «Ver como el cliente». Es una vista de solo lectura: desde ahí no se envía ni se paga nada.</li>
+      <li><b>Su reserva:</b> es el enlace del correo de confirmación. Hoy la ficha no tiene un botón directo «Ver como cliente» para esta página; sería una mejora pequeña.</li>
+    </ul>
+    <p class="nota">Hecho en una copia de prueba con datos ficticios, el 1 de octubre de 2026. Los enlaces de los correos dicen «localhost» por eso; en producción dicen cosplay-inc.com. El círculo con la «N» abajo a la izquierda es una herramienta de desarrollo y no aparece en el sitio real.</p>
+  </section>
+</main>
+</body>
+</html>
