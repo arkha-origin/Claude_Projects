@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>«Tu Proyecto» · Sesiones personalizadas en Cosplay Inc</title>
+<style>
+body{margin:0;font:15px/1.65 system-ui,sans-serif;background:#f4f4f7;color:#15151c}
+main{max-width:1080px;margin:0 auto;padding:40px 22px 90px}
+h1{margin:0 0 6px;font-size:30px;line-height:1.2}
+h2{margin:52px 0 10px;font-size:22px}
+h3{margin:26px 0 6px;font-size:17px}
+p,li{color:#33343f}
+.b{max-width:860px}
+.nota{font-size:13px;color:#5e6070}
+.tarjeta{background:#fff;border:1px solid #e4e4ea;border-radius:16px;padding:18px 20px;margin:14px 0;box-shadow:0 14px 30px -24px rgba(0,0,0,.35)}
+.rejilla{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}
+.etapas{counter-reset:e;display:grid;gap:10px;margin:16px 0}
+.etapa{display:grid;grid-template-columns:44px 1fr;gap:14px;background:#fff;border:1px solid #e4e4ea;border-radius:14px;padding:14px 16px}
+.etapa:before{counter-increment:e;content:counter(e);display:flex;align-items:center;justify-content:center;width:36px;height:36px;border-radius:12px;background:linear-gradient(135deg,#e11d48,#a21caf);color:#fff;font-weight:700}
+.etapa b{display:block;font-size:15px}
+.etapa small{display:block;color:#5e6070;margin-top:2px}
+.chip{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:2px 8px;border-radius:99px;background:#fde7ee;color:#be123c;margin-right:6px}
+.chip.v{background:#e8f6ee;color:#166534}.chip.a{background:#eef2ff;color:#3730a3}.chip.g{background:#f1f1f4;color:#4b4c57}
+table{border-collapse:collapse;width:100%;background:#fff;border-radius:14px;overflow:hidden;border:1px solid #e4e4ea;font-size:14px}
+th,td{text-align:left;padding:10px 12px;border-bottom:1px solid #eee;vertical-align:top}
+th{background:#faf7fb;font-size:12px;letter-spacing:.05em;text-transform:uppercase;color:#5e6070}
+.ok{color:#166534;font-weight:700}.falta{color:#be123c;font-weight:700}
+.opciones{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:760px){.opciones{grid-template-columns:1fr}}
+.op{background:#fff;border:1px solid #e4e4ea;border-radius:16px;padding:16px}
+.op.rec{border:2px solid #e11d48;box-shadow:0 0 0 4px #fde7ee}
+.op h4{margin:0 0 4px}.op .p{font-size:22px;font-weight:800}
+.mock{background:#0f0f1a;color:#fff;border-radius:22px;padding:22px;max-width:420px}
+.mock .k{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:#ffffff99}
+.mock .bar{height:8px;border-radius:9px;background:#ffffff1a;margin:10px 0}
+.mock .bar i{display:block;height:100%;width:44%;border-radius:9px;background:linear-gradient(90deg,#f5c542,#e11d48,#a21caf)}
+.mock ul{list-style:none;padding:0;margin:10px 0 0}.mock li{color:#fff;padding:6px 0;border-bottom:1px solid #ffffff14;font-size:14px}
+.mock li span{color:#ffffff80;font-size:12px}
+.decide{background:#fff7ed;border:1px solid #fed7aa;border-radius:14px;padding:14px 18px}
+</style></head><body><main>
+
+<p class="nota">Cosplay Inc · Propuesta de producto · Octubre de 2026</p>
+<h1>«Tu Proyecto»: la sesión personalizada como experiencia completa</h1>
+<p class="b">Hoy la sesión personalizada ya funciona por intuición: una entrevista bien hecha, una reunión, una propuesta y un cliente que se siente escuchado. El caso más reciente fue de <b>20 fotos por $1.300.000</b>, varias con procesado especial. Esta propuesta convierte ese camino en un <b>producto</b>: un espacio privado dentro de Cosplay Inc donde el cliente vive su proyecto de principio a fin, y donde cada etapa es también una oportunidad de venta bien puesta.</p>
+
+<h2>1 · Lo que ya existe y lo que falta</h2>
+<p class="b">La buena noticia: más de la mitad del camino ya está construido y probado en eventos. La propuesta es <b>unirlo</b> bajo un solo proyecto, no empezar de cero.</p>
+<table>
+<tr><th>Etapa</th><th>Hoy</th><th>Estado</th></tr>
+<tr><td>Entrevista (brief)</td><td>Encuestas editables en <code>/sesionpersonalizada</code>, con varias versiones por tipo de sesión y un diagnóstico interno de costos.</td><td class="ok">Existe</td></tr>
+<tr><td>Bandeja del equipo</td><td>Admin → Cotizaciones: cada solicitud con su código (COT-0001), estado y notas internas; aviso por correo al equipo y acuse al cliente.</td><td class="ok">Existe</td></tr>
+<tr><td>Reunión creativa</td><td>Se hace por fuera; las decisiones quedan en la memoria o en un chat.</td><td class="falta">Falta</td></tr>
+<tr><td>Propuesta y costo</td><td>Se arma a mano y se manda por WhatsApp o PDF. El cliente no puede elegir entre opciones ni aceptar en línea.</td><td class="falta">Falta</td></tr>
+<tr><td>Aceptación y pago</td><td>Bold y pago directo (Nequi/efectivo) existen para eventos, pero no están ligados a una cotización.</td><td class="falta">Falta unirlo</td></tr>
+<tr><td>Preproducción</td><td>Vestuario, maquillaje, locación (hay un directorio de lugares), fecha y llamado: todo por fuera.</td><td class="falta">Falta</td></tr>
+<tr><td>Miniaturas, selección, edición y entrega</td><td>La galería completa de eventos: miniaturas con marca, selección, ampliación, edición con fecha estimada, entrega en alta, marca forense.</td><td class="ok">Existe (para eventos)</td></tr>
+<tr><td>Publicar y recordar</td><td>«Para tus redes» (formatos, carrusel, collage, Reel, encuadre, texto con hashtags, «Publicar») y el correo «¿Ya publicaste?».</td><td class="ok">Existe</td></tr>
+<tr><td>Espacio del cliente</td><td>El portal <code>/p</code> muestra compras de eventos. No hay un lugar para <b>un proyecto</b> con su historia.</td><td class="falta">Falta</td></tr>
+</table>
+
+<h2>2 · El concepto: «Tu Proyecto»</h2>
+<p class="b">Cada sesión personalizada se convierte en un <b>proyecto con nombre propio</b>, con un código del tipo <b>PRY-0001</b> y su propia página privada, a la que se entra con un enlace igual que hoy a la galería. Es la «sala de producción» del cliente: ahí ve en qué va, qué se decidió, qué sigue, qué tiene que hacer él y qué está haciendo el equipo. Al terminar, la página queda como <b>recuerdo</b> del proyecto.</p>
+<div class="rejilla">
+<div class="mock">
+<div class="k">Tu proyecto · PRY-0007</div>
+<div style="font-size:22px;font-weight:800;margin-top:6px">«La Reina del Casino»</div>
+<div style="color:#ffffffb3;font-size:13px">Kakegurui · Editorial cinematográfico · 2 personas</div>
+<div class="bar"><i></i></div>
+<div style="font-size:12px;color:#ffffffb3">Etapa 4 de 9 · <b style="color:#fff">Preproducción</b></div>
+<ul>
+<li>✅ Entrevista <span>· 2 oct</span></li>
+<li>✅ Reunión creativa <span>· 5 oct · 6 decisiones</span></li>
+<li>✅ Propuesta aceptada <span>· Opción Recomendada</span></li>
+<li>⏳ Preproducción <span>· 3 de 5 listos</span></li>
+<li>○ Sesión <span>· sáb 18 oct · 2:00 p. m.</span></li>
+<li>○ Selección · Edición · Entrega · Recuerdo</li>
+</ul>
+<div style="margin-top:14px;background:#ffffff14;border-radius:14px;padding:12px">
+<div class="k">Lo que sigue</div>
+<div style="font-weight:700;margin-top:4px">Confirma tu vestuario</div>
+<div style="font-size:13px;color:#ffffffb3">Sube una foto del traje completo para revisar el encuadre.</div>
+</div>
+</div>
+<div>
+<h3 style="margin-top:0">Por qué funciona</h3>
+<ul>
+<li><b>Se siente atendido de verdad:</b> la propuesta cita sus propias palabras de la entrevista. Ve que lo escucharon.</li>
+<li><b>Nunca se pregunta «¿y ahora qué?»:</b> siempre hay una sola cosa que hacer, o «no tienes que hacer nada, te avisamos».</li>
+<li><b>Todo queda en un lugar:</b> referencias, decisiones, pagos, fechas, fotos y entregas. Nada se pierde en el chat.</li>
+<li><b>El equipo gana orden:</b> cada proyecto con su estado, sus pendientes y su dinero, visible en el administrador.</li>
+<li><b>Es una vitrina:</b> un cliente feliz comparte su página de recuerdo, y eso vende el próximo proyecto.</li>
+</ul>
+</div>
+</div>
+
+<h2>3 · El recorrido, etapa por etapa</h2>
+<div class="etapas">
+<div class="etapa"><div><b>Entrevista</b><small>El cliente responde la encuesta (ya existe). <span class="chip v">Nuevo</span> Al enviarla se crea su proyecto y recibe el correo «Bienvenido a tu proyecto», con su enlace privado. Puede subir referencias (moodboard) desde ese momento.</small></div></div>
+<div class="etapa"><div><b>Reunión creativa</b><small>Se agenda desde el proyecto (día y hora). En la reunión, el equipo anota las <b>decisiones</b> en el administrador: personaje, atmósfera, locación, vestuario, límites, entregables. El cliente las ve como un acta clara: «Lo que decidimos juntos».</small></div></div>
+<div class="etapa"><div><b>Propuesta</b><small>Es la segunda encuesta de la que hablas, convertida en una <b>propuesta interactiva</b>: el concepto con nombre, sus palabras citadas, el moodboard, y <b>tres opciones</b> con lo que incluye cada una. Debajo van extras que se activan con un toque, el total que se actualiza en vivo y la fecha hasta la que vale. Ver la sección 4.</small></div></div>
+<div class="etapa"><div><b>Aceptación y pago</b><small>«Acepto esta propuesta» → paga el <b>anticipo</b> (Bold o Nequi, lo que ya existe) y la fecha queda asegurada. El saldo se paga antes de la entrega. Cada pago queda en el proyecto.</small></div></div>
+<div class="etapa"><div><b>Preproducción</b><small>Una lista de lo que falta, con dueño: vestuario (foto del traje), maquillaje, utilería, locación (del directorio de lugares) y la confirmación de la fecha. El día antes llega la <b>hoja de llamado</b> con hora, lugar, qué traer y a quién llamar.</small></div></div>
+<div class="etapa"><div><b>Sesión</b><small>El día de la producción. Al terminar: «¡Gracias! Lo que sigue…» (ya existe para eventos). <span class="chip a">Ideal</span> Un adelanto: 1 o 2 fotos de detrás de cámaras ese mismo día, para que lo comparta mientras espera.</small></div></div>
+<div class="etapa"><div><b>Selección</b><small>Las miniaturas con marca de agua (la galería que ya existe). Elige las incluidas en su opción y, si quiere más, las amplía con el precio por foto de su propuesta.</small></div></div>
+<div class="etapa"><div><b>Edición y entrega</b><small>Cada foto con su fecha estimada (ya existe). <span class="chip v">Nuevo</span> Rondas de revisión según la opción contratada: «pide un ajuste» sobre una foto entregada. Entrega en alta calidad con marca forense.</small></div></div>
+<div class="etapa"><div><b>Recuerdo</b><small>El proyecto queda como página de recuerdo: el concepto, el antes y el después, las fotos favoritas, el video de detrás de cámaras si lo hubo, «Para tus redes» y el texto para publicar. Al año llega un correo: «Hace un año fuiste la Reina del Casino».</small></div></div>
+</div>
+
+<h2>4 · La propuesta: el momento que más vende</h2>
+<p class="b">Es donde se decide el ticket. Tres principios que ya funcionan en el mundo de los servicios creativos:</p>
+<ol class="b">
+<li><b>Tres opciones, no una.</b> Con una sola, el cliente decide «sí o no». Con tres, decide «cuál». La del medio va marcada como recomendada, y casi siempre es la que se elige.</li>
+<li><b>Sus palabras primero.</b> «Nos dijiste que querías una atmósfera de casino de lujo, dramática, con cartas y fichas…»: es la prueba de que lo escucharon.</li>
+<li><b>Extras en un toque, el total a la vista.</b> Video de detrás de cámaras, edición FX, maquillaje profesional, impresión fine art, fotos adicionales. Cada uno suma en vivo, sin tener que preguntar «¿y si agrego…?».</li>
+</ol>
+<p class="nota">Ejemplo con el caso real como referencia. Los montos de las otras dos opciones son <b>ilustrativos</b>: los precios los defines tú.</p>
+<div class="opciones">
+<div class="op"><span class="chip g">Esencial</span><h4>12 fotos editadas</h4><div class="p">$ —</div><small>1 personaje · 1 atmósfera · edición estándar · 1 ronda de ajustes</small></div>
+<div class="op rec"><span class="chip">Recomendada</span><h4>20 fotos editadas</h4><div class="p">$1.300.000</div><small>Caso real: 20 fotos, varias con procesado especial · 2 rondas de ajustes · galería y recuerdo del proyecto</small></div>
+<div class="op"><span class="chip a">Épica</span><h4>30 fotos + video</h4><div class="p">$ —</div><small>Todo lo de la Recomendada + video de detrás de cámaras + edición FX en las favoritas + impresión fine art</small></div>
+</div>
+<p class="b" style="margin-top:14px"><b>La «segunda encuesta»</b> que mencionas encaja aquí: en lugar de otro formulario, el cliente <b>arma su propuesta</b> eligiendo la opción y los extras. Lo que elige queda guardado como el pedido del proyecto, con su precio, y el equipo lo ve tal cual.</p>
+
+<h2>5 · Dónde está el dinero (monetización)</h2>
+<table>
+<tr><th>Momento</th><th>Palanca</th><th>Por qué funciona</th></tr>
+<tr><td>Propuesta</td><td>Escalera de tres opciones + extras</td><td>Sube el ticket promedio sin presión: el cliente elige más porque ve el valor.</td></tr>
+<tr><td>Aceptación</td><td>Anticipo para asegurar la fecha</td><td>Compromiso real: casi elimina las cancelaciones y las fechas perdidas.</td></tr>
+<tr><td>Selección</td><td>Fotos adicionales al precio de su propuesta</td><td>Ya pasa en eventos: de las miniaturas siempre gustan más de las incluidas.</td></tr>
+<tr><td>Edición</td><td>Mejora a FX o composición en las favoritas</td><td>Se ofrece cuando ya ve la foto: el deseo está en su punto más alto.</td></tr>
+<tr><td>Entrega</td><td>Impresos: fine art, cuadro, fotolibro del proyecto</td><td>Alto margen y es el recuerdo físico que más se valora; encaja con «el espacio en línea como recuerdo».</td></tr>
+<tr><td>Recuerdo</td><td>«Parte 2»: otro personaje o una continuación, con un beneficio</td><td>Quien vivió una buena experiencia quiere repetirla; el aniversario es el momento natural.</td></tr>
+<tr><td>Comunidad</td><td>Proyectos de crew y dúo (precio por persona, ya existe la lógica de grupos)</td><td>Un solo proyecto, varios clientes: más ingreso por producción.</td></tr>
+<tr><td>Creadores</td><td><b>Licencia de uso comercial</b> (Patreon, impresos para vender en convenciones, plataformas de suscripción)</td><td>Muchos cosplayers monetizan sus fotos. Cobrar la licencia de uso comercial aparte es estándar en la industria y una línea de ingreso grande.</td></tr>
+<tr><td>Fidelidad</td><td>Membresía anual (N sesiones al año, prioridad de fechas, beneficios)</td><td>Ingreso recurrente y clientes que planean contigo su temporada de convenciones.</td></tr>
+<tr><td>Recomendación</td><td>Referidos con crédito (ya existe el crédito a favor)</td><td>El cliente feliz es el mejor vendedor en una comunidad tan conectada.</td></tr>
+</table>
+
+<h2>6 · Hacer sentir bien al cliente (los detalles)</h2>
+<div class="rejilla">
+<div class="tarjeta"><b>Correos que emocionan</b><br><small>Bienvenida al proyecto · «Tu propuesta está lista» · «Tu fecha quedó asegurada» · hoja de llamado · «Ya están tus miniaturas» · entrega · «¿Ya publicaste?» · aniversario. Todos editables en Admin → Textos, como los de hoy.</small></div>
+<div class="tarjeta"><b>Un nombre para el proyecto</b><br><small>«La Reina del Casino» en vez de «COT-0007». El cliente siente que es <i>su</i> obra, y el equipo lo recuerda mejor.</small></div>
+<div class="tarjeta"><b>Siempre una sola cosa que hacer</b><br><small>Como la línea de tiempo de los eventos: «Lo que sigue» con un botón, o «no tienes que hacer nada, te avisamos».</small></div>
+<div class="tarjeta"><b>Un productor de cabecera</b><br><small>El proyecto muestra quién del equipo lo acompaña, como rol (sin exponer datos personales), y un botón directo a WhatsApp.</small></div>
+<div class="tarjeta"><b>Adelanto el mismo día</b><br><small>Una o dos fotos de detrás de cámaras al terminar la sesión. Cuesta poco y es lo que más se comparte mientras espera.</small></div>
+<div class="tarjeta"><b>Cuidado y consentimiento</b><br><small>Para sesiones sensuales o eróticas: límites acordados por escrito en el proyecto, verificación de mayoría de edad y autorización de uso de imagen explícita (portafolio sí o no). Protege al cliente y a la marca.</small></div>
+</div>
+
+<h2>7 · Cómo se construye (reutilizando lo que ya funciona)</h2>
+<p class="b"><b>La idea técnica clave:</b> el proyecto <b>usa la misma galería de los eventos</b> para las miniaturas, la selección, la edición, la entrega, «Para tus redes» y los correos. Todo eso ya está probado. Lo nuevo se concentra en lo que pasa <b>antes</b> de la sesión (proyecto, reunión, propuesta, pago y preproducción) y en la página de recuerdo.</p>
+<table>
+<tr><th>Pieza nueva</th><th>Qué guarda</th></tr>
+<tr><td>Proyecto</td><td>Código PRY, nombre, cliente, la entrevista de origen, etapa actual, productor asignado y enlace privado.</td></tr>
+<tr><td>Decisiones de la reunión</td><td>Fecha de la reunión y la lista de decisiones (tema → decisión), visibles para el cliente.</td></tr>
+<tr><td>Referencias (moodboard)</td><td>Imágenes y enlaces que suben el cliente y el equipo, con nota.</td></tr>
+<tr><td>Propuesta (con versiones)</td><td>Concepto, citas de la entrevista, opciones con lo que incluyen y su precio, extras, vigencia, estado (enviada, vista, aceptada) y la elección final.</td></tr>
+<tr><td>Pagos del proyecto</td><td>Anticipo y saldo con Bold o Nequi, sobre las órdenes y pagos que ya existen.</td></tr>
+<tr><td>Preproducción</td><td>Lista de pendientes con responsable y estado, y la hoja de llamado.</td></tr>
+<tr><td>Revisiones</td><td>Pedidos de ajuste sobre fotos entregadas, contados según la opción contratada.</td></tr>
+</table>
+
+<h2>8 · Plan por fases</h2>
+<div class="rejilla">
+<div class="tarjeta"><span class="chip">Fase 1 · el corazón</span><br><b>Proyecto + propuesta + pago</b><br><small>Al enviar la entrevista se crea el proyecto. Página del proyecto con su línea de tiempo y «Lo que sigue». Desde el administrador: convertir la solicitud en proyecto, anotar las decisiones de la reunión y armar la propuesta con 3 opciones y extras. El cliente compara, elige, acepta y paga el anticipo. Correos de cada paso.</small></div>
+<div class="tarjeta"><span class="chip a">Fase 2 · producción</span><br><b>Preproducción + galería</b><br><small>Moodboard compartido, lista de pendientes, hoja de llamado y conexión con la galería existente (miniaturas, selección, edición, entrega), con saldo antes de la entrega y rondas de ajuste.</small></div>
+<div class="tarjeta"><span class="chip v">Fase 3 · recuerdo y extras</span><br><b>Página de recuerdo + ventas después de la entrega</b><br><small>Página final del proyecto, adelanto del mismo día, impresos y fotolibro, mejoras a FX, aniversario y «Parte 2».</small></div>
+<div class="tarjeta"><span class="chip g">Fase 4 · crecer</span><br><b>Licencias, membresía, crews, referidos</b><br><small>Las palancas grandes de monetización en la comunidad, cuando el flujo base esté rodando.</small></div>
+</div>
+
+<h2>9 · Decisiones que necesito de ti antes de construir</h2>
+<div class="decide">
+<p style="margin-top:0">Son reglas comerciales; no las invento, las defines tú:</p>
+<ol>
+<li><b>Precios de las opciones</b> (o la base por foto). El caso real da una referencia de unos $65.000 por foto en la opción de 20, con procesado especial.</li>
+<li><b>Anticipo:</b> qué porcentaje (por ejemplo, 50 %) y cuándo se paga el saldo (¿antes de la sesión o antes de la entrega?).</li>
+<li><b>Cancelación y cambio de fecha:</b> qué pasa con el anticipo.</li>
+<li><b>Rondas de ajuste</b> por opción y el precio de una ronda extra.</li>
+<li><b>Vigencia de la propuesta</b> (por ejemplo, 7 días).</li>
+<li><b>Extras y sus precios:</b> video de detrás de cámaras, FX, maquillaje, impresos, foto adicional.</li>
+<li><b>Licencia de uso comercial:</b> ¿se ofrece?, ¿a qué precio?</li>
+<li><b>Sesiones sensuales o eróticas:</b> verificación de edad y política de uso de imagen en el portafolio.</li>
+</ol>
+</div>
+
+<h2>10 · Cómo saber si funciona</h2>
+<ul class="b">
+<li><b>Embudo:</b> entrevistas → reuniones → propuestas vistas → aceptadas (la tasa de cierre).</li>
+<li><b>Ticket promedio</b> y qué opción se elige (si la Recomendada gana, la escalera está bien armada).</li>
+<li><b>Extras:</b> qué porcentaje de proyectos suma al menos uno.</li>
+<li><b>Tiempo de entrega</b> frente a lo prometido.</li>
+<li><b>Recompra y referidos</b> a los 6 y 12 meses.</li>
+</ul>
+
+<h2>11 · Desde aquí, otras cosas</h2>
+<ul class="b">
+<li><b>Red de aliados:</b> maquilladores, sastres y utileros del directorio, con comisión por proyecto.</li>
+<li><b>Talleres:</b> poses, maquillaje para cámara, cómo preparar un traje para fotos. Ingresos y comunidad.</li>
+<li><b>Marcas y convenciones:</b> producciones para marcas que quieren cosplayers, y cobertura oficial de eventos.</li>
+<li><b>Convocatorias:</b> «Proyecto del mes» con votación de la comunidad. El ganador recibe una producción y la marca gana alcance.</li>
+<li><b>Prints en eventos:</b> los clientes venden sus fotos con licencia, y tú imprimes y cobras la licencia.</li>
+</ul>
+<p class="nota" style="margin-top:40px">Documento de trabajo. Las cifras que no salen del caso real son ilustrativas hasta que se definan las reglas comerciales de la sección 9.</p>
+</main></body></html>
