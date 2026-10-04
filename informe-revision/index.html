@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Cosplay Inc · Revisión completa del proyecto y del negocio</title>
+<style>
+body{margin:0;font:15px/1.65 system-ui,sans-serif;background:#f4f4f7;color:#15151c}
+main{max-width:1060px;margin:0 auto;padding:40px 22px 90px}
+h1{margin:0 0 6px;font-size:30px;line-height:1.2}
+h2{margin:54px 0 10px;font-size:23px;padding-top:12px;border-top:1px solid #e4e4ea}
+h3{margin:26px 0 6px;font-size:17px}
+p,li{color:#33343f}.b{max-width:880px}.nota{font-size:13px;color:#5e6070}
+table{border-collapse:collapse;width:100%;background:#fff;border:1px solid #e4e4ea;font-size:14px;margin:10px 0}
+th,td{text-align:left;padding:9px 12px;border-bottom:1px solid #eee;vertical-align:top}
+th{background:#faf7fb;font-size:12px;letter-spacing:.04em;text-transform:uppercase;color:#5e6070}
+.ok{color:#166534;font-weight:700}.alto{color:#b91c1c;font-weight:700}.medio{color:#b45309;font-weight:700}.bajo{color:#4b5563;font-weight:700}
+.tarjeta{background:#fff;border:1px solid #e4e4ea;border-radius:16px;padding:16px 20px;margin:12px 0}
+.rejilla{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:12px}
+.urgente{background:#fef2f2;border:1px solid #fecaca;border-radius:14px;padding:14px 18px}
+.decide{background:#fff7ed;border:1px solid #fed7aa;border-radius:14px;padding:14px 18px}
+.chip{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:2px 8px;border-radius:99px;background:#fde7ee;color:#be123c;margin-right:6px}
+.cap{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px}.cap img{width:100%;border:1px solid #e4e4ea;border-radius:10px}
+</style></head><body><main>
+<p class="nota">Cosplay Inc · Revisión del 4 de octubre de 2026, cuatro días antes de SOFA</p>
+<h1>Revisión completa: plataforma y negocio</h1>
+<p class="b">Revisé la plataforma de punta a punta: arquitectura, funcionamiento, seguridad, buscadores, estética y recorrido del cliente. También revisé el negocio: oferta, precios, canales, mercadeo y publicidad. Este documento dice qué encontré, qué arreglé y qué recomiendo, en orden de prioridad.</p>
+
+<h2>1 · Resumen en una página</h2>
+<div class="rejilla">
+<div class="tarjeta"><span class="chip">Fortaleza</span><br><b>Una plataforma completa y propia</b><br>Venta, agenda, cobro, stand, galerías, entrega, «Para tus redes», proyectos y experiencias en un solo sistema, con pruebas automáticas. Ninguna competencia local en cosplay tiene algo así.</div>
+<div class="tarjeta"><span class="chip">Fortaleza</span><br><b>El producto genera su propia publicidad</b><br>Cada cliente sale con su Reel, sus formatos para redes, el texto listo y el crédito a @cosplay.inc. Bien usado, es un motor de contenido gratuito.</div>
+<div class="tarjeta"><span class="chip">Riesgo</span><br><b>Todo depende de un evento</b><br>Hoy la venta gira alrededor de SOFA. Las experiencias y los proyectos ya existen en el sistema, pero aún no tienen fecha ni precios publicados.</div>
+<div class="tarjeta"><span class="chip">Riesgo</span><br><b>La portada no vende lo nuevo</b><br>El inicio habla solo del estudio en convención. Experiencias, proyectos a medida e ideas de poses no aparecen ahí.</div>
+</div>
+<div class="urgente" style="margin-top:14px"><b>Lo urgente, antes de SOFA (8 de octubre):</b>
+<ol>
+<li><b>Congelar cambios</b> del 6 al 13 de octubre, salvo arreglos urgentes. Un despliegue en plena venta es el mayor riesgo técnico de la semana.</li>
+<li><b>Rotar las claves expuestas</b> que siguen pendientes: contraseña de la base de datos, la clave secreta de Bold (la de pruebas también), la clave de sesión y la del stand. Se cambian solo en el servidor, nunca en el chat ni en el repositorio.</li>
+<li><b>Anunciar Halloween</b> (recomendado: sábado 24 de octubre) para que el QR del stand en SOFA lleve a /experiencias con la lista de espera abierta.</li>
+</ol></div>
+
+<h2>2 · Qué revisé y cómo</h2>
+<ul class="b">
+<li><b>Pruebas automáticas:</b> 263 pruebas de punta a punta, que simulan a un cliente y al equipo usando el sitio, y 308 pruebas unitarias, que revisan reglas, precios y textos. También la verificación de tipos de todo el código, unas 74.000 líneas.</li>
+<li><b>Seguridad:</b> que cada acción que cambia datos exija la sesión o el enlace correcto, y que lo privado no llegue a los buscadores.</li>
+<li><b>Buscadores:</b> el mapa del sitio, las reglas para rastreadores y los datos estructurados de eventos.</li>
+<li><b>Estética y recorrido:</b> capturas en celular y computador de inicio, SOFA, eventos, preguntas, experiencias, poses y la sesión personalizada.</li>
+<li><b>Negocio:</b> precios y niveles configurados, medición (Google Analytics y Meta), contenido del blog y canales.</li>
+</ul>
+<p class="nota" id="resultado-pruebas">Resultado de la batería completa: ver sección 3.</p>
+
+<h2>3 · Errores encontrados y arreglados (ya publicados)</h2>
+<table>
+<tr><th>Hallazgo</th><th>Impacto</th><th>Arreglo</th></tr>
+<tr><td>El espacio privado de cada proyecto (/proyecto/…) no estaba en la lista de «no rastrear» de los buscadores.</td><td class="alto">Alto</td><td>Agregado, junto con el simulador del equipo. Ya tenía la marca de «no indexar», ahora también la regla del rastreador.</td></tr>
+<tr><td>Las experiencias no estaban en el mapa del sitio.</td><td class="medio">Medio</td><td>/experiencias y cada experiencia anunciada o a la venta entran solas al mapa.</td></tr>
+<tr><td>Las experiencias no se presentaban a Google como «Evento».</td><td class="medio">Medio</td><td>Cada experiencia lleva sus datos de evento (fecha, lugar, precios y si está agotada), para que pueda salir en el buscador de eventos.</td></tr>
+<tr><td>Si el cliente de un proyecto dejó solo WhatsApp, nunca recibía la propuesta (los avisos salen por correo).</td><td class="alto">Alto</td><td>Botón «Enviarle su enlace por WhatsApp» en la ficha del proyecto, con el mensaje ya escrito. Al enviar la propuesta, el sistema avisa si el cliente no tiene correo.</td></tr>
+<tr><td>Ni la lista de espera ni la propuesta aceptada se medían como clientes potenciales.</td><td class="medio">Medio</td><td>Ahora llegan a Google Analytics y a Meta como «Lead». La propuesta aceptada va con su valor, para optimizar campañas.</td></tr>
+<tr><td>Los correos de «abrió la venta» no ofrecían cómo dejar de recibirlos.</td><td class="medio">Medio (Ley 1581)</td><td>El correo dice cómo darse de baja, y el admin tiene el botón «Quitar» en la lista de espera.</td></tr>
+<tr><td>Una foto dañada hacía fallar toda la subida de poses.</td><td class="bajo">Bajo</td><td>Se salta esa foto, se suben las demás y se avisa cuál falló.</td></tr>
+<tr><td>Las etiquetas de cada pose salían cortadas en el administrador.</td><td class="bajo">Bajo</td><td>Ahora se ven completas.</td></tr>
+</table>
+<div id="tabla-pruebas"></div>
+
+<h2>4 · Arquitectura</h2>
+<h3>Lo que está bien hecho</h3>
+<ul class="b">
+<li><b>Un solo sistema</b> (Next.js + PostgreSQL) con módulos claros: catálogo y precios en un paquete aparte con sus propias pruebas, notificaciones con bandeja y reintentos, almacén de archivos separado entre lo público (portafolio) y lo privado (clientes).</li>
+<li><b>El servidor decide el dinero:</b> el navegador nunca manda precios, solo códigos y cantidades. Los totales se recalculan siempre.</li>
+<li><b>Textos editables</b> desde el admin sin tocar código, y el sitio en tres idiomas.</li>
+<li><b>Respaldo automático</b> de la base antes de cada despliegue, y despliegue automático al publicar.</li>
+<li><b>Pruebas extensas</b>: 263 de punta a punta y 308 unitarias, más que la mayoría de sitios comerciales.</li>
+</ul>
+<h3>Riesgos y recomendaciones técnicas</h3>
+<table>
+<tr><th>Riesgo</th><th>Prioridad</th><th>Recomendación</th></tr>
+<tr><td>Claves expuestas sin rotar (base de datos, Bold, sesión, stand).</td><td class="alto">Alta</td><td>Rotarlas en el servidor esta semana. Es lo más importante de esta lista.</td></tr>
+<tr><td>Un solo servidor (VPS) compartido con otras cuatro aplicaciones.</td><td class="medio">Media</td><td>Monitoreo de caída con alerta al celular (un servicio gratuito de «uptime» basta) y una copia de los respaldos fuera del servidor.</td></tr>
+<tr><td>La verificación automática (GitHub) no compila el sitio ni corre las pruebas de punta a punta antes de desplegar.</td><td class="medio">Media</td><td>Agregar la compilación y un grupo corto de pruebas críticas (compra, pago, galería) antes del despliegue.</td></tr>
+<tr><td>No hay revisor de estilo de código (ESLint) configurado.</td><td class="bajo">Baja</td><td>Configurarlo después de SOFA.</td></tr>
+<tr><td>Algunos archivos son muy grandes (el de «Para tus redes» tiene más de 2.600 líneas).</td><td class="bajo">Baja</td><td>Partirlos en piezas cuando se vuelvan a tocar.</td></tr>
+<tr><td>Pagos de proyectos y experiencias: el equipo los confirma a mano.</td><td class="medio">Media</td><td>Conectar Bold a proyectos cuando estén las credenciales nuevas.</td></tr>
+</table>
+
+<h2>5 · Funcionalidad: el recorrido completo</h2>
+<table>
+<tr><th>Etapa</th><th>Estado</th><th>Observación</th></tr>
+<tr><td>Descubrir (inicio, blog, páginas de tema, portafolio)</td><td class="ok">Funciona</td><td>La portada solo presenta el estudio de convención. El blog tiene 15 artículos, el último programado para el 5 de octubre: después no hay más.</td></tr>
+<tr><td>Comprar en convención (catálogo, armar, pagar, agenda)</td><td class="ok">Funciona</td><td>Preventa con precio que sube en el evento, niveles PASS → LEGENDARIO por gasto, pago en línea.</td></tr>
+<tr><td>Operar el día (stand, caja, check-in, ingesta)</td><td class="ok">Funciona</td><td>—</td></tr>
+<tr><td>Entregar (galería, selección, «Para tus redes», Reel, texto)</td><td class="ok">Funciona</td><td>Es el diferencial más fuerte del sistema.</td></tr>
+<tr><td>Volver a comprar (postventa, niveles, «¿Ya publicaste?»)</td><td class="ok">Funciona</td><td>Los niveles solo se ganan por gasto. La regla «eventos asistidos» (el pasaporte) existe, pero ningún nivel la tiene configurada.</td></tr>
+<tr><td>Sesión personalizada → «Tu Proyecto»</td><td class="ok">Funciona</td><td>Brief libre, propuesta, aceptación y pago reportado. Faltan precios de varias opciones y extras.</td></tr>
+<tr><td>Cosplay Inc Experience</td><td class="medio">Lista, sin contenido</td><td>Todavía no hay ninguna experiencia anunciada.</td></tr>
+<tr><td>Ideas de poses</td><td class="medio">Lista, sin contenido</td><td>Hay que cargar las fotos.</td></tr>
+</table>
+
+<h2>6 · Estética</h2>
+<div class="cap">
+<img src="capturas/inicio-cel.jpg" alt="Inicio en celular"><img src="capturas/sofa-cel.jpg" alt="SOFA en celular">
+<img src="capturas/inicio-web.jpg" alt="Inicio en computador"><img src="capturas/sofa-web.jpg" alt="SOFA en computador">
+</div>
+<p class="nota">Capturas del entorno de prueba: las fotos son de relleno.</p>
+<ul class="b">
+<li><b>Identidad consistente:</b> el degradado rojo → magenta, la tipografía de titulares y el logo funcionan en todo el sitio. Las experiencias en oscuro y las tarjetas como afiches le dan un aire más premium.</li>
+<li><b>La portada es muy larga:</b> una fila por cada producto (12 líneas). Las que no tienen material muestran marcos de «Próximamente». En producción, cada fila sin fotos hace ver el sitio sin terminar. <b>Recomiendo</b> agrupar en tres filas (Fotografía, Video, Efectos) u ocultar las vacías.</li>
+<li><b>Dos lenguajes visuales:</b> el brief de sesión personalizada es oscuro neón y el resto del sitio claro. Funciona como «experiencia privada», pero conviene acercarlo a la estética oscura de Experience para que se sienta de la misma casa.</li>
+<li><b>En el celular</b> el menú de arriba solo tiene «Ingresar» y «Reservar». Experiencias, poses y proyectos solo se encuentran en el pie de página.</li>
+<li><b>El aviso de cookies</b> tapa el botón principal en el celular hasta que se responde. Es lo esperado legalmente; está bien que sea compacto.</li>
+</ul>
+
+<h2>7 · El negocio: diagnóstico de mercadeo</h2>
+<h3>7.1 La escalera de valor (con los precios configurados hoy)</h3>
+<table>
+<tr><th>Escalón</th><th>Producto</th><th>Precio de referencia</th><th>Papel</th></tr>
+<tr><td>1 · Entrada</td><td>Foto Pasarela / Fotoestudio en convención</td><td>$30.000 – $40.000</td><td>Primer contacto, mucho volumen.</td></tr>
+<tr><td>2 · Subir</td><td>Video, cámara lenta, órbita, FX e inmersiva</td><td>$45.000 – $200.000</td><td>Ticket promedio; los niveles ELITE ($220.000), MASTER ($340.000) y LEGENDARIO ($600.000) empujan a sumar.</td></tr>
+<tr><td>3 · Repetir</td><td>Cosplay Inc Experience (temporadas, salidas, campamentos)</td><td>Por definir</td><td><b>El hueco más grande:</b> entre $200.000 y $1.300.000 no hay oferta fuera de la convención.</td></tr>
+<tr><td>4 · Profundizar</td><td>Tu Proyecto (sesión personalizada)</td><td>Desde $1.300.000 (20 fotos)</td><td>Ticket alto, a la medida.</td></tr>
+</table>
+<p class="b"><b>Conclusión:</b> el negocio tiene una entrada muy buena y un techo alto, pero le falta el escalón del medio. Ese escalón es el que convierte a un cliente de convención en cliente de todo el año. Las experiencias de temporada son la forma más rápida de llenarlo, y Halloween es la primera oportunidad.</p>
+
+<h3>7.2 Posicionamiento</h3>
+<p class="b">Hoy el mensaje es «estudio de fotografía y video de cosplay en convención». Recomiendo pasar a <b>«la casa del cosplay en Colombia»</b>, con tres puertas:</p>
+<ul class="b">
+<li><b>En tu evento</b> (convenciones),</li>
+<li><b>Experiencias</b> (eventos propios),</li>
+<li><b>A tu medida</b> (proyectos),</li>
+</ul>
+<p class="b">y una capa de comunidad: poses, blog, «Para tus redes» y niveles. La familia de marcas Studio, Magazine y Experience encaja con eso.</p>
+
+<h3>7.3 Canales</h3>
+<table>
+<tr><th>Canal</th><th>Qué hacer</th></tr>
+<tr><td><b>Instagram y TikTok</b> (el principal)</td><td>Publicar los Reels de las sesiones (con autorización), detrás de cámaras, «antes y después» de la edición FX y una «pose de la semana» tomada de Ideas de poses. Cada cliente que publica con @cosplay.inc es publicidad gratis: «¿Ya publicaste?» ya lo empuja.</td></tr>
+<tr><td><b>WhatsApp</b></td><td>Catálogo de WhatsApp Business con los productos. Listas de difusión con quienes se anotaron a «Avísame» y quienes compraron (solo con su autorización). Respuestas rápidas con los enlaces de reserva y de experiencias.</td></tr>
+<tr><td><b>Google</b></td><td>Crear y cuidar el <b>Perfil de Empresa en Google</b> («Cosplay Inc Studio», Bogotá) con fotos, horario y reseñas: es lo que sale al buscar «fotógrafo cosplay Bogotá». Seguir publicando en el blog: hoy la programación termina el 5 de octubre.</td></tr>
+<tr><td><b>Convenciones</b></td><td>QR en el stand hacia /experiencias (lista de espera) y hacia la galería. Tarjeta con «tu código, tus fotos, tu Reel».</td></tr>
+<tr><td><b>Alianzas</b></td><td>Las Cámaras del Dragón (SOFA), maquilladores, tiendas de cosplay y comunidades por fandom, para las salidas. Comisión o beneficio por referir.</td></tr>
+</table>
+
+<h3>7.4 Publicidad pagada (cuando haya presupuesto)</h3>
+<ul class="b">
+<li><b>Meta (Instagram y Facebook):</b> el sitio ya envía «Compra», «Inicio de pago» y «Lead». Con eso se puede:
+  <ul>
+  <li>mostrar anuncios a quien vio el catálogo y no compró (retargeting);</li>
+  <li>buscar personas parecidas a quienes compraron;</li>
+  <li>durante SOFA, mostrar anuncios solo alrededor de Corferias.</li>
+  </ul>
+  Los mejores anuncios son los Reels de clientes reales, con su autorización.</li>
+<li><b>TikTok:</b> impulsar publicaciones de clientes que etiquetan a la marca, con su permiso.</li>
+<li><b>Google:</b> campañas pequeñas de búsqueda para «fotógrafo cosplay Bogotá» y «sesión de fotos cosplay», hacia la sesión personalizada.</li>
+<li><b>Regla de oro:</b> medir el costo por venta y por lead con los eventos que ya existen. Lo que no se mide, no se escala.</li>
+</ul>
+
+<h3>7.5 Fidelización</h3>
+<ul class="b">
+<li><b>Activar el pasaporte:</b> en Admin → Niveles, poner cuántos eventos asistidos dan cada nivel (por ejemplo, ELITE a los 2 y MASTER a los 4). Así las experiencias suben de nivel aunque el gasto sea menor. Los números los defines tú.</li>
+<li><b>Preventa para quienes ya compraron</b> y para la lista de espera, antes de anunciar en redes.</li>
+<li><b>Referidos:</b> «trae a tu crew», con los precios de grupo que ya existen.</li>
+<li><b>Pase de temporada</b> para Halloween, Navidad y Año Nuevo. Recomendado: tríptico exclusivo + prioridad.</li>
+</ul>
+
+<h3>7.6 Legal y confianza</h3>
+<ul class="b">
+<li>Revisión de abogado para las políticas de uso de imagen, cancelación y menores, y para los términos.</li>
+<li>Para usar fotos de clientes en publicidad hace falta su <b>autorización expresa</b>. Ya se pide: en convención es una casilla opcional al comprar («Autorizo que mi material se use en redes y portafolio de la marca») y en proyectos es parte de la aceptación. La regla para el equipo: usar en anuncios y redes <b>solo</b> material de quienes la marcaron.</li>
+<li>Reseñas: pedir una reseña en Google con el correo de «¿Ya publicaste?» sube la confianza y el posicionamiento local.</li>
+</ul>
+
+<h2>8 · Plan sugerido</h2>
+<table>
+<tr><th>Cuándo</th><th>Qué</th></tr>
+<tr><td><b>Esta semana (antes del 8)</b></td><td>Rotar claves · congelar cambios desde el 6 · anunciar Halloween · QR del stand a /experiencias · Perfil de Empresa en Google.</td></tr>
+<tr><td><b>Durante SOFA (8–12)</b></td><td>Capturar correos y autorizaciones · Reels diarios del stand · anuncios alrededor de Corferias si hay presupuesto.</td></tr>
+<tr><td><b>Después de SOFA (13–31)</b></td><td>Entregas rápidas y «¿Ya publicaste?» · abrir la venta de Halloween y avisar a la lista · cargar Ideas de poses · reanudar el blog · presentar las tres puertas en la portada.</td></tr>
+<tr><td><b>Noviembre – diciembre</b></td><td>Navidad y Año Nuevo con pase de temporada · activar el pasaporte · Bold para proyectos · primera salida por comunidad · monitoreo y pruebas antes de desplegar.</td></tr>
+</table>
+
+<h2>9 · Decisiones que necesito de ti</h2>
+<div class="decide"><ol>
+<li>Fecha, estudio y precios de los niveles de Halloween.</li>
+<li>¿Agrego a la portada las «tres puertas» (convención, experiencias, a tu medida)? ¿Y «Experiencias» en el menú del celular?</li>
+<li>¿Agrupo u oculto las filas vacías del portafolio en la portada?</li>
+<li>Cuántos eventos asistidos dan cada nivel (pasaporte).</li>
+</ol></div>
+</main></body></html>
