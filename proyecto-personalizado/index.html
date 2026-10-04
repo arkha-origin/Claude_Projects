@@ -35,11 +35,56 @@ th{background:#faf7fb;font-size:12px;letter-spacing:.05em;text-transform:upperca
 .mock ul{list-style:none;padding:0;margin:10px 0 0}.mock li{color:#fff;padding:6px 0;border-bottom:1px solid #ffffff14;font-size:14px}
 .mock li span{color:#ffffff80;font-size:12px}
 .decide{background:#fff7ed;border:1px solid #fed7aa;border-radius:14px;padding:14px 18px}
+.cap{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin:16px 0}
+.cap figure{margin:0}.cap img{width:100%;border:1px solid #e4e4ea;border-radius:14px;display:block}
+.cap figcaption{font-size:12px;color:#5e6070;margin-top:6px}
 </style></head><body><main>
 
 <p class="nota">Cosplay Inc · Propuesta de producto · Octubre de 2026</p>
 <h1>«Tu Proyecto»: la sesión personalizada como experiencia completa</h1>
 <p class="b">Hoy la sesión personalizada ya funciona por intuición: una entrevista bien hecha, una reunión, una propuesta y un cliente que se siente escuchado. El caso más reciente fue de <b>20 fotos por $1.300.000</b>, varias con procesado especial. Esta propuesta convierte ese camino en un <b>producto</b>: un espacio privado dentro de Cosplay Inc donde el cliente vive su proyecto de principio a fin, y donde cada etapa es también una oportunidad de venta bien puesta.</p>
+
+<h2>Fase 1 · Ya está en el sistema</h2>
+<p class="b"><span class="chip v">Publicado</span> El corazón de «Tu Proyecto» ya funciona en producción, con las reglas comerciales que definiste:</p>
+<table>
+<tr><th>Regla</th><th>Cómo quedó</th></tr>
+<tr><td>Precio por foto</td><td>$65.000; mínimo 20 fotos. La opción Recomendada sale en $1.300.000 (20 fotos) y la Amplia en $1.950.000 (30 fotos).</td></tr>
+<tr><td>Opción de 10 fotos</td><td>«Esencial» aparece <b>por cotizar</b> hasta que definas su precio; el cliente la ve, pero no la puede elegir sin precio.</td></tr>
+<tr><td>Foto adicional</td><td>$40.000 cada una. El cliente elige cuántas y el total se actualiza en vivo.</td></tr>
+<tr><td>Anticipo</td><td>50 % para asegurar la fecha y 50 % a la entrega. El saldo solo se puede pagar cuando el anticipo está confirmado.</td></tr>
+<tr><td>Ajustes</td><td>1 ronda en edición y hasta 3 reuniones de preproducción: van escritos en cada opción.</td></tr>
+<tr><td>Licencia comercial</td><td>Al aceptar, el cliente dice si las fotos son para uso <b>personal</b> o <b>comercial</b>. Si es comercial, la licencia se suma sola, <b>por cotizar</b>, hasta que fijes su precio.</td></tr>
+<tr><td>Menores de edad</td><td>Se pide la fecha de nacimiento. Si es menor: nombre, documento y teléfono del acudiente, más su autorización (y su acompañamiento en la sesión). Un proyecto <b>sensual o erótico nunca</b> se acepta con un menor; el sistema lo bloquea y el administrador lo marca en rojo.</td></tr>
+<tr><td>Uso de imagen</td><td>El cliente decide si autoriza mostrar sus fotos en el portafolio y las redes de la casa, y acepta las políticas de uso de imagen, menores y cancelación (editables en Admin → Textos → «Proyectos personalizados»).</td></tr>
+<tr><td>Cancelación y cambio de fecha</td><td>Texto basado en la normativa colombiana vigente (Estatuto del Consumidor, Ley 1480 de 2011), editable.</td></tr>
+<tr><td>Vigencia de la propuesta</td><td>7 días desde que se envía.</td></tr>
+</table>
+<h3>El recorrido, tal como funciona hoy</h3>
+<ol class="b">
+<li>El cliente llena la entrevista en <b>/sesionpersonalizada</b>. El sistema guarda la cotización (COT-…) y abre su proyecto (PRY-…). El correo de confirmación ya trae el enlace privado a su proyecto.</li>
+<li>El cliente ve su espacio: dónde va (9 etapas), «Lo que sigue», «Lo que decidimos juntos» y su entrevista.</li>
+<li>En <b>Admin → Proyectos</b> el equipo pone el nombre real del proyecto, la fecha de la reunión creativa y las decisiones («Tema: decisión»), y arma la propuesta: concepto, frases de la entrevista, opciones y extras. Puede guardarla como borrador o enviarla. Si la cambia después de enviada, sale una versión nueva y la anterior queda reemplazada.</li>
+<li>El cliente recibe un correo, abre su propuesta (el equipo ve cuándo la vio), elige la opción y los extras, completa sus datos y acepta.</li>
+<li>Paga el anticipo por Nequi, transferencia, Llave Bre-B o Daviplata y deja la referencia en «Ya pagué». El equipo recibe un aviso, confirma el pago y el proyecto pasa a <b>Preproducción</b>. El cliente recibe la confirmación por correo.</li>
+</ol>
+<div class="cap">
+<figure><img src="capturas/cliente-1-inicio.jpg"><figcaption>El espacio del cliente: lo que sigue y las 9 etapas</figcaption></figure>
+<figure><img src="capturas/cliente-2-propuesta.jpg"><figcaption>La propuesta: opciones, extras y la cuenta en vivo</figcaption></figure>
+<figure><img src="capturas/cliente-3-menor.jpg"><figcaption>Menor de edad: aparecen los datos y la autorización del acudiente</figcaption></figure>
+</div>
+<div class="cap">
+<figure><img src="capturas/admin-1-lista.jpg"><figcaption>Admin → Proyectos (con aviso en el menú)</figcaption></figure>
+<figure><img src="capturas/admin-2-ficha.jpg"><figcaption>La ficha: datos, decisiones y armador de la propuesta</figcaption></figure>
+</div>
+<div class="decide">
+<p style="margin-top:0"><b>Para revisar antes de darlo por definitivo:</b></p>
+<ul>
+<li>Las <b>políticas</b> (uso de imagen, menores y cancelación) son un buen punto de partida, pero conviene que las revise un abogado. Se editan sin tocar código.</li>
+<li>Que el acudiente <b>acompañe la sesión</b> de un menor es una propuesta mía: si no la quieres, se quita del texto.</li>
+<li>Faltan precios: la opción de 10 fotos, la licencia comercial, el video de detrás de cámaras, la edición FX y la impresión. Mientras no los definas, salen como «por cotizar».</li>
+<li>En esta fase los pagos se reportan y el equipo los confirma. Bold para proyectos queda para después, cuando estén listas sus credenciales.</li>
+</ul>
+</div>
 
 <h2>1 · Lo que ya existe y lo que falta</h2>
 <p class="b">La buena noticia: más de la mitad del camino ya está construido y probado en eventos. La propuesta es <b>unirlo</b> bajo un solo proyecto, no empezar de cero.</p>
@@ -159,7 +204,7 @@ th{background:#faf7fb;font-size:12px;letter-spacing:.05em;text-transform:upperca
 
 <h2>8 · Plan por fases</h2>
 <div class="rejilla">
-<div class="tarjeta"><span class="chip">Fase 1 · el corazón</span><br><b>Proyecto + propuesta + pago</b><br><small>Al enviar la entrevista se crea el proyecto. Página del proyecto con su línea de tiempo y «Lo que sigue». Desde el administrador: convertir la solicitud en proyecto, anotar las decisiones de la reunión y armar la propuesta con 3 opciones y extras. El cliente compara, elige, acepta y paga el anticipo. Correos de cada paso.</small></div>
+<div class="tarjeta"><span class="chip v">Fase 1 · publicada</span><br><b>Proyecto + propuesta + pago</b><br><small>Al enviar la entrevista se crea el proyecto. Página del proyecto con su línea de tiempo y «Lo que sigue». Desde el administrador: convertir la solicitud en proyecto, anotar las decisiones de la reunión y armar la propuesta con 3 opciones y extras. El cliente compara, elige, acepta y paga el anticipo. Correos de cada paso.</small></div>
 <div class="tarjeta"><span class="chip a">Fase 2 · producción</span><br><b>Preproducción + galería</b><br><small>Moodboard compartido, lista de pendientes, hoja de llamado y conexión con la galería existente (miniaturas, selección, edición, entrega), con saldo antes de la entrega y rondas de ajuste.</small></div>
 <div class="tarjeta"><span class="chip v">Fase 3 · recuerdo y extras</span><br><b>Página de recuerdo + ventas después de la entrega</b><br><small>Página final del proyecto, adelanto del mismo día, impresos y fotolibro, mejoras a FX, aniversario y «Parte 2».</small></div>
 <div class="tarjeta"><span class="chip g">Fase 4 · crecer</span><br><b>Licencias, membresía, crews, referidos</b><br><small>Las palancas grandes de monetización en la comunidad, cuando el flujo base esté rodando.</small></div>
@@ -167,7 +212,7 @@ th{background:#faf7fb;font-size:12px;letter-spacing:.05em;text-transform:upperca
 
 <h2>9 · Decisiones que necesito de ti antes de construir</h2>
 <div class="decide">
-<p style="margin-top:0">Son reglas comerciales; no las invento, las defines tú:</p>
+<p style="margin-top:0">Son reglas comerciales; no las invento, las defines tú. <b>Ya definiste</b> el precio por foto, el anticipo, las rondas de ajuste, la foto adicional, cómo se ofrece la licencia y las reglas para menores (ver «Fase 1»). <b>Faltan</b> los precios de la opción de 10 fotos, de la licencia y de los demás extras.</p>
 <ol>
 <li><b>Precios de las opciones</b> (o la base por foto). El caso real da una referencia de unos $65.000 por foto en la opción de 20, con procesado especial.</li>
 <li><b>Anticipo:</b> qué porcentaje (por ejemplo, 50 %) y cuándo se paga el saldo (¿antes de la sesión o antes de la entrega?).</li>
