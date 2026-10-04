@@ -45,7 +45,7 @@ th{background:#faf7fb;font-size:12px;letter-spacing:.04em;text-transform:upperca
 <li><b>Estética y recorrido:</b> capturas en celular y computador de inicio, SOFA, eventos, preguntas, experiencias, poses y la sesión personalizada.</li>
 <li><b>Negocio:</b> precios y niveles configurados, medición (Google Analytics y Meta), contenido del blog y canales.</li>
 </ul>
-<p class="nota" id="resultado-pruebas">Resultado de la batería completa: ver sección 3.</p>
+<p class="nota">Resultado: ver sección 3.</p>
 
 <h2>3 · Errores encontrados y arreglados (ya publicados)</h2>
 <table>
@@ -59,7 +59,15 @@ th{background:#faf7fb;font-size:12px;letter-spacing:.04em;text-transform:upperca
 <tr><td>Una foto dañada hacía fallar toda la subida de poses.</td><td class="bajo">Bajo</td><td>Se salta esa foto, se suben las demás y se avisa cuál falló.</td></tr>
 <tr><td>Las etiquetas de cada pose salían cortadas en el administrador.</td><td class="bajo">Bajo</td><td>Ahora se ven completas.</td></tr>
 </table>
-<div id="tabla-pruebas"></div>
+<h3>Resultado de las pruebas</h3>
+<table>
+<tr><th>Qué</th><th>Resultado</th></tr>
+<tr><td>Pruebas unitarias (reglas, precios, textos, traducciones)</td><td class="ok">308 de 308 pasan</td></tr>
+<tr><td>Verificación de tipos y compilación de producción</td><td class="ok">Sin errores</td></tr>
+<tr><td>Batería completa de punta a punta (263 pruebas, en una sola corrida de 50 minutos)</td><td class="medio">235 pasan, 24 fallan y 4 se omiten</td></tr>
+<tr><td>Las 24 que fallaron, corridas de nuevo una por una</td><td class="ok">Todas pasan</td></tr>
+</table>
+<p class="b">Entre las 24 que fallaron hubo dos problemas reales de las <b>pruebas</b>, no del sitio. Una buscaba la hora de la cita, que ahora aparece en tres lugares de la reserva. Otra no esperaba lo suficiente a que cargara una página. Las dos quedaron corregidas. Las demás fallaron por el entorno de prueba: el servidor de desarrollo se reinicia y compila páginas en medio de una corrida tan larga. <b>Recomendación:</b> correr la batería completa contra una compilación de producción en GitHub, antes de cada despliegue (ver sección 4).</p>
 
 <h2>4 · Arquitectura</h2>
 <h3>Lo que está bien hecho</h3>
