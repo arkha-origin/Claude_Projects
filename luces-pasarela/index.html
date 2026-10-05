@@ -14,7 +14,7 @@ svg text{font-family:system-ui,sans-serif}
 </style></head><body><main>
 <p class="nota">Cosplay Inc · Hoja de montaje para SOFA</p>
 <h1>Luces de la pasarela: 2 × CB300 RGB + 2 × CB200 RGB + 4 tubos RGB</h1>
-<p><b>Para la pasarela de 10 m de SOFA, usa la <a href="#diagonal">versión 2 (en diagonal)</a>.</b> La versión 1 sirve para pasarelas cortas.</p>
+<p><b>Para la pasarela de 10 m de SOFA, usa la <a href="#diagonal">versión 2 (en diagonal)</a>.</b> La versión 1 sirve para pasarelas cortas. Las <a href="#escenas">escenas por personaje</a>, con sus valores para la app, están después de la versión 2.</p>
 <p><b>La idea:</b> las dos CB300, las más potentes, son la <b>luz principal en blanco</b> desde adelante. Las dos CB200 van <b>atrás, en color</b>, para recortar la silueta del personaje y darle el ambiente. Los <b>cuatro tubos, en vertical y dentro del cuadro</b>, forman un corredor de columnas de luz a los lados de la pasarela. Son lo que la hace ver como pasarela y no como estudio. La piel y el traje quedan con color real, y el RGB pone la magia sin ensuciar los tonos.</p>
 
 <h2 id="diagonal">Versión 2 · Pasarela de 10 m en diagonal (recomendada)</h2>
@@ -99,6 +99,49 @@ svg text{font-family:system-ui,sans-serif}
 <li>Guarda la escena en la app de NEEWER («Pasarela SOFA») para recuperarla cada mañana en un toque.</li>
 </ol>
 <p class="nota">Las distancias son un punto de partida para una pasarela de 10 m y unos 2 m de ancho. La calibración con la cámara es la que manda.</p>
+
+<h2 id="escenas">Escenas por personaje (para la pasarela en diagonal)</h2>
+<p>En la versión de 10 m, las cuatro luces grandes (CB300 y CB200) son la luz <b>blanca</b> del personaje: siempre en modo CCT, con el verde/magenta en 0, para que piel y traje salgan con su color real. El ambiente lo ponen los <b>tubos</b>: el par del portal (fondo) y el par lateral. Valores en modo <b>HSI</b>: H = tono (0–360), S = saturación (0–100), I = intensidad (0–100).</p>
+<table>
+<tr><th>Escena</th><th>Personajes de ejemplo</th><th>CB300 + CB200 (CCT)</th><th>Tubos portal (fondo)</th><th>Tubos laterales</th><th>Efecto (solo video, solo tubos)</th></tr>
+<tr><td><b>01 · Marca Cosplay Inc</b></td><td>Cualquiera · foto oficial del evento</td><td>5600 K · I calibrada</td><td>Magenta · H 320 · S 100 · I 30</td><td>Cian · H 190 · S 100 · I 25</td><td>Respiración lenta</td></tr>
+<tr><td><b>02 · Fuego</b></td><td>Rengoku, Ace, Diluc, Hu Tao, personajes de fuego o Pyro</td><td>5200 K (un toque cálida)</td><td>Naranja · H 25 · S 100 · I 35</td><td>Rojo · H 5 · S 100 · I 30</td><td>Parpadeo de fuego, suave</td></tr>
+<tr><td><b>03 · Hielo</b></td><td>Elsa, Ganyu, Shenhe, Sub-Zero, personajes Cryo</td><td>6000 K (un toque fría)</td><td>Azul hielo · H 200 · S 70 · I 35</td><td>Blanco frío · CCT 7000 K · I 25</td><td>Respiración lenta</td></tr>
+<tr><td><b>04 · Villano / Sith</b></td><td>Darth Vader, Kylo Ren, Sukuna, Akatsuki</td><td>5600 K · una CB300 al 100 % y la otra al 40 % (más contraste)</td><td>Rojo · H 0 · S 100 · I 40</td><td>Rojo · H 0 · S 100 · I 15, o apagados</td><td>Pulso lento rojo</td></tr>
+<tr><td><b>05 · Cyberpunk / neón</b></td><td>Jinx, Lucy y David (Edgerunners), K/DA</td><td>5600 K</td><td>Magenta · H 300 · S 100 · I 35</td><td>Cian · H 180 · S 100 · I 35</td><td>Ciclo de color lento</td></tr>
+<tr><td><b>06 · Bruja / magia oscura</b></td><td>Maléfica, brujas, hechiceras</td><td>5600 K</td><td>Violeta · H 275 · S 100 · I 30</td><td>Verde esmeralda · H 140 · S 80 · I 20</td><td>Respiración</td></tr>
+<tr><td><b>07 · Halloween</b></td><td>Vampiros, brujas, terror</td><td>5400 K</td><td>Naranja · H 28 · S 100 · I 35</td><td>Púrpura · H 280 · S 100 · I 30</td><td>Parpadeo de vela</td></tr>
+<tr><td><b>08 · Gótico / vampiro</b></td><td>Alucard, Castlevania, cazadores</td><td>5000 K y bajar 10 % el relleno</td><td>Rojo vino · H 350 · S 100 · I 25</td><td>Violeta oscuro · H 265 · S 100 · I 20</td><td>—</td></tr>
+<tr><td><b>09 · Héroe clásico</b></td><td>Spider-Man, Superman, Capitán América</td><td>5600 K</td><td>Azul · H 220 · S 100 · I 35</td><td>Rojo · H 0 · S 100 · I 30</td><td>—</td></tr>
+<tr><td><b>10 · Naturaleza / élfico</b></td><td>Link, Nahida, elfos, Robin Hood</td><td>5000 K</td><td>Verde · H 120 · S 80 · I 30</td><td>Dorado · H 45 · S 70 · I 30</td><td>Respiración</td></tr>
+<tr><td><b>11 · Chica mágica / idol</b></td><td>Sailor Moon, Madoka, Hatsune Miku (cambia el portal a turquesa H 175)</td><td>5600 K · las dos CB300 iguales (luz suave)</td><td>Rosa · H 330 · S 70 · I 35</td><td>Dorado · H 45 · S 60 · I 30</td><td>Destellos suaves</td></tr>
+<tr><td><b>12 · Eléctrico / tormenta</b></td><td>Raiden Shogun, Killua, personajes Electro</td><td>5800 K</td><td>Violeta · H 270 · S 100 · I 35</td><td>Azul eléctrico · H 230 · S 100 · I 30</td><td>Relámpago corto (solo video)</td></tr>
+<tr><td><b>13 · Dorado / sagrado</b></td><td>Caballeros dorados (Saint Seiya), paladines, Wonder Woman</td><td>5000 K</td><td>Dorado · H 40 · S 80 · I 35</td><td>Blanco cálido · CCT 3200 K · I 30</td><td>—</td></tr>
+<tr><td><b>14 · Dragón</b></td><td>Daenerys, cazadores de dragones, Cámaras del Dragón</td><td>5200 K</td><td>Rojo-naranja · H 15 · S 100 · I 35</td><td>Dorado · H 45 · S 90 · I 30</td><td>Parpadeo de fuego</td></tr>
+<tr><td><b>15 · Neutro editorial</b></td><td>Trajes blancos, dorados o pastel; looks elegantes</td><td>5600 K</td><td>Blanco · CCT 6500 K · I 20</td><td>Apagados, o blanco 6500 K · I 15</td><td>—</td></tr>
+<tr><td><b>16 · Mitad y mitad</b></td><td>Todoroki y personajes de dos elementos</td><td>5600 K</td><td>Izquierda roja · H 5 · derecha azul · H 215 (I 35)</td><td>Izquierda roja · derecha azul (I 25)</td><td>—</td></tr>
+<tr><td><b>17 · Dúos</b></td><td>Dos personajes juntos</td><td>5600 K</td><td>Lado izquierdo: color del personaje A · lado derecho: color del B</td><td>Igual que el portal, por lado</td><td>—</td></tr>
+</table>
+<p class="nota">Las intensidades son un punto de partida. La exposición del personaje la ponen siempre las luces blancas calibradas: si una escena se ve muy oscura, se suben los tubos, nunca el ISO. En la versión 1 (pasarela corta), las CB200 hacen de contraluz con el color de los «tubos laterales».</p>
+
+<h3>Cómo elegir el color si el personaje no está en la tabla</h3>
+<ul>
+<li><b>Para reforzar:</b> usa el color de acento del traje (el de los detalles, los ojos, el arma o el poder).</li>
+<li><b>Para separar:</b> si el traje es casi todo de un color, usa el <b>complementario</b> en el contraluz (traje rojo → cian; traje azul → naranja; traje verde → magenta). Con el mismo color, el borde se pierde contra el traje.</li>
+<li><b>Para trajes blancos, dorados o pastel:</b> escena 15 (neutro). El color fuerte los tiñe.</li>
+<li>Para un personaje con su <b>elemento</b> (Genshin, Pokémon, Naruto…): Pyro/fuego → 02, Cryo/hielo → 03, Electro → 12, Dendro/planta → 10, Geo → 13, Hydro/agua → 09 con los dos tubos azules, Anemo/viento → laterales turquesa H 165.</li>
+</ul>
+
+<h3>Montarlo en la app de NEEWER</h3>
+<ol>
+<li><b>Nombra cada luz</b>: «CB300 Izq», «CB300 Der», «CB200 Izq», «CB200 Der», «Tubo Portal Izq», «Tubo Portal Der», «Tubo Lat Izq», «Tubo Lat Der».</li>
+<li><b>Crea los grupos</b>: «Blancas» (las cuatro COB), «Portal» (los dos tubos del fondo) y «Laterales» (los dos tubos de los lados). Para dúos y la escena 16, controla los tubos por lado.</li>
+<li><b>Escena base:</b> grupo «Blancas» en modo CCT 5600 K, verde/magenta 0 y la intensidad que salió de la calibración. Guárdala como «00 · Base pasarela».</li>
+<li><b>Cada escena de la tabla:</b> parte de la base, cambia la temperatura de las blancas si la escena lo pide, pon el grupo «Portal» y el grupo «Laterales» en modo HSI con sus valores, y guarda con el número y el nombre («02 · Fuego»). Así quedan en orden en la lista.</li>
+<li><b>Efectos:</b> solo en los tubos y solo para video. Guárdalos como escena aparte («02V · Fuego video») para no dejarlos encendidos en las fotos.</li>
+<li><b>Los tubos de otra marca</b>, si los tienes, se configuran con los mismos valores HSI en su propia app.</li>
+</ol>
+<p><b>En el stand:</b> la tabla impresa junto al operador de luces. El sistema ya pide el personaje al reservar, y aparece en la agenda y en el tablero de turnos. Con eso se puede tener la escena elegida antes de que el cosplayer llegue a la pasarela.</p>
 
 <h2>Versión 1 · Pasarela corta (hasta unos 5 m)</h2>
 <h2>Vista desde arriba</h2>
