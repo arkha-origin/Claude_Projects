@@ -101,6 +101,16 @@ Arma tu sesión y reserva tu día y tu hora aquí 👉 https://cosplay-inc.com/s
 </ul>
 </div>
 
+<h2>1e · Marcar el estado y contestar con ayuda de Claude</h2>
+<div class="caja">
+<p><b>El estado, a mano.</b> El sistema no ve WhatsApp por dentro: quien envía dice qué pasó. Cada contacto tiene los botones <b>Pendiente · Enviado · Contestó · No respondió · Compró · No escribir</b>. «Pendiente» deshace todo.</p>
+<p><b>¿Cuáles salieron y cuáles no?</b> Pongan el filtro en «Enviado». Para cada contacto, busquen su chat en WhatsApp: si el mensaje está, se queda «Enviado»; si no está, márquenlo «Pendiente» y vuelve a la cola de «Enviar el siguiente».</p>
+<p><b>Cuando alguien contesta:</b> abran «Su respuesta y qué contestarle», peguen lo que escribió y den <b>«Sugerir respuesta con Claude»</b>. Claude redacta la respuesta con la información real del sistema (fechas, preventa, paquetes, precios, rangos). Revísenla, ajústenla si hace falta y denle <b>«Abrir WhatsApp con esta respuesta»</b>. Nada se envía solo.</p>
+<div class="cap"><img src="capturas/respuesta-claude.png" alt="Ficha de un contacto con su respuesta y la sugerencia" style="max-width:400px"></div>
+<p class="nota">Captura del entorno de pruebas; el texto sugerido viene de una respuesta simulada.</p>
+<p class="nota">A Claude solo le llegan el primer nombre y lo que escribió el cliente, nunca su teléfono. Para que funcione hay que poner ANTHROPIC_API_KEY en el .env del servidor; sin esa clave, la respuesta del cliente igual queda guardada.</p>
+</div>
+
 <h2>2 · Los mensajes (los redacta el sistema, con los datos de cada persona)</h2>
 <p><b>Primer mensaje</b>, para alguien que vino de Nezuko:</p>
 <div class="msg">¡Hola María! 💛 Te escribimos de Cosplay Inc. Nos encantó tenerte en el SOFA del año pasado cuando viniste de Nezuko ✨ Y queríamos contarte antes que a nadie: volvemos a Corferias del 8 al 12 de octubre.
