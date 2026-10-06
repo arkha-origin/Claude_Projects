@@ -54,7 +54,7 @@ Prompts para generar con IA (ChatGPT/GPT-Image, Gemini, Ideogram, Midjourney, Hi
 | Video FX | $150.000 | — | — |
 | Video IA Inmersivo | $200.000 | — | — |
 | Vista Rápida (tus fotos primero en la galería) | $20.000 | — | — |
-| Entrega Rápida (edición de primera, por foto) | $40.000 | — | — |
+| Entrega Rápida (edición de primera, por foto o video) | $40.000 | — | — |
 
 **Prompt:**
 > [Bloque de marca] Menú de precios vertical tamaño carta (17:22), estilo carta de restaurante de lujo cruzada con interfaz de videojuego. Dos columnas con títulos de sección "FOTO" (acento rojo) y "VIDEO" (acento azul eléctrico). Cada columna tiene 5 o 6 filas vacías con línea punteada entre el nombre y el precio, y un ícono minimalista de línea a la izquierda de cada fila. Abajo, una banda horizontal con degradado de marca para la sección "EXTRAS" con 2 filas vacías. Fondo negro con una textura sutil de puntos tipo manga y un destello de luz en la esquina superior. Sin texto: solo la maqueta con cajas vacías.

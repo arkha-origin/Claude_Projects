@@ -111,7 +111,7 @@ const EFECTOS = [
 ];
 const EXTRAS = [
   { nombre: "Vista Rápida", nota: "Tus capturas suben primero a tu galería", p: 20_000, sufijo: "" },
-  { nombre: "Entrega Rápida", nota: "La edición final de esa foto, de primera en la cola", p: 40_000, sufijo: " c/u" },
+  { nombre: "Entrega Rápida", nota: "La edición final de esa foto o video, de primera en la cola", p: 40_000, sufijo: " c/u" },
 ];
 const GRUPOS = [
   {
