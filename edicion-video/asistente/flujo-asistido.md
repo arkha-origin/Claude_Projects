@@ -49,4 +49,6 @@ Ver `ficha-direccion-arte.md`. No toca la plataforma ni la pausa de cambios.
 4. **Formato de la librería de VFX:** con transparencia, fondo negro o croma. El catalogador acepta los tres.
 
 ## Datos personales
-Los cuadros llevan la cara del cliente. Mandarlos a Claude, o a cualquier servicio de IA, es un tratamiento de datos que debe estar cubierto por la autorización que da el cliente (Ley 1581); con menores, la del acudiente. Conviene revisar que la política de privacidad y los términos de la compra lo mencionen. A los prompts del fondo no va nada del cliente: solo la descripción del lugar.
+Los cuadros llevan la cara del cliente. Mandarlos a Claude, o a cualquier servicio de IA, es un tratamiento de datos que debe estar cubierto por la autorización que da el cliente (Ley 1581). Conviene revisar que la política de privacidad y los términos de la compra lo mencionen. A los prompts del fondo no va nada del cliente: solo la descripción del lugar.
+
+**Menores de edad:** su autorización (`material-impreso-sofa/protocolo-menores.md`) no cubre subir su imagen a servicios de IA. Con menores no se mandan cuadros: la ficha se pide con una descripción escrita, el fondo se genera solo desde texto, y el script de la Fase 1 debe preguntar si es menor y, en ese caso, no exportar cuadros. Si el uso promocional dice NO, el material no va a redes ni al portafolio de la marca.

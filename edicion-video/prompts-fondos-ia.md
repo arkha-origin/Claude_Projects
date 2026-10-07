@@ -74,7 +74,7 @@ Algunas herramientas transforman el video real completo (*video a video*). Tiene
 - **la cara del cliente puede cambiar**, así que la cara y el traje reales se dejan siempre en una capa recortada encima;
 - **es subir la imagen del cliente a un servicio externo**, lo que pide su autorización (Ley 1581, datos personales). Con menores de edad, nunca sin la del acudiente.
 
-Generar solo el fondo, desde texto, no usa ningún dato del cliente. Es el camino recomendado.
+Generar solo el fondo, desde texto, no usa ningún dato del cliente. Es el camino recomendado. **Con menores de edad es el único camino:** su autorización no cubre subir su imagen a servicios externos (ver `material-impreso-sofa/protocolo-menores.md`).
 
 ---
 

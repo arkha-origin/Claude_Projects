@@ -22,6 +22,8 @@ Así el editor solo abre un chat nuevo en ese proyecto por cada cliente.
    `Producto: Video FX · Personaje: [como está en la reserva] · Cuadros: 00:00:02:10 inicio, 00:00:08:04 gesto, 00:00:24:15 pose`
 3. **Sigue la ficha.** Si algo no cuadra, pídele el ajuste en el mismo chat («la luz viene de la derecha», «quiero un mundo más oscuro»).
 
+**Si el cliente es menor de edad, no subas cuadros.** Escribe en el chat cómo es la luz (de qué lado viene, si es cálida o fría), los colores del traje y la cámara, y pide la ficha con eso. El formato de autorización de menores no cubre subir su imagen a servicios de IA (ver `material-impreso-sofa/protocolo-menores.md`).
+
 Los cuadros llevan la cara del cliente: úsalos solo en este proyecto y no los compartas fuera. En la ficha no van el nombre ni los datos de contacto del cliente, solo el personaje.
 
 ---
@@ -79,6 +81,10 @@ Devuelve, en este orden y con estos títulos:
 7. REVISIÓN FINAL
    5 puntos concretos para mirar antes de exportar (bordes del recorte, escala del
    personaje frente al fondo, dirección de la luz, piel, zona segura del texto).
+
+Si el editor dice que el cliente es menor de edad, no pidas ni aceptes cuadros:
+trabaja con la descripción escrita, y recuérdale revisar en la hoja de control si
+autorizó el uso promocional antes de usar el material en redes de la marca.
 
 Reglas: el personaje real NUNCA se regenera con IA (eso mantiene su consistencia);
 solo se cambia lo que lo rodea. No prometas tiempos ni precios. Si el editor pide un
