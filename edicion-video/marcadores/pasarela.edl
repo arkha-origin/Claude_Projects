@@ -1,0 +1,17 @@
+TITLE: Plantilla pasarela
+FCM: NON-DROP FRAME
+
+001  001      V     C        01:00:00:00 01:00:00:01 01:00:00:00 01:00:00:01  
+ |C:ResolveColorRed |M:HOOK FINAL PRIMERO |D:45
+
+002  001      V     C        01:00:01:15 01:00:01:16 01:00:01:15 01:00:01:16  
+ |C:ResolveColorYellow |M:ENTRADA |D:75
+
+003  001      V     C        01:00:04:00 01:00:04:01 01:00:04:00 01:00:04:01  
+ |C:ResolveColorBlue |M:CAMINATA CON RAMPAS |D:480
+
+004  001      V     C        01:00:20:00 01:00:20:01 01:00:20:00 01:00:20:01  
+ |C:ResolveColorGreen |M:POSE FINAL |D:180
+
+005  001      V     C        01:00:26:00 01:00:26:01 01:00:26:00 01:00:26:01  
+ |C:ResolveColorPurple |M:CIERRE |D:120

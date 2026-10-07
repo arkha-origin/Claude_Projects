@@ -1,0 +1,17 @@
+TITLE: Plantilla aura
+FCM: NON-DROP FRAME
+
+001  001      V     C        01:00:00:00 01:00:00:01 01:00:00:00 01:00:00:01  
+ |C:ResolveColorRed |M:HOOK |D:30
+
+002  001      V     C        01:00:01:00 01:00:01:01 01:00:01:00 01:00:01:01  
+ |C:ResolveColorYellow |M:RAMPA ENTRADA |D:30
+
+003  001      V     C        01:00:02:00 01:00:02:01 01:00:02:00 01:00:02:01  
+ |C:ResolveColorBlue |M:CAMARA LENTA HEROE |D:165
+
+004  001      V     C        01:00:07:15 01:00:07:16 01:00:07:15 01:00:07:16  
+ |C:ResolveColorGreen |M:RAMPA SALIDA + FLASH |D:30
+
+005  001      V     C        01:00:08:15 01:00:08:16 01:00:08:15 01:00:08:16  
+ |C:ResolveColorPurple |M:CIERRE |D:45

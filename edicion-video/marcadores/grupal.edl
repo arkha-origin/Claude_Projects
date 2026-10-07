@@ -1,0 +1,17 @@
+TITLE: Plantilla grupal
+FCM: NON-DROP FRAME
+
+001  001      V     C        01:00:00:00 01:00:00:01 01:00:00:00 01:00:00:01  
+ |C:ResolveColorRed |M:HOOK EQUIPO |D:60
+
+002  001      V     C        01:00:02:00 01:00:02:01 01:00:02:00 01:00:02:01  
+ |C:ResolveColorYellow |M:ENTRADA |D:90
+
+003  001      V     C        01:00:05:00 01:00:05:01 01:00:05:00 01:00:05:01  
+ |C:ResolveColorBlue |M:MOMENTO DE CADA UNO |D:990
+
+004  001      V     C        01:00:38:00 01:00:38:01 01:00:38:00 01:00:38:01  
+ |C:ResolveColorGreen |M:POSE GRUPAL |D:120
+
+005  001      V     C        01:00:42:00 01:00:42:01 01:00:42:00 01:00:42:01  
+ |C:ResolveColorPurple |M:CIERRE |D:90

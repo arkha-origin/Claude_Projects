@@ -1,0 +1,17 @@
+TITLE: Plantilla orbita
+FCM: NON-DROP FRAME
+
+001  001      V     C        01:00:00:00 01:00:00:01 01:00:00:00 01:00:00:01  
+ |C:ResolveColorRed |M:HOOK DETALLE |D:45
+
+002  001      V     C        01:00:01:15 01:00:01:16 01:00:01:15 01:00:01:16  
+ |C:ResolveColorYellow |M:REVELACION |D:45
+
+003  001      V     C        01:00:03:00 01:00:03:01 01:00:03:00 01:00:03:01  
+ |C:ResolveColorBlue |M:ORBITA + DETALLES |D:360
+
+004  001      V     C        01:00:15:00 01:00:15:01 01:00:15:00 01:00:15:01  
+ |C:ResolveColorGreen |M:GIRO COMPLETO |D:90
+
+005  001      V     C        01:00:18:00 01:00:18:01 01:00:18:00 01:00:18:01  
+ |C:ResolveColorPurple |M:CIERRE |D:60

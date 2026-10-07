@@ -1,0 +1,20 @@
+TITLE: Plantilla video-fx
+FCM: NON-DROP FRAME
+
+001  001      V     C        01:00:00:00 01:00:00:01 01:00:00:00 01:00:00:01  
+ |C:ResolveColorRed |M:HOOK PODER |D:45
+
+002  001      V     C        01:00:01:15 01:00:01:16 01:00:01:15 01:00:01:16  
+ |C:ResolveColorYellow |M:CARGA |D:195
+
+003  001      V     C        01:00:08:00 01:00:08:01 01:00:08:00 01:00:08:01  
+ |C:ResolveColorPink |M:DISPARO FX |D:30
+
+004  001      V     C        01:00:09:00 01:00:09:01 01:00:09:00 01:00:09:01  
+ |C:ResolveColorBlue |M:CAMINATA CON AURA |D:390
+
+005  001      V     C        01:00:22:00 01:00:22:01 01:00:22:00 01:00:22:01  
+ |C:ResolveColorGreen |M:POSE FX |D:150
+
+006  001      V     C        01:00:27:00 01:00:27:01 01:00:27:00 01:00:27:01  
+ |C:ResolveColorPurple |M:CIERRE |D:90

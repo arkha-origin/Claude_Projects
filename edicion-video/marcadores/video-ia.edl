@@ -1,0 +1,17 @@
+TITLE: Plantilla video-ia
+FCM: NON-DROP FRAME
+
+001  001      V     C        01:00:00:00 01:00:00:01 01:00:00:00 01:00:00:01  
+ |C:ResolveColorRed |M:HOOK ANTES/DESPUES |D:45
+
+002  001      V     C        01:00:01:15 01:00:01:16 01:00:01:15 01:00:01:16  
+ |C:ResolveColorYellow |M:REVELACION DEL MUNDO |D:105
+
+003  001      V     C        01:00:05:00 01:00:05:01 01:00:05:00 01:00:05:01  
+ |C:ResolveColorBlue |M:CAMINATA EN EL MUNDO |D:510
+
+004  001      V     C        01:00:22:00 01:00:22:01 01:00:22:00 01:00:22:01  
+ |C:ResolveColorGreen |M:POSE HEROICA |D:150
+
+005  001      V     C        01:00:27:00 01:00:27:01 01:00:27:00 01:00:27:01  
+ |C:ResolveColorPurple |M:CIERRE |D:90
