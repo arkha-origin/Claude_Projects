@@ -18,6 +18,16 @@
 4. **Archiva el original** en la carpeta de autorizaciones. No se fotografía para mandarlo por WhatsApp ni por chats: lleva documentos de identidad de un menor.
 5. **Al cerrar el día:** la carpeta y la hoja de control quedan con quien coordina el stand.
 
+## En el sistema
+- **POS:** en «Sus datos», marca **Es menor de edad**. Pide el acudiente, su documento, el uso promocional (SÍ o NO) y si ya firmó el formato. Sin esos datos no deja seguir.
+- **Tienda web:** el acudiente marca que la persona es menor y deja sus datos. La casilla de «redes y portafolio» es su autorización del uso promocional. El formato en papel se firma igual en el stand.
+- **Ficha de la reserva en el stand:**
+  - **Reserva de un menor:** aviso en rojo mientras falte el formato firmado. Con **Editar la autorización** se marca «firmó el formato y quedó archivado».
+  - **Reserva que no está marcada como menor** (también las de crews): con **¿Es menor de edad?** se registra todo ahí mismo.
+- **Fila de cada estación:** «Menor · falta formato» o «Menor · formato firmado».
+- **Ingesta y cola de edición:** aviso de menor, con el uso promocional SÍ o NO.
+- **Portafolio:** al crear una pieza con material de un cliente, escribe su código de reserva. Si no hay autorización promocional, el sistema no deja crearla.
+
 ## En edición y en redes
 - **Uso promocional NO:** el material se entrega al cliente normalmente, pero **no** se usa en redes, portafolio, publicidad ni *reels* de la marca. Antes de publicar algo, revisa la hoja de control.
 - **Uso promocional SÍ:** se puede usar para los fines del formato (portafolio, redes, promoción de LCDD, SOFA y CORFERIAS). Siempre cuidando la dignidad del menor.
