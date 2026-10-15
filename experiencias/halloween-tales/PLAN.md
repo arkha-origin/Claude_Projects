@@ -61,78 +61,100 @@ Solo dos productos: **foto en estudio** y **un video**.
 **Sugerencia:** A como video incluido en todos los paquetes y C como el
 diferencial del paquete mayor.
 
-### Paquetes propuestos
+### Precios base (decisión de la dirección)
 
-| Paquete | Incluye | Precio sugerido |
-|---|---|---|
-| **Relato** | 3 fotos editadas + 1 video Aura | ⚠️ $130.000 |
-| **Leyenda** | 6 fotos editadas + 1 video Aura + 1 foto inmersiva de terror (fotomontaje) | ⚠️ $210.000 |
-| **Inmortal** | 10 fotos editadas + 1 video Aura + 1 «Tale» de 15 s + Entrega Rápida | ⚠️ $320.000 |
+Esta es una experiencia especial: **no lleva precios de feria**.
 
-- **Adicionales:** foto adicional ⚠️ $40.000; video adicional ⚠️ $60.000.
-- **Descuento comunidad** (compraron en SOFA o ya se tomaron fotos con Cosplay
-  Inc): ⚠️ 15 %, verificado por correo o teléfono contra la base, que el
-  sistema ya tiene.
-- **Grupo o pareja (opcional):** mismo turno, paquete por persona y una foto grupal de regalo.
+- **Foto editada: $60.000.** En SOFA era $40.000 (+50 %).
+- **Video: $80.000.** El Aura en SOFA era $50.000 (+60 %).
 
-Referencias de SOFA para no quedar por debajo:
-- 3 fotos de estudio en evento: $110.000;
-- Aura a precio normal: $50.000.
+Estos son también los precios de los **adicionales**.
 
-Relato ($130.000) cuesta menos que esas partes sueltas ($160.000) y además lleva
-el set temático.
+### Paquetes (⚠️ por aprobar)
+
+El paquete vale menos que sus partes sueltas, para que comprar el paquete sea lo obvio:
+
+| Paquete | Incluye | Sueltos | Precio paquete | Ahorro |
+|---|---|---|---|---|
+| **Relato** | 3 fotos + 1 video Aura | $260.000 | **$230.000** | 12 % |
+| **Leyenda** ⭐ recomendado | 6 fotos + 2 videos (Aura + Tale) | $520.000 | **$450.000** | 13 % |
+| **Inmortal** | 10 fotos + 3 videos (Aura + Tale + Órbita o segundo Aura) + Entrega Rápida | $840.000 | **$690.000** | 18 % |
+
+- **Adicionales:** foto $60.000 · video $80.000.
+- **Descuento comunidad SOFA:** ⚠️ propongo **10 %** y no 15 %. Con estos precios,
+  10 % ya son $23.000 a $69.000 de ahorro, y 15 % le quita casi un cupo de
+  ganancia al evento.
 
 ---
 
-## 4. Números: la meta es pasar el punto de equilibrio por el doble
+## 4. Números: ¿es buen negocio?
 
-**Regla:** ingresos ≥ 2 × costos. Es decir, **los costos no pueden pasar de la
-mitad de lo que se venda**.
+Meta: **ingresos ≥ 2 × costos** (pasar el punto de equilibrio por el doble).
 
-### Cuánto se puede gastar según cuánto se venda
+### Ticket promedio esperado
 
-| Personas | Ticket promedio $180.000 | $220.000 | $260.000 |
-|---|---|---|---|
-| 10 | Ingreso $1,8 M → gasto máximo **$0,9 M** | $2,2 M → **$1,1 M** | $2,6 M → **$1,3 M** |
-| 15 | $2,7 M → **$1,35 M** | $3,3 M → **$1,65 M** | $3,9 M → **$1,95 M** |
-| 20 | $3,6 M → **$1,8 M** | $4,4 M → **$2,2 M** | $5,2 M → **$2,6 M** |
+Supuesto de mezcla: 50 % Relato, 35 % Leyenda, 15 % Inmortal.
 
-### Costos estimados (⚠️ a validar con cotizaciones reales)
+- Promedio de paquete: 0,5 × 230.000 + 0,35 × 450.000 + 0,15 × 690.000 = **$376.000**.
+- Descuento comunidad: si lo usa el 40 % de los compradores, resta ≈ $15.000 → **≈ $361.000**.
+- Sin contar adicionales vendidos el día o en la galería: esos son ganancia extra.
 
-| Categoría | Estimado | Nota |
+### Ingresos por cupos vendidos
+
+| Personas | Ingreso (≈ $361.000 c/u) |
+|---|---|
+| 10 | **$3,6 M** |
+| 12 | **$4,3 M** |
+| 15 | **$5,4 M** |
+| 20 | **$7,2 M** |
+
+### Costos
+
+Mismas estimaciones de antes (⚠️ a validar con cotizaciones):
+- **≈ $2,0 M** con un estudio económico y props propios;
+- **≈ $2,6 M** en un escenario medio;
+- **≈ $3,7 M** con una locación tematizada cara.
+
+A eso se suma la comisión de Bold (~3 % de lo vendido).
+
+### Cuántas personas hacen falta
+
+| Costos fijos | Punto de equilibrio (ganancia 0) | **El doble (meta)** |
 |---|---|---|
-| Estudio o locación, 6 h + montaje | $600.000 – $1.200.000 | El mayor costo: decide el resultado |
-| Escenografía y props | $200.000 – $400.000 | Reutilizable en futuras temporadas (gasto compartido) |
-| Humo, luces de color (alquiler) | $150.000 – $300.000 | Si no son propios |
-| Personal (fotógrafo, video, asistente) | $300.000 – $600.000 | Por día o por evento, según el sistema de gastos |
-| Pauta TikTok + Instagram | $300.000 – $600.000 | |
-| Transporte y montaje | $100.000 – $200.000 | |
-| Alimentación del equipo | $80.000 – $150.000 | |
-| Comisión Bold (~3 % de ventas) | ~$100.000 | |
-| Imprevistos (10 %) | $200.000 | |
-| **Total** | **≈ $2,0 M – $3,7 M** | |
+| $2,0 M | 6 personas | **12 personas** |
+| $2,6 M | 8 personas | **16 personas** |
+| $3,7 M | 11 personas | 22 personas: ❌ no cabe en 20 cupos |
 
-### Lo que dicen los números
+### Ganancia según escenario
 
-**Con 10 personas no se llega al doble.** Habría que gastar menos de
-$1,1–1,3 millones en total, y solo el estudio puede costar eso.
+| Personas | Costos $2,0 M | Costos $2,6 M | Costos $3,7 M |
+|---|---|---|---|
+| 10 | +$1,5 M (1,7×) | +$0,9 M (1,3×) | −$0,2 M |
+| 12 | +$2,2 M (2,1×) ✅ | +$1,6 M (1,6×) | +$0,5 M |
+| 15 | +$3,2 M (2,6×) ✅ | +$2,6 M (2,0×) ✅ | +$1,5 M (1,4×) |
+| 20 | +$5,0 M (3,4×) ✅ | +$4,4 M (2,6×) ✅ | +$3,3 M (1,8×) |
 
-Para llegar al doble hacen falta:
-1. **15 o más personas**, con un ticket promedio de al menos $220.000; y
-2. **costos de máximo $1,6–1,9 millones**. Para lograrlo:
-   - un estudio barato o prestado, adaptado con escenografía propia;
-   - props reutilizables;
-   - pauta pequeña y enfocada en la base de SOFA, que ya conoce la marca.
+*(Entre paréntesis: cuántas veces los ingresos cubren los costos.)*
 
-Palancas para subir el ticket:
-- que el paquete del medio (Leyenda) sea el «recomendado»;
-- ofrecer adicionales en la galería (postventa).
+### Conclusión
 
-**Punto de control:** si el 25 de octubre hay menos de 8 cupos vendidos,
-recortar gastos: menos pauta, estudio más sencillo.
+- **Con estos precios el evento sí es buen negocio**, con dos condiciones:
+  1. **los costos no pasan de ~$2,6 M**; y
+  2. **se venden al menos 12–16 cupos** (12 si se gasta $2 M, 16 si se gasta $2,6 M).
+- **Una locación tematizada cara (≈ $3,7 M) no llega al doble** ni con 20 cupos.
+  Conviene un estudio adaptado con escenografía propia, que además se reutiliza
+  en Navidad y otras temporadas.
+- **Con 10 cupos solo se llega al doble si se gasta ≈ $1,7 M o menos.**
+  Por eso conviene abrir la venta con 12 turnos y no con 10.
+- **Tope de gasto recomendado: $2,2 M**, que se registra como presupuesto en el sistema de gastos.
+- **Punto de control el 25 de octubre:**
+  - con menos de 8 cupos vendidos, recortar pauta y escenografía;
+  - con más de 10, ampliar a 16–20.
+- Cada paquete Leyenda o Inmortal vale por 2–3 Relatos: la pauta y la página
+  deben empujar **Leyenda como el recomendado**.
 
-Todos estos gastos se registrarán en el sistema de gastos, como el primer evento
-**con presupuesto**.
+Todos los gastos se registran en el sistema de gastos con presupuesto, y al
+final se compara lo presupuestado con lo real.
 
 ---
 
@@ -201,7 +223,7 @@ Todos estos gastos se registrarán en el sistema de gastos, como el primer event
 > Este Halloween tu disfraz merece una historia. Set de terror con humo y luces,
 > fotos editadas y video en cámara lenta para guardar toda la vida.
 > 📅 Viernes 30 de octubre · 2 a 8 p. m. · Bogotá
-> Solo 12 cupos. Reserva tu turno en halloween.cosplay-inc.com
+> Desde $230.000 · solo 12 cupos. Reserva tu turno en halloween.cosplay-inc.com
 
 **Correo a la base de SOFA:** invitación con el descuento comunidad. Se envía
 con el mismo sistema de comunicados, ampliado para campañas de venta.
