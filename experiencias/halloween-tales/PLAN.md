@@ -229,3 +229,48 @@ final se compara lo presupuestado con lo real.
 con el mismo sistema de comunicados, ampliado para campañas de venta.
 
 **Imágenes promocionales con Higgsfield:** solo con adultos o sin personas reconocibles; nunca con menores.
+
+---
+
+## 9. ¿$40.000 o $60.000 por foto? Del modelo SOFA al modelo Experience
+
+**SOFA (feria):**
+- muchísima gente pasando y venta rápida;
+- el espacio lo pone el evento;
+- precio bajo por pieza ($40.000), que se gana por **volumen**.
+
+**Halloween Tales (experiencia):**
+- 10 a 20 personas;
+- el estudio, la escenografía y la pauta los pagamos nosotros;
+- se gana por **valor**: lo que se vende es la experiencia completa, no la pieza suelta.
+
+Con 10 a 20 cupos no hay volumen que compense un precio de feria.
+
+| Precio base (foto / video) | Relato · Leyenda · Inmortal | Ticket promedio* | Ingreso con 12 | Ingreso con 16 | ¿Llega al doble con $2,2 M de gasto? |
+|---|---|---|---|---|---|
+| **$40.000 / $50.000** (SOFA) | $150.000 · $300.000 · $460.000 | ≈ $240.000 | $2,9 M | $3,8 M | ❌ ni con 16 cupos |
+| $50.000 / $70.000 | $195.000 · $380.000 · $590.000 | ≈ $306.000 | $3,7 M | $4,9 M | ⚠️ solo con 15 o más |
+| **$60.000 / $80.000** (recomendado) | $230.000 · $450.000 · $690.000 | ≈ $361.000 | $4,3 M | $5,8 M | ✅ desde 12 cupos |
+
+*Mezcla supuesta: 50 % Relato, 35 % Leyenda, 15 % Inmortal, con el descuento
+comunidad aplicado al 40 % de los compradores.
+
+**Recomendación: mantener $60.000 por foto y $80.000 por video.**
+
+**Cómo pasar del modelo SOFA sin espantar a la base:**
+1. **No mostrar el precio por foto suelta en la portada.** Se muestra la experiencia
+   («desde $230.000»). El precio por pieza solo aparece en «Adicionales».
+2. **Descuento comunidad del 10 %** para quien estuvo en SOFA. La foto les queda
+   efectivamente en ≈ $54.000, y el salto desde $40.000 se siente justificado
+   por el set y la ambientación.
+3. **Comunicar por qué vale más:**
+   - set exclusivo de terror con humo, luces y props;
+   - turno con hora, sin fila;
+   - dirección de poses;
+   - video tipo película.
+   En SOFA era una feria con fila; aquí es una sesión.
+4. **Precio de lanzamiento** (opcional): los primeros 4 cupos o hasta el 20 de
+   octubre con el descuento comunidad abierto a todos. Crea urgencia sin bajar
+   el precio de lista.
+5. **Mismos precios en todas las futuras Experiences** (Navidad, Año Nuevo), para
+   que el mercado asocie «Experience» con un precio distinto al de «feria».
