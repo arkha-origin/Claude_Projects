@@ -84,6 +84,7 @@ def pagina(t):
     galeria="".join(f'<div class="foto" style="background-image:url(\'{img}\'),linear-gradient(160deg,{t["c2"]}55,var(--tarjeta))"><span>{p}</span></div>' for _,p,img in t["paquetes"])
     galeria+=f'<div class="foto" style="background-image:url(\'{t["set"]}\');background-position:30% center"><span>El set</span></div>'
     pasos="".join(f'<div class="paso"><b>{e}</b><strong>{a}</strong><p class="sub" style="margin:6px 0 0">{b}</p></div>' for e,a,b in t["pasos"])
+    vives="".join(f'<div class="paso"><b>{e}</b><strong>{a}</strong><p class="sub" style="margin:6px 0 0">{b}</p></div>' for e,a,b in [("🎭","Set tematizado","Escenografía, luz y ambiente pensados para la temporada."),("📸","Dirección de poses","Te guiamos en cada turno para sacar lo mejor de tu personaje."),("✨","Tus fotos editadas","En tu galería privada, listas para descargar."),("🎬","Tu video","En cámara lenta o tu «Tale» para Reels y TikTok."),("📲","Kit para redes","Formatos, carrusel y el texto para publicar."),("🎟️","Cupos limitados","Pocas personas por turno, para que sea tuya.")])
     faq="".join(f'<details{" open" if i==0 else ""}><summary>{q}</summary><p>{r}</p></details>' for i,(q,r) in enumerate(t["faq"]))
     aparta=wa(f"Hola, quiero apartar mi cupo en {t['nombreEvento']} (diciembre) ✨. Avísenme la fecha y los turnos.")
     return f'''<!doctype html>
@@ -148,6 +149,7 @@ footer{{position:relative;z-index:5;text-align:center;color:var(--tenue);padding
 <a class="boton" href="#paquetes">Elige tu historia · desde $230.000</a><p class="cupos">✦ Cupos limitados · aparta el tuyo y te avisamos primero</p></div></div>
 <main>
 <section><h2>{t["h2a"]} <span>experiencia</span></h2><p class="sub">Llega con tu personaje o tu mejor look. Nosotros ponemos el set, la luz, la ambientación y la historia. Creamos tu contenido en foto y video.</p><div class="pasos">{pasos}</div></section>
+<section><h2>Lo que <span>vives</span></h2><p class="sub">En cada experiencia, todo esto va incluido.</p><div class="pasos">{vives}</div></section>
 <section id="paquetes"><h2>{t["h2b"]} <span>{t["h2c"]}</span></h2><p class="sub">Todo incluido: set, ambientación, dirección de poses, edición y galería privada. Lo que quieras de más, lo sumas después.</p>
 <div class="paquetes">{tarjetas}</div>
 <div class="comunidad">⭐ <strong>¿Estuviste en SOFA 2026 o ya te tomaste fotos con nosotros?</strong> Tienes <strong>10 % de descuento</strong>: cuéntanos al apartar con el correo o WhatsApp con el que compraste.</div>
