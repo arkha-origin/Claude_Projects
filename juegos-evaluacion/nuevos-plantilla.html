@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Juegos nuevos · por aplicar</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#f6f7fb;color:#1f2544;font:16px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+.wrap{max-width:980px;margin:0 auto;padding:28px 18px 60px}
+a{color:#3b5bdb}
+h1{margin:6px 0 4px;font-size:32px}
+.sub{color:#5c6386;margin:0 0 18px}
+.avance{background:#fff;border-radius:18px;padding:18px;box-shadow:0 10px 30px -20px rgba(31,37,68,.4)}
+.avance b{font-size:28px}
+.barra{height:12px;border-radius:99px;background:#e4e7f2;overflow:hidden;margin-top:10px}
+.barra span{display:block;height:100%;background:#2f9e44;transition:width .4s}
+.filtros{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0}
+.filtros button{border:0;border-radius:99px;padding:8px 16px;background:#e7ecff;color:#1f2a5c;font:600 14px system-ui;cursor:pointer}
+.filtros button.on{background:#1f2a5c;color:#fff}
+.siguiente{margin:0 0 18px;padding:16px 18px;border-radius:16px;background:#fff8db;border:2px solid #ffd43b}
+.siguiente a{font-weight:800}
+h2{margin:26px 0 8px;font-size:19px;display:flex;justify-content:space-between;align-items:baseline}
+h2 small{font-size:13px;color:#5c6386;font-weight:600}
+ol{list-style:none;padding:0;margin:0;display:grid;gap:8px}
+li{display:grid;grid-template-columns:40px 1fr auto;gap:12px;align-items:center;background:#fff;border-radius:14px;padding:12px 14px;box-shadow:0 1px 0 #dde1ee}
+li.hecho{background:#ebfbee}
+li.hecho .nombre{color:#2b6b39}
+.num{display:grid;place-items:center;width:32px;height:32px;border-radius:50%;background:#e7ecff;font-weight:800;font-size:14px}
+li.hecho .num{background:#2f9e44;color:#fff}
+.nombre{font-weight:700;text-decoration:none;color:#1f2544}
+.nombre:hover{text-decoration:underline}
+.info{display:block;font-size:13px;color:#5c6386}
+label{display:flex;align-items:center;gap:6px;font-size:13px;font-weight:600;white-space:nowrap;cursor:pointer}
+label input{width:20px;height:20px}
+.acciones{margin-top:24px;display:flex;flex-wrap:wrap;gap:10px;font-size:14px}
+.acciones button{border:1px solid #c5cbe0;background:#fff;border-radius:10px;padding:8px 12px;cursor:pointer;font:inherit}
+@media (max-width:560px){li{grid-template-columns:32px 1fr}label{grid-column:2}}
+</style></head>
+<body><div class="wrap">
+<p><a href="index.html">← Todos los juegos</a></p>
+<h1>✨ Juegos nuevos · por aplicar</h1>
+<p class="sub">Los temas que todavía no tenían preguntas en el banco, en la secuencia de grado y asignatura. Cada juego tiene explicación, demostración, práctica y evaluación. Marca los que ya aplicaste; también se marcan solos cuando un estudiante termina la evaluación en este equipo.</p>
+<div class="avance"><b id="hechos">0</b> de <span id="total">0</span> aplicados · faltan <b id="faltan" style="font-size:inherit">0</b><div class="barra"><span id="barra"></span></div></div>
+<div class="filtros" id="filtros"></div>
+<div class="siguiente" id="siguiente" hidden></div>
+<div id="lista"></div>
+<div class="acciones">
+  <button id="exportar">Copiar la lista de pendientes</button>
+  <button id="reiniciar">Desmarcar todos</button>
+</div>
+<p class="sub" style="margin-top:14px;font-size:13px">Las marcas se guardan en este navegador y este equipo. Si usas otro computador, márcalos ahí también.</p>
+</div>
+<script>
+var DATOS = __DATOS__;
+var filtro = "faltan", grado = "todos";
+function clave(d){ return "aplicado:" + d.href; }
+function leer(d){ try { return JSON.parse(localStorage.getItem(clave(d)) || "null"); } catch(e){ return null; } }
+function pintar(){
+  var hechos = DATOS.filter(leer).length;
+  document.getElementById("hechos").textContent = hechos;
+  document.getElementById("total").textContent = DATOS.length;
+  document.getElementById("faltan").textContent = DATOS.length - hechos;
+  document.getElementById("barra").style.width = (hechos / DATOS.length * 100) + "%";
+  var f = document.getElementById("filtros"); f.innerHTML = "";
+  [["faltan","Faltan por aplicar"],["hechos","Ya aplicados"],["todos","Todos"]].forEach(function(o){
+    var b = document.createElement("button"); b.textContent = o[1]; if (filtro === o[0]) b.className = "on";
+    b.onclick = function(){ filtro = o[0]; pintar(); }; f.appendChild(b);
+  });
+  f.appendChild(Object.assign(document.createElement("span"), { style: "width:12px" }));
+  ["todos","3°","4°","5°"].forEach(function(g){
+    var b = document.createElement("button"); b.textContent = g === "todos" ? "Todos los grados" : "Grado " + g; if (grado === g) b.className = "on";
+    b.onclick = function(){ grado = g; pintar(); }; f.appendChild(b);
+  });
+  var sig = DATOS.find(function(d){ return !leer(d) && (grado === "todos" || d.grado === grado); });
+  var s = document.getElementById("siguiente");
+  if (sig) { s.hidden = false; s.innerHTML = "👉 <b>Siguiente en la secuencia:</b> <a href='" + sig.href + "'>" + sig.nombre + "</a> · " + sig.grupo; }
+  else { s.hidden = false; s.innerHTML = "🎉 <b>¡Todos aplicados" + (grado === "todos" ? "" : " en grado " + grado) + "!</b>"; }
+  var cont = document.getElementById("lista"); cont.innerHTML = "";
+  var grupos = [];
+  DATOS.forEach(function(d, i){
+    if (grado !== "todos" && d.grado !== grado) return;
+    var h = leer(d);
+    if (filtro === "faltan" && h) return;
+    if (filtro === "hechos" && !h) return;
+    var g = grupos.find(function(x){ return x.n === d.grupo; });
+    if (!g) { g = { n: d.grupo, items: [] }; grupos.push(g); }
+    g.items.push({ d: d, i: i, h: h });
+  });
+  if (!grupos.length) cont.innerHTML = "<p class='sub'>No hay juegos en esta vista.</p>";
+  grupos.forEach(function(g){
+    var total = DATOS.filter(function(d){ return d.grupo === g.n; });
+    var listos = total.filter(leer).length;
+    var h2 = document.createElement("h2"); h2.innerHTML = g.n + " <small>" + listos + " de " + total.length + " aplicados</small>";
+    var ol = document.createElement("ol");
+    g.items.forEach(function(x){
+      var li = document.createElement("li"); if (x.h) li.className = "hecho";
+      var info = x.h ? "Aplicado el " + new Date(x.h.fecha).toLocaleDateString("es-CO") + (x.h.nota ? " · última nota " + String(x.h.nota.toFixed ? x.h.nota.toFixed(1) : x.h.nota).replace(".", ",") : "") : x.d.tema;
+      li.innerHTML = "<span class='num'>" + (x.i + 1) + "</span><div><a class='nombre' href='" + x.d.href + "'>" + x.d.nombre + "</a><span class='info'>" + info + "</span></div>";
+      var lab = document.createElement("label"); var cb = document.createElement("input"); cb.type = "checkbox"; cb.checked = !!x.h;
+      cb.onchange = function(){
+        if (cb.checked) localStorage.setItem(clave(x.d), JSON.stringify({ fecha: new Date().toISOString() }));
+        else localStorage.removeItem(clave(x.d));
+        pintar();
+      };
+      lab.appendChild(cb); lab.appendChild(document.createTextNode("Ya lo apliqué")); li.appendChild(lab); ol.appendChild(li);
+    });
+    cont.appendChild(h2); cont.appendChild(ol);
+  });
+}
+document.getElementById("exportar").onclick = function(){
+  var t = DATOS.filter(function(d){ return !leer(d); }).map(function(d, k){ return (k + 1) + ". " + d.grupo + " — " + d.nombre; }).join("\n");
+  navigator.clipboard.writeText(t || "Todos aplicados").then(function(){ alert("Lista de pendientes copiada."); });
+};
+document.getElementById("reiniciar").onclick = function(){
+  if (!confirm("¿Desmarcar todos los juegos?")) return;
+  DATOS.forEach(function(d){ localStorage.removeItem(clave(d)); }); pintar();
+};
+pintar();
+</script></body></html>

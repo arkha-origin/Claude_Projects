@@ -53,3 +53,29 @@ data = [d for d in data if d["href"] not in hrefs] + nuevos
 s = s[:i] + json.dumps(data, ensure_ascii=False) + s[j:]
 open(p, "w").write(s)
 print(len(nuevos), "juegos ·", len(data), "en el índice")
+
+# ── Página «Nuevos · por aplicar»: los juegos generados, en la secuencia de la lista.
+ORDEN = [("3°", "mat"), ("3°", "len"), ("3°", "art"), ("3°", "pileo"), ("3°", "eti"), ("3°", "tec"),
+         ("4°", "est"), ("4°", "tec"), ("5°", "tec"), ("5°", "eti")]
+NOMBRE_GRUPO = {"mat": "Matemáticas", "len": "Lengua Castellana", "art": "Artes", "pileo": "PILEO",
+                "eti": "Ética", "tec": "Tecnología e Informática", "est": "Estadística"}
+def grupo(n):
+    if n["tema"] == "PILEO": return "pileo"
+    if n["tema"] == "Estadística": return "est"
+    return {"Matemáticas": "mat", "Lengua Castellana": "len", "Artes": "art",
+            "Ética y Religión": "eti", "Tecnología e Informática": "tec"}[n["area"]]
+secuencia = []
+for g, a in ORDEN:
+    for n in nuevos:
+        if n["grado"] == g and grupo(n) == a:
+            secuencia.append({**n, "grupo": f"{g} · {NOMBRE_GRUPO[a]}"})
+assert len(secuencia) == len(nuevos)
+pagina = open("/tmp/gen/nuevos-plantilla.html").read().replace("__DATOS__", json.dumps(secuencia, ensure_ascii=False))
+open(f"{DESTINO}/nuevos.html", "w").write(pagina)
+
+# Pestaña en el índice (una sola vez).
+s = open(p).read()
+if 'href="nuevos.html"' not in s:
+    s = s.replace('<input id="q"', '<a href="nuevos.html" class="pestana-nuevos" style="display:flex;justify-content:space-between;align-items:center;gap:12px;margin:0 0 14px;padding:14px 18px;border-radius:14px;background:#1f2a5c;color:#fff;font-weight:700;text-decoration:none">✨ ' + str(len(nuevos)) + ' juegos nuevos · por aplicar <span style="background:#ffd43b;color:#1f2a5c;border-radius:99px;padding:4px 12px">Ver la secuencia →</span></a><input id="q"', 1)
+    open(p, "w").write(s)
+print("nuevos.html con", len(secuencia))
