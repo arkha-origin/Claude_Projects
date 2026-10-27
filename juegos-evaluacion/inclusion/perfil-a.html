@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+<title>Perfil A · Comunicación y regulación</title><link rel="stylesheet" href="comun.css"></head>
+<body>
+<header class="top"><a href="index.html">← Inicio</a><h1>🌈 Mis juegos</h1><div id="ajustes"></div></header>
+<main id="app"></main>
+<script src="comun.js"></script>
+<script>
+/*
+ * PERFIL A · comunicación y regulación. Sin respuestas «malas»: lo que no
+ * coincide se mece suave y se vuelve a intentar. Botones enormes, máximo dos
+ * opciones, voz que nombra todo y una zona de calma siempre a mano.
+ */
+var A = APOYO, app = document.getElementById("app");
+A.ajustes(document.getElementById("ajustes"));
+var COSAS = [["🐶","perro"],["🐱","gato"],["🐮","vaca"],["🐔","gallina"],["🐟","pez"],["🦋","mariposa"],["🍎","manzana"],["🍌","banano"],["🍓","fresa"],["⚽","balón"],["🚗","carro"],["🌞","sol"],["🌙","luna"],["⭐","estrella"],["🌳","árbol"],["🌸","flor"]];
+var GRUPOS = {
+  "Animales (Ciencias)": [["🐶","perro"],["🐱","gato"],["🐮","vaca"],["🐔","gallina"],["🐟","pez"],["🐴","caballo"]],
+  "Frutas (Ciencias)": [["🍎","manzana"],["🍌","banano"],["🍓","fresa"],["🍇","uvas"],["🍉","sandía"],["🍊","naranja"]],
+  "Formas (Matemáticas)": [["⚫","círculo"],["⬛","cuadrado"],["🔺","triángulo"],["⭐","estrella"],["❤️","corazón"]],
+  "Vocales (Lengua)": [["A","a"],["E","e"],["I","i"],["O","o"],["U","u"]],
+  "Transporte (Tecnología)": [["🚗","carro"],["🚌","bus"],["🚲","bicicleta"],["✈️","avión"],["🚢","barco"]],
+};
+var COLORES = [["#e03131","rojo"],["#1971c2","azul"],["#f6c90e","amarillo"],["#2f9e44","verde"],["#f08c00","naranja"],["#862e9c","morado"]];
+var PICTOS = [["💧","Quiero agua"],["🍽️","Quiero comer"],["🚻","Quiero ir al baño"],["🧸","Quiero jugar"],["😴","Quiero descansar"],["🆘","Necesito ayuda"],["🤗","Quiero un abrazo"],["🏠","Quiero ir a casa"],["👍","Sí"],["👎","No"],["✋","Para, por favor"],["🙏","Gracias"]];
+var EMOCIONES = [["😀","Estoy feliz"],["😢","Estoy triste"],["😠","Estoy enojado"],["😨","Tengo miedo"],["😴","Tengo sueño"],["🤒","Me siento mal"]];
+var AGENDA = [["📚","Trabajar"],["🖍️","Colorear"],["🍎","Merienda"],["⚽","Recreo"],["🚻","Baño"],["🎵","Música"],["🧘","Calma"],["🏠","Casa"]];
+
+function limpiar(){ app.innerHTML = ""; if (window.speechSynthesis) speechSynthesis.cancel(); }
+function volver(){ var b = document.createElement("button"); b.className = "btn sec"; b.textContent = "← Volver a los juegos"; b.onclick = menu; return b; }
+function el(h){ var d = document.createElement("div"); d.innerHTML = h; return d.firstElementChild; }
+
+function menu(){
+  limpiar();
+  var m = el('<div class="menu"></div>');
+  [["👆","Toca y descubre",tocar],["🗣️","Quiero…",tablero],["😊","¿Cómo me siento?",emociones],["🧩","Busca el igual",igualMenu],["🎨","Toca el color",colores],["🔢","Contemos",contar],["📅","Primero y después",agenda],["🫧","Calma",calma]].forEach(function(x){
+    var b = el('<button><span>'+x[0]+'</span>'+x[1]+'</button>'); b.onclick = function(){ A.tono("suave"); x[2](); }; m.appendChild(b);
+  });
+  app.appendChild(m);
+  app.appendChild(el('<p class="nota-guia"><b>Para el acompañante:</b> deje que el estudiante toque; acompañe con la mano solo si lo necesita y retire la ayuda poco a poco. Si se desregula, abra <b>🫧 Calma</b>. Todo se puede tocar con el dedo, el mouse o la barra espaciadora.</p>'));
+}
+
+// 1 · Causa y efecto: cualquier toque (o tecla) hace aparecer algo y lo nombra.
+function tocar(){
+  limpiar();
+  var z = el('<div class="zona" style="min-height:70vh;cursor:pointer;user-select:none"><p class="consigna">¡Toca la pantalla!</p><div class="grande" id="cosa">✋</div><p id="palabra" style="font-size:34px;font-weight:800"></p></div>');
+  function accion(){ var c = COSAS[Math.floor(Math.random()*COSAS.length)]; z.querySelector("#cosa").textContent = c[0]; z.querySelector("#palabra").textContent = c[1]; z.querySelector("#cosa").animate([{transform:"scale(.3)"},{transform:"scale(1.15)"},{transform:"scale(1)"}],{duration:450}); A.tono("toque"); A.hablar(c[1]); }
+  z.onclick = accion; app.appendChild(z); app.appendChild(volver());
+  document.onkeydown = function(e){ if (app.contains(z)) { e.preventDefault(); accion(); } };
+}
+
+// 2 · Tablero de comunicación: toca y la voz lo dice.
+function tablero(){
+  limpiar();
+  app.appendChild(el('<p class="consigna">¿Qué quieres decir?</p>'));
+  var m = el('<div class="menu"></div>');
+  PICTOS.forEach(function(p){ var b = el('<button><span>'+p[0]+'</span>'+p[1]+'</button>'); b.onclick = function(){ A.hablar(p[1]); b.animate([{transform:"scale(1.1)"},{transform:"scale(1)"}],{duration:300}); }; m.appendChild(b); });
+  app.appendChild(m); app.appendChild(volver());
+}
+
+function emociones(){
+  limpiar();
+  app.appendChild(el('<p class="consigna">¿Cómo te sientes?</p>'));
+  var m = el('<div class="menu"></div>');
+  EMOCIONES.forEach(function(p){ var b = el('<button><span>'+p[0]+'</span>'+p[1]+'</button>'); b.onclick = function(){ A.hablar(p[1]); }; m.appendChild(b); });
+  app.appendChild(m); app.appendChild(volver());
+}
+
+// 3 · Emparejar con dos opciones. Lo que no coincide se mece y se intenta otra vez.
+function igualMenu(){
+  limpiar();
+  app.appendChild(el('<p class="consigna">¿Qué quieres buscar?</p>'));
+  var m = el('<div class="menu"></div>');
+  Object.keys(GRUPOS).forEach(function(k){ var b = el('<button><span>'+GRUPOS[k][0][0]+'</span>'+k+'</button>'); b.onclick = function(){ igual(GRUPOS[k], 0); }; m.appendChild(b); });
+  app.appendChild(m); app.appendChild(volver());
+}
+function igual(lista, aciertos){
+  limpiar();
+  var meta = lista[Math.floor(Math.random()*lista.length)];
+  var otro; do { otro = lista[Math.floor(Math.random()*lista.length)]; } while (otro === meta);
+  var z = el('<div class="zona"><p class="consigna">Busca: '+meta[1]+'</p><div class="grande">'+meta[0]+'</div><div class="estrellas">'+"⭐".repeat(aciertos)+'</div><div class="opciones"></div></div>');
+  A.hablar("Busca " + meta[1]);
+  A.barajar([meta, otro]).forEach(function(o){
+    var b = el('<button class="opcion">'+o[0]+'</button>');
+    b.onclick = function(){
+      if (o === meta) { b.classList.add("ok"); A.tono("bien"); A.hablar("¡Muy bien! " + meta[1]); if ((aciertos+1) % 5 === 0) A.celebrar(); setTimeout(function(){ igual(lista, (aciertos+1)%5); }, 1300); }
+      else { b.classList.remove("no"); void b.offsetWidth; b.classList.add("no"); A.tono("suave"); A.hablar("Ese es " + o[1] + ". Busca " + meta[1]); }
+    };
+    z.querySelector(".opciones").appendChild(b);
+  });
+  app.appendChild(z); app.appendChild(volver());
+}
+
+function colores(aciertos){
+  aciertos = aciertos || 0; limpiar();
+  var meta = COLORES[Math.floor(Math.random()*COLORES.length)];
+  var otro; do { otro = COLORES[Math.floor(Math.random()*COLORES.length)]; } while (otro === meta);
+  var z = el('<div class="zona"><p class="consigna">Toca el color '+meta[1]+'</p><div class="estrellas">'+"⭐".repeat(aciertos)+'</div><div class="opciones"></div></div>');
+  A.hablar("Toca el " + meta[1]);
+  A.barajar([meta, otro]).forEach(function(o){
+    var b = el('<button class="opcion" style="background:'+o[0]+';border-radius:50%"></button>');
+    b.onclick = function(){
+      if (o === meta) { A.tono("bien"); A.hablar("¡Sí! " + meta[1]); if ((aciertos+1) % 5 === 0) A.celebrar(); setTimeout(function(){ colores((aciertos+1)%5); }, 1200); }
+      else { b.classList.remove("no"); void b.offsetWidth; b.classList.add("no"); A.hablar("Ese es " + o[1] + ". Busca el " + meta[1]); }
+    };
+    z.querySelector(".opciones").appendChild(b);
+  });
+  app.appendChild(z); app.appendChild(volver());
+}
+
+// 4 · Contar tocando: cada objeto que se toca dice su número.
+function contar(hasta){
+  hasta = hasta || 3; limpiar();
+  var c = COSAS[Math.floor(Math.random()*COSAS.length)], n = 0;
+  var z = el('<div class="zona"><p class="consigna">Toca y cuenta</p><div class="opciones"></div><p id="n" style="font-size:90px;font-weight:900;margin:10px"></p></div>');
+  for (var i = 0; i < hasta; i++) {
+    var b = el('<button class="opcion">'+c[0]+'</button>');
+    b.onclick = function(){ if (this.disabled) return; this.disabled = true; this.classList.add("ok"); n++; z.querySelector("#n").textContent = n; A.hablar(String(n)); A.tono("toque");
+      if (n === hasta) setTimeout(function(){ A.tono("bien"); A.celebrar(); A.hablar("¡Son " + hasta + "! Muy bien"); }, 700); };
+    z.querySelector(".opciones").appendChild(b);
+  }
+  var otra = el('<div></div>');
+  [3,4,5].forEach(function(k){ var b = el('<button class="btn'+(k===hasta?"":" sec")+'">Contar hasta '+k+'</button>'); b.onclick = function(){ contar(k); }; otra.appendChild(b); });
+  app.appendChild(z); app.appendChild(otra); app.appendChild(volver());
+}
+
+// 5 · Agenda visual primero–después: el adulto arma la secuencia y el estudiante marca.
+function agenda(){
+  limpiar();
+  var guardada = JSON.parse(localStorage.getItem("incl-agenda") || "[]");
+  var z = el('<div class="zona"><p class="consigna">Primero… y después…</p><div class="opciones" id="seq"></div><p class="nota-guia">Adulto: toque los dibujos de abajo para armar la secuencia (hasta 4). El estudiante toca cada uno cuando lo termina.</p><div class="menu" id="pal"></div></div>');
+  function pintar(){
+    var s = z.querySelector("#seq"); s.innerHTML = "";
+    if (!guardada.length) s.innerHTML = '<p style="font-size:22px">Aún no hay pasos.</p>';
+    guardada.forEach(function(p, i){
+      var b = el('<button class="opcion'+(p.hecho?" ok":"")+'">'+p.e+'<small>'+(i===0?"Primero: ":"Después: ")+p.t+'</small></button>');
+      b.onclick = function(){ p.hecho = !p.hecho; if (p.hecho) { A.tono("bien"); A.hablar(p.t + ", terminado"); } localStorage.setItem("incl-agenda", JSON.stringify(guardada)); pintar(); if (guardada.every(function(x){return x.hecho;})) A.celebrar(); };
+      s.appendChild(b);
+    });
+  }
+  AGENDA.forEach(function(a){ var b = el('<button><span>'+a[0]+'</span>'+a[1]+'</button>'); b.onclick = function(){ if (guardada.length >= 4) guardada.shift(); guardada.push({e:a[0], t:a[1], hecho:false}); localStorage.setItem("incl-agenda", JSON.stringify(guardada)); pintar(); }; z.querySelector("#pal").appendChild(b); });
+  var borrar = el('<button class="btn sec">Borrar la agenda</button>'); borrar.onclick = function(){ guardada = []; localStorage.removeItem("incl-agenda"); pintar(); };
+  app.appendChild(z); app.appendChild(borrar); app.appendChild(volver()); pintar();
+}
+
+// 6 · Calma: un círculo que crece y se encoge para respirar al mismo ritmo.
+function calma(){
+  limpiar();
+  var z = el('<div class="zona" style="background:#e7f5ff;border-radius:30px;min-height:70vh"><p class="consigna" id="t">Respira conmigo</p><div id="c" style="width:160px;height:160px;margin:30px auto;border-radius:50%;background:radial-gradient(#a5d8ff,#4dabf7);transition:transform 4s ease-in-out"></div></div>');
+  app.appendChild(z); app.appendChild(volver());
+  var grande = false, c = z.querySelector("#c"), t = z.querySelector("#t");
+  function ciclo(){ if (!app.contains(z)) return; grande = !grande; c.style.transform = grande ? "scale(2)" : "scale(1)"; t.textContent = grande ? "Toma aire…" : "Suelta el aire…"; A.hablar(grande ? "Toma aire" : "Suelta"); setTimeout(ciclo, 4200); }
+  setTimeout(ciclo, 300);
+}
+menu();
+</script></body></html>

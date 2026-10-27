@@ -1,0 +1,25 @@
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{margin:0;background:#fdf8f0;color:#2b2a33;font:20px/1.4 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji";touch-action:manipulation}
+.top{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 14px;background:#fff;box-shadow:0 1px 0 #eee2cf}
+.top a{color:#5b4bdb;font-weight:700;text-decoration:none;font-size:18px}
+.top h1{margin:0;font-size:22px}
+.ajuste{border:2px solid #d8cfee;background:#fff;border-radius:99px;padding:6px 12px;font:600 15px system-ui;cursor:pointer;margin-left:6px;opacity:.55}
+.ajuste.on{opacity:1;border-color:#5b4bdb}
+.menu{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:16px;padding:18px;max-width:1100px;margin:0 auto}
+.menu button{border:0;border-radius:28px;padding:24px 12px;background:#fff;box-shadow:0 8px 0 #eadfcb;font:700 21px system-ui;color:#2b2a33;cursor:pointer;display:grid;gap:8px;place-items:center}
+.menu button span{font-size:70px;line-height:1}
+.menu button:active{transform:translateY(4px);box-shadow:0 4px 0 #eadfcb}
+.zona{max-width:1100px;margin:0 auto;padding:18px;text-align:center}
+.consigna{font-size:28px;font-weight:800;margin:6px 0 18px}
+.grande{font-size:140px;line-height:1.1}
+.opciones{display:flex;flex-wrap:wrap;justify-content:center;gap:22px}
+.opcion{border:0;border-radius:32px;min-width:220px;min-height:220px;background:#fff;box-shadow:0 10px 0 #eadfcb;font-size:120px;cursor:pointer;display:grid;place-items:center;transition:transform .15s}
+.opcion small{display:block;font-size:24px;font-weight:700}
+.opcion.ok{background:#d3f9d8;box-shadow:0 10px 0 #8ce99a;transform:scale(1.06)}
+.opcion.no{animation:mece .5s}
+@keyframes mece{25%{transform:rotate(-4deg)}75%{transform:rotate(4deg)}}
+.btn{border:0;border-radius:99px;padding:14px 26px;background:#5b4bdb;color:#fff;font:800 20px system-ui;cursor:pointer;margin:8px}
+.btn.sec{background:#fff;color:#5b4bdb;box-shadow:inset 0 0 0 3px #5b4bdb}
+.estrellas{font-size:36px;margin:8px 0;min-height:44px}
+.nota-guia{max-width:900px;margin:18px auto;padding:14px 18px;background:#fff4d6;border-radius:16px;font-size:16px;text-align:left}
+canvas{touch-action:none;background:#fff;border-radius:24px;box-shadow:0 8px 0 #eadfcb;max-width:100%}

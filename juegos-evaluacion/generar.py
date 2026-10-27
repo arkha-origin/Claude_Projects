@@ -79,3 +79,10 @@ if 'href="nuevos.html"' not in s:
     s = s.replace('<input id="q"', '<a href="nuevos.html" class="pestana-nuevos" style="display:flex;justify-content:space-between;align-items:center;gap:12px;margin:0 0 14px;padding:14px 18px;border-radius:14px;background:#1f2a5c;color:#fff;font-weight:700;text-decoration:none">✨ ' + str(len(nuevos)) + ' juegos nuevos · por aplicar <span style="background:#ffd43b;color:#1f2a5c;border-radius:99px;padding:4px 12px">Ver la secuencia →</span></a><input id="q"', 1)
     open(p, "w").write(s)
 print("nuevos.html con", len(secuencia))
+
+# ── Rincón de inclusión: la lista de juegos para el modo enfoque y el acceso desde el índice.
+open(f"{DESTINO}/inclusion/juegos-lista.js", "w").write("var JUEGOS = " + json.dumps(secuencia, ensure_ascii=False) + ";\n")
+s = open(p).read()
+if 'href="inclusion/index.html"' not in s:
+    s = s.replace('<input id="q"', '<a href="inclusion/index.html" style="display:flex;justify-content:space-between;align-items:center;gap:12px;margin:0 0 14px;padding:14px 18px;border-radius:14px;background:#fff4d6;color:#5b3a00;font-weight:700;text-decoration:none;border:2px solid #ffd43b">🤝 Rincón de inclusión · juegos y apoyos por perfil <span style="background:#5b4bdb;color:#fff;border-radius:99px;padding:4px 12px">Abrir →</span></a><input id="q"', 1)
+    open(p, "w").write(s)

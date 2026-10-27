@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Perfil C · Atención y enfoque</title><link rel="stylesheet" href="comun.css">
+<style>
+.dos{display:grid;grid-template-columns:1fr 1fr;gap:18px;max-width:1100px;margin:0 auto;padding:18px}
+.caja{background:#fff;border-radius:24px;padding:18px;box-shadow:0 8px 0 #eadfcb}
+.caja h2{margin:0 0 10px;font-size:22px}
+.tarea{display:flex;align-items:center;gap:12px;padding:12px;border-radius:16px;background:#f8f4ff;margin:8px 0;font-size:22px;font-weight:700;cursor:pointer}
+.tarea.hecha{background:#d3f9d8;text-decoration:line-through;color:#2b6b39}
+.tarea span{font-size:38px}
+.paleta{display:flex;flex-wrap:wrap;gap:6px}
+.paleta button{border:2px solid #e4dcf5;background:#fff;border-radius:14px;padding:6px 10px;font:600 15px system-ui;cursor:pointer}
+#reloj{width:240px;height:240px;margin:6px auto;border-radius:50%;background:conic-gradient(#e8590c var(--p,100%),#f1f3f5 0);display:grid;place-items:center}
+#reloj b{width:170px;height:170px;border-radius:50%;background:#fff;display:grid;place-items:center;font-size:44px}
+.materias h3{margin:16px 0 6px}
+.materias a{display:block;padding:10px 14px;margin:6px 0;border-radius:14px;background:#fff;box-shadow:0 2px 0 #eadfcb;color:#2b2a33;font-weight:700;text-decoration:none;font-size:17px}
+.materias a small{color:#7a7486;font-weight:600}
+@media (max-width:800px){.dos{grid-template-columns:1fr}}
+</style></head>
+<body>
+<header class="top"><a href="index.html">← Inicio</a><h1>🎯 Mi plan de trabajo</h1><div id="ajustes"></div></header>
+<div class="dos">
+  <section class="caja">
+    <h2>1 · Hoy voy a hacer</h2>
+    <div id="tareas"></div>
+    <p style="font-size:14px;color:#7a7486">Docente: elija hasta 3 tareas. El estudiante toca cada una al terminarla.</p>
+    <div class="paleta" id="paleta"></div>
+    <button class="btn sec" id="borrar" style="font-size:15px;padding:8px 14px">Borrar el plan</button>
+  </section>
+  <section class="caja" style="text-align:center">
+    <h2>2 · Mi tiempo</h2>
+    <div id="reloj"><b id="mm">5:00</b></div>
+    <div><button class="btn sec" data-m="3">3 min</button><button class="btn sec" data-m="5">5 min</button><button class="btn sec" data-m="10">10 min</button></div>
+    <div><button class="btn" id="iniciar">▶ Empezar</button><button class="btn sec" id="pausar">⏸</button></div>
+    <p style="font-size:14px;color:#7a7486">El color se va acabando; al final suena una campana suave. Después de cada bloque: pausa activa de 1 minuto.</p>
+  </section>
+</div>
+<section class="zona materias" style="text-align:left">
+  <h2>3 · Juegos por materia en modo enfoque</h2>
+  <p style="font-size:16px">Se abren en misiones cortas de 3 preguntas, con pausa y estrella al terminar cada una, y con lectura en voz alta.</p>
+  <div id="materias"></div>
+</section>
+<script src="comun.js"></script>
+<script src="juegos-lista.js"></script>
+<script>
+var A = APOYO; A.ajustes(document.getElementById("ajustes"));
+var OPC = [["📖","Leer"],["✏️","Escribir"],["🔢","Matemáticas"],["🎮","Juego de clase"],["🎨","Colorear"],["🧩","Rompecabezas"],["📒","Copiar del tablero"],["🎒","Organizar mis cosas"],["🧘","Pausa"]];
+var plan = JSON.parse(localStorage.getItem("incl-plan") || "[]");
+function pintar(){
+  var c = document.getElementById("tareas"); c.innerHTML = "";
+  if (!plan.length) c.innerHTML = '<p style="font-size:18px">Aún no hay tareas.</p>';
+  plan.forEach(function(t, i){
+    var d = document.createElement("div"); d.className = "tarea" + (t.hecha ? " hecha" : "");
+    d.innerHTML = "<span>" + (t.hecha ? "✅" : t.e) + "</span>" + (i + 1) + ". " + t.t;
+    d.onclick = function(){ t.hecha = !t.hecha; if (t.hecha) { A.tono("bien"); A.hablar(t.t + ", terminado"); } guardar(); if (plan.every(function(x){ return x.hecha; })) { A.celebrar(24); A.hablar("¡Terminaste todo tu plan!"); } };
+    c.appendChild(d);
+  });
+}
+function guardar(){ localStorage.setItem("incl-plan", JSON.stringify(plan)); pintar(); }
+OPC.forEach(function(o){ var b = document.createElement("button"); b.textContent = o[0] + " " + o[1]; b.onclick = function(){ if (plan.length >= 3) plan.shift(); plan.push({ e: o[0], t: o[1], hecha: false }); guardar(); }; document.getElementById("paleta").appendChild(b); });
+document.getElementById("borrar").onclick = function(){ plan = []; guardar(); };
+pintar();
+
+// Reloj visual
+var total = 300, queda = 300, tic = null;
+function mostrar(){ document.getElementById("reloj").style.setProperty("--p", (queda / total * 100) + "%"); document.getElementById("mm").textContent = Math.floor(queda / 60) + ":" + String(queda % 60).padStart(2, "0"); }
+document.querySelectorAll("[data-m]").forEach(function(b){ b.onclick = function(){ clearInterval(tic); tic = null; total = queda = +b.dataset.m * 60; mostrar(); }; });
+document.getElementById("iniciar").onclick = function(){ if (tic) return; A.hablar("Empezamos"); tic = setInterval(function(){ queda--; mostrar(); if (queda <= 0) { clearInterval(tic); tic = null; A.tono("bien"); A.celebrar(); A.hablar("¡Tiempo! Muy bien. Ahora una pausa activa"); } }, 1000); };
+document.getElementById("pausar").onclick = function(){ clearInterval(tic); tic = null; };
+mostrar();
+
+// Juegos por materia (de la lista generada)
+var m = document.getElementById("materias"), grupos = {};
+JUEGOS.forEach(function(j){ (grupos[j.grupo] = grupos[j.grupo] || []).push(j); });
+Object.keys(grupos).forEach(function(g){
+  var h = document.createElement("h3"); h.textContent = g; m.appendChild(h);
+  grupos[g].forEach(function(j){ var a = document.createElement("a"); a.href = "../" + j.href + "?enfoque=1&voz=1"; a.innerHTML = j.nombre + " <small>· " + j.tema + "</small>"; m.appendChild(a); });
+});
+</script></body></html>

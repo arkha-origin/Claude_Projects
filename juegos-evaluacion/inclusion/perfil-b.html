@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+<title>Perfil B · Grafomotricidad</title><link rel="stylesheet" href="comun.css">
+<style>
+.barra-h{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin:10px 0}
+.barra-h button{border:2px solid #d8cfee;background:#fff;border-radius:99px;padding:8px 14px;font:700 17px system-ui;cursor:pointer}
+.barra-h button.on{background:#5b4bdb;color:#fff;border-color:#5b4bdb}
+.medidor{display:flex;justify-content:center;gap:24px;font-size:20px;font-weight:700;margin:8px 0}
+.medidor b{font-size:28px}
+.color{width:46px;height:46px;border-radius:50%;border:4px solid #fff;box-shadow:0 0 0 2px #ccc;cursor:pointer}
+.color.on{box-shadow:0 0 0 4px #5b4bdb}
+</style></head>
+<body>
+<header class="top"><a href="index.html">← Inicio</a><h1>✏️ Trazo y color</h1><div id="ajustes"></div></header>
+<main id="app"></main>
+<script src="comun.js"></script>
+<script>
+/*
+ * PERFIL B · grafomotricidad. Trazar caminos, números y letras siguiendo una
+ * guía, y colorear sin salirse. El camino empieza GRUESO y se afina cuando ya
+ * sale bien. Mide dos cosas: cuánto del trazo hizo y qué tanto quedó dentro.
+ * También lectura y conteo que se responden tocando, sin tener que escribir.
+ */
+var A = APOYO, app = document.getElementById("app");
+A.ajustes(document.getElementById("ajustes"));
+var ANCHOS = { grueso: 90, medio: 60, fino: 36 };
+var ancho = localStorage.getItem("incl-ancho") || "grueso";
+function el(h){ var d = document.createElement("div"); d.innerHTML = h; return d.firstElementChild; }
+function limpiar(){ app.innerHTML = ""; }
+function volver(){ var b = el('<button class="btn sec">← Volver</button>'); b.onclick = menu; return b; }
+
+function menu(){
+  limpiar();
+  var m = el('<div class="menu"></div>');
+  [["〰️","Sigue el camino",function(){caminos(0);}],["🔢","Traza los números",function(){glifos("0123456789".split(""),0,"número");}],["🔤","Traza las vocales",function(){glifos("AEIOUaeiou".split(""),0,"letra");}],["✍️","Traza letras",function(){glifos("MPSLTNDmpsltnd".split(""),0,"letra");}],["🖍️","Colorea sin salirte",function(){colorear(0);}],["📖","Lee y toca",function(){leer(0,0);}],["🧩","Arma la palabra",function(){silabas(0);}],["🍎","Cuenta y toca",function(){cuenta(0);}]].forEach(function(x){
+    var b = el('<button><span>'+x[0]+'</span>'+x[1]+'</button>'); b.onclick = function(){ A.tono("suave"); x[2](); }; m.appendChild(b);
+  });
+  app.appendChild(m);
+  app.appendChild(el('<p class="nota-guia"><b>Para el docente:</b> empiece con el camino <b>grueso</b>. Cuando el estudiante quede «dentro» en más del 85 % varias veces, pase a <b>medio</b> y luego a <b>fino</b>. Puede usar el dedo en tableta o un lápiz óptico; en computador, el mouse. Pídale que no levante el dedo.</p>'));
+}
+
+/* ── Lienzo de trazo común ── */
+function lienzo(opciones){
+  // opciones: { dibujarGuia(ctx), muestras: [[x,y]...] que debe cubrir, dentro(x,y), etiqueta, alTerminar }
+  var W = 900, H = 560;
+  var wrap = el('<div class="zona"><p class="consigna">'+opciones.consigna+'</p><div class="barra-h" id="anchos"></div><canvas width="'+W+'" height="'+H+'"></canvas><div class="medidor"><span>Avance <b id="av">0%</b></span><span>Dentro de la línea <b id="de">–</b></span></div><div class="estrellas" id="est"></div><div id="acc"></div></div>');
+  var cv = wrap.querySelector("canvas"), ctx = cv.getContext("2d");
+  if (opciones.conAncho) ["grueso","medio","fino"].forEach(function(k){ var b = el('<button class="'+(k===ancho?"on":"")+'">Camino '+k+'</button>'); b.onclick = function(){ ancho = k; localStorage.setItem("incl-ancho", k); opciones.reiniciar(); }; wrap.querySelector("#anchos").appendChild(b); });
+  var cubiertas = new Uint8Array(opciones.muestras.length), dentro = 0, total = 0, dibujando = false, ultimo = null, terminado = false;
+  function base(){ ctx.clearRect(0,0,W,H); opciones.dibujarGuia(ctx); }
+  base();
+  function pos(e){ var r = cv.getBoundingClientRect(); return [(e.clientX - r.left) * W / r.width, (e.clientY - r.top) * H / r.height]; }
+  function marca(p){
+    total++; if (opciones.dentro(p[0], p[1])) dentro++;
+    var R = opciones.radio || 30;
+    for (var i = 0; i < opciones.muestras.length; i++) { if (cubiertas[i]) continue; var m = opciones.muestras[i]; if ((m[0]-p[0])*(m[0]-p[0]) + (m[1]-p[1])*(m[1]-p[1]) < R*R) cubiertas[i] = 1; }
+    var hechas = 0; for (var k = 0; k < cubiertas.length; k++) hechas += cubiertas[k];
+    var av = Math.round(hechas / cubiertas.length * 100), de = Math.round(dentro / total * 100);
+    wrap.querySelector("#av").textContent = av + "%"; wrap.querySelector("#de").textContent = de + "%";
+    if (!terminado && av >= (opciones.meta || 85)) { terminado = true; final(de); }
+  }
+  function final(de){
+    var e = de >= 85 ? 3 : de >= 65 ? 2 : 1;
+    wrap.querySelector("#est").textContent = "⭐".repeat(e);
+    A.tono("bien"); A.celebrar(e * 5);
+    A.hablar(e === 3 ? "¡Excelente! Te quedó dentro de la línea" : e === 2 ? "¡Muy bien! Casi todo dentro de la línea" : "¡Lo lograste! Intentemos ir más despacio");
+    var acc = wrap.querySelector("#acc");
+    var otra = el('<button class="btn sec">Otra vez</button>'); otra.onclick = opciones.reiniciar;
+    var sig = el('<button class="btn">Siguiente →</button>'); sig.onclick = opciones.siguiente;
+    acc.appendChild(otra); acc.appendChild(sig);
+  }
+  cv.onpointerdown = function(e){ dibujando = true; ultimo = pos(e); cv.setPointerCapture(e.pointerId); marca(ultimo); };
+  cv.onpointermove = function(e){
+    if (!dibujando) return; var p = pos(e);
+    ctx.strokeStyle = opciones.dentro(p[0], p[1]) ? (opciones.color || "#5b4bdb") : "#e8590c";
+    ctx.lineWidth = opciones.pincel || 14; ctx.lineCap = "round"; ctx.lineJoin = "round";
+    ctx.beginPath(); ctx.moveTo(ultimo[0], ultimo[1]); ctx.lineTo(p[0], p[1]); ctx.stroke();
+    var pasos = Math.max(1, Math.round(Math.hypot(p[0]-ultimo[0], p[1]-ultimo[1]) / 6));
+    for (var s = 1; s <= pasos; s++) marca([ultimo[0] + (p[0]-ultimo[0]) * s / pasos, ultimo[1] + (p[1]-ultimo[1]) * s / pasos]);
+    ultimo = p;
+  };
+  cv.onpointerup = cv.onpointercancel = function(){ dibujando = false; };
+  limpiar(); app.appendChild(wrap); app.appendChild(volver());
+  A.hablar(opciones.consigna);
+}
+
+/* ── 1 · Caminos ── */
+var CAMINOS = [
+  ["línea recta", function(t){ return [100 + 700*t, 280]; }],
+  ["línea de arriba a abajo", function(t){ return [450, 70 + 420*t]; }],
+  ["línea inclinada", function(t){ return [120 + 660*t, 460 - 360*t]; }],
+  ["la ola", function(t){ return [90 + 720*t, 280 + 120*Math.sin(t*Math.PI*3)]; }],
+  ["las montañas (zigzag)", function(t){ var k = t*6, f = k - Math.floor(k); return [90 + 720*t, 400 - (Math.floor(k)%2 ? 1-f : f)*260]; }],
+  ["el círculo", function(t){ return [450 + 200*Math.cos(t*2*Math.PI - Math.PI/2), 280 + 200*Math.sin(t*2*Math.PI - Math.PI/2)]; }],
+  ["los puentes (curvas)", function(t){ return [90 + 720*t, 380 - 220*Math.abs(Math.sin(t*Math.PI*3))]; }],
+  ["el caracol (espiral)", function(t){ var a = t*4*Math.PI; return [450 + (30 + 190*t)*Math.cos(a), 280 + (30 + 190*t)*Math.sin(a)]; }],
+];
+function puntos(f, n){ var p = []; for (var i = 0; i <= n; i++) p.push(f(i/n)); return p; }
+function distanciaA(p, lista){ var m = 1e9; for (var i = 0; i < lista.length; i++) { var d = (lista[i][0]-p[0])*(lista[i][0]-p[0]) + (lista[i][1]-p[1])*(lista[i][1]-p[1]); if (d < m) m = d; } return Math.sqrt(m); }
+function caminos(i){
+  var c = CAMINOS[i % CAMINOS.length], pts = puntos(c[1], 400), w = ANCHOS[ancho];
+  lienzo({ consigna: "Sigue " + c[0] + " desde el punto verde hasta la bandera", conAncho: true, radio: w/2 + 8, pincel: 14,
+    muestras: puntos(c[1], 60),
+    dentro: function(x, y){ return distanciaA([x,y], pts) <= w/2; },
+    dibujarGuia: function(ctx){
+      ctx.lineCap = "round"; ctx.lineJoin = "round";
+      ctx.strokeStyle = "#e9ecf5"; ctx.lineWidth = w; ctx.beginPath(); pts.forEach(function(p,k){ k ? ctx.lineTo(p[0],p[1]) : ctx.moveTo(p[0],p[1]); }); ctx.stroke();
+      ctx.strokeStyle = "#b9bfd6"; ctx.lineWidth = 3; ctx.setLineDash([10,12]); ctx.stroke(); ctx.setLineDash([]);
+      ctx.fillStyle = "#2f9e44"; ctx.beginPath(); ctx.arc(pts[0][0], pts[0][1], 18, 0, 7); ctx.fill();
+      ctx.font = "44px system-ui"; ctx.fillText("🏁", pts[pts.length-1][0]-10, pts[pts.length-1][1]+12);
+    },
+    reiniciar: function(){ caminos(i); }, siguiente: function(){ caminos(i + 1); } });
+}
+
+/* ── 2 · Trazar números y letras sobre su forma gris ── */
+function glifos(lista, i, tipo){
+  var ch = lista[i % lista.length], W = 900, H = 560;
+  var off = document.createElement("canvas"); off.width = W; off.height = H;
+  var o = off.getContext("2d"); o.fillStyle = "#000"; o.textAlign = "center"; o.textBaseline = "middle";
+  o.font = "bold 430px 'Comic Sans MS','Trebuchet MS',system-ui,sans-serif"; o.fillText(ch, W/2, H/2 + 20);
+  var datos = o.getImageData(0, 0, W, H).data, muestras = [];
+  function lleno(x, y){ x = Math.round(x); y = Math.round(y); if (x < 0 || y < 0 || x >= W || y >= H) return false; return datos[(y*W + x)*4 + 3] > 100; }
+  for (var y = 0; y < H; y += 14) for (var x = 0; x < W; x += 14) if (lleno(x, y)) muestras.push([x, y]);
+  lienzo({ consigna: "Traza " + (tipo === "número" ? "el número " : "la letra ") + ch + " por encima, sin salirte", radio: 22, pincel: 18, meta: 75,
+    muestras: muestras, dentro: function(x, y){ return lleno(x, y) || lleno(x+6, y) || lleno(x-6, y) || lleno(x, y+6) || lleno(x, y-6); },
+    dibujarGuia: function(ctx){ ctx.fillStyle = "#e9ecf5"; ctx.textAlign = "center"; ctx.textBaseline = "middle"; ctx.font = o.font; ctx.fillText(ch, W/2, H/2 + 20); ctx.strokeStyle = "#b9bfd6"; ctx.lineWidth = 3; ctx.setLineDash([10,10]); ctx.strokeText(ch, W/2, H/2 + 20); ctx.setLineDash([]); },
+    reiniciar: function(){ glifos(lista, i, tipo); }, siguiente: function(){ glifos(lista, i + 1, tipo); } });
+}
+
+/* ── 3 · Colorear dentro de la figura ── */
+var FIGURAS = [
+  ["el círculo", function(p){ p.arc(450, 280, 200, 0, Math.PI*2); }],
+  ["el cuadrado", function(p){ p.rect(260, 90, 380, 380); }],
+  ["el corazón", function(p){ p.moveTo(450, 470); p.bezierCurveTo(130, 300, 220, 60, 450, 190); p.bezierCurveTo(680, 60, 770, 300, 450, 470); }],
+  ["la estrella", function(p){ for (var k = 0; k < 10; k++) { var r = k % 2 ? 95 : 230, a = -Math.PI/2 + k*Math.PI/5; k ? p.lineTo(450 + r*Math.cos(a), 290 + r*Math.sin(a)) : p.moveTo(450 + r*Math.cos(a), 290 + r*Math.sin(a)); } p.closePath(); }],
+  ["la casa", function(p){ p.moveTo(250, 250); p.lineTo(450, 80); p.lineTo(650, 250); p.lineTo(610, 250); p.lineTo(610, 480); p.lineTo(290, 480); p.lineTo(290, 250); p.closePath(); }],
+  ["el pez", function(p){ p.ellipse(420, 280, 230, 130, 0, 0, Math.PI*2); p.moveTo(640, 280); p.lineTo(780, 170); p.lineTo(780, 390); p.closePath(); }],
+];
+var colorActual = "#f03e3e", magico = false;
+function colorear(i){
+  var f = FIGURAS[i % FIGURAS.length], ruta = new Path2D(); f[1](ruta);
+  var prueba = document.createElement("canvas").getContext("2d"), muestras = [];
+  for (var y = 40; y < 540; y += 22) for (var x = 40; x < 880; x += 22) if (prueba.isPointInPath(ruta, x, y)) muestras.push([x, y]);
+  lienzo({ consigna: "Colorea " + f[0] + " sin salirte del borde", radio: 22, pincel: 26, meta: 85, color: colorActual,
+    muestras: muestras, dentro: function(x, y){ return prueba.isPointInPath(ruta, x, y); },
+    dibujarGuia: function(ctx){ ctx.lineWidth = 10; ctx.strokeStyle = "#2b2a33"; ctx.stroke(ruta); if (magico) ctx.clip(ruta); },
+    reiniciar: function(){ colorear(i); }, siguiente: function(){ colorear(i + 1); } });
+  var paleta = el('<div class="barra-h"></div>');
+  ["#f03e3e","#1c7ed6","#fab005","#37b24d","#f76707","#ae3ec9"].forEach(function(c){ var b = el('<button class="color'+(c===colorActual?" on":"")+'" style="background:'+c+'" aria-label="color"></button>'); b.onclick = function(){ colorActual = c; colorear(i); }; paleta.appendChild(b); });
+  var mg = el('<button class="'+(magico?"on":"")+'">✨ Borde mágico (ayuda: el color no se sale)</button>'); mg.onclick = function(){ magico = !magico; colorear(i); };
+  var bar = el('<div class="barra-h"></div>'); bar.appendChild(mg);
+  var z = app.querySelector(".zona"); z.insertBefore(paleta, z.querySelector("canvas")); z.insertBefore(bar, paleta);
+}
+
+/* ── 4 · Lectura y conteo que se responden tocando ── */
+var PALABRAS = [["sol","🌞"],["casa","🏠"],["mesa","🪑"],["gato","🐱"],["luna","🌙"],["pato","🦆"],["oso","🐻"],["mano","✋"],["perro","🐶"],["flor","🌸"],["pez","🐟"],["árbol","🌳"],["mamá","👩"],["papá","👨"],["lápiz","✏️"],["libro","📕"]];
+function opcionesUI(z, correcta, lista, mostrar, alAcertar){
+  var otras = A.barajar(lista.filter(function(x){ return x !== correcta; })).slice(0, 2);
+  A.barajar([correcta].concat(otras)).forEach(function(o){
+    var b = el('<button class="opcion">'+mostrar(o)+'</button>');
+    b.onclick = function(){ if (o === correcta) { b.classList.add("ok"); A.tono("bien"); setTimeout(alAcertar, 900); } else { b.classList.remove("no"); void b.offsetWidth; b.classList.add("no"); A.tono("suave"); } };
+    z.querySelector(".opciones").appendChild(b);
+  });
+}
+function leer(i, bien){
+  limpiar(); var p = PALABRAS[Math.floor(Math.random()*PALABRAS.length)];
+  var z = el('<div class="zona"><p class="consigna">Lee la palabra y toca su dibujo</p><p style="font-size:96px;font-weight:900;letter-spacing:6px;margin:0">'+p[0]+'</p><button class="btn sec" id="oir">🔊 Escuchar</button><div class="estrellas">'+"⭐".repeat(bien)+'</div><div class="opciones"></div></div>');
+  z.querySelector("#oir").onclick = function(){ A.hablar(p[0]); };
+  opcionesUI(z, p, PALABRAS, function(o){ return o[1]; }, function(){ if (bien + 1 === 5) A.celebrar(); leer(i + 1, (bien + 1) % 5); });
+  app.appendChild(z); app.appendChild(volver());
+}
+var SILABAS = [["ca","sa","🏠"],["me","sa","🪑"],["ga","to","🐱"],["lu","na","🌙"],["pa","to","🦆"],["ma","no","✋"],["pe","rro","🐶"],["li","bro","📕"],["lá","piz","✏️"],["za","pa","to","👞"],["pe","lo","ta","⚽"],["ma","ri","po","sa","🦋"]];
+function silabas(i){
+  limpiar(); var w = SILABAS[i % SILABAS.length], partes = w.slice(0, -1), puestas = [];
+  var z = el('<div class="zona"><p class="consigna">Toca las sílabas en orden para armar la palabra</p><div class="grande">'+w[w.length-1]+'</div><p id="arm" style="font-size:64px;font-weight:900;min-height:80px;letter-spacing:4px"></p><div class="opciones"></div></div>');
+  A.barajar(partes.map(function(s, k){ return [s, k]; })).forEach(function(s){
+    var b = el('<button class="opcion" style="min-width:160px;min-height:140px;font-size:56px;font-weight:900">'+s[0]+'</button>');
+    b.onclick = function(){
+      if (s[1] === puestas.length) { puestas.push(s[0]); b.disabled = true; b.classList.add("ok"); A.hablar(s[0]); z.querySelector("#arm").textContent = puestas.join("");
+        if (puestas.length === partes.length) { A.tono("bien"); A.celebrar(); A.hablar(puestas.join("")); setTimeout(function(){ silabas(i + 1); }, 1800); } }
+      else { b.classList.remove("no"); void b.offsetWidth; b.classList.add("no"); A.tono("suave"); }
+    };
+    z.querySelector(".opciones").appendChild(b);
+  });
+  app.appendChild(z); app.appendChild(volver());
+}
+var COSAS = ["🍎","⭐","🐟","🚗","🎈","🌸","⚽","🐞"];
+function cuenta(bien){
+  limpiar(); var n = 1 + Math.floor(Math.random()*10), c = COSAS[Math.floor(Math.random()*COSAS.length)];
+  var numeros = []; for (var k = 1; k <= 10; k++) numeros.push(k);
+  var z = el('<div class="zona"><p class="consigna">¿Cuántos hay?</p><div style="font-size:64px;max-width:700px;margin:0 auto;letter-spacing:8px">'+c.repeat(n)+'</div><div class="estrellas">'+"⭐".repeat(bien)+'</div><div class="opciones"></div></div>');
+  opcionesUI(z, n, numeros, function(o){ return '<span style="font-size:90px;font-weight:900">'+o+'</span>'; }, function(){ A.hablar("¡Sí! " + n); if (bien + 1 === 5) A.celebrar(); cuenta((bien + 1) % 5); });
+  app.appendChild(z); app.appendChild(volver());
+}
+menu();
+</script></body></html>
