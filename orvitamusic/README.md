@@ -8,12 +8,13 @@ Sitio **estático** (HTML + CSS + JS), sin build. Escena 3D con Three.js (r169, 
 
 ```
 orvitamusic/
-├── index.html          # Página única (hero 3D, servicios, proceso, estudio, contacto)
+├── index.html          # Página única (hero 3D, servicios, proceso, estudio, próximamente)
 ├── css/styles.css      # Sistema visual y animaciones
-├── js/main.js          # Escena 3D + interacciones (tilt, cursor, reveal, contadores)
+├── js/main.js          # Escena 3D + interacciones (tilt, cursor, reveal)
 ├── js/vendor/          # three.module.min.js + licencia
 ├── assets/             # logo.svg, logo-mark.svg, favicon.svg
-└── BRAND.md            # Guía de identidad de marca
+├── BRAND.md            # Guía de identidad de marca
+└── PROMPTS-FOTOS.md    # Prompts para generar las fotos en Google Flow
 ```
 
 ## Ver en local
@@ -33,9 +34,9 @@ Todas las rutas son relativas, así que basta con subir la carpeta a `/orvitamus
 - **Netlify / Vercel:** desplegar este repo y, en el sitio principal de Arkha, añadir un rewrite de `/orvitamusic/*` hacia este despliegue.
 - **GitHub Pages:** si el repo se llama `orvitamusic` y el dominio `arkhaorigin.com` ya está en Pages, quedará en `arkhaorigin.com/orvitamusic/` automáticamente.
 
-## Pendientes antes de publicar
+## Pendientes (cuando Orvita tenga su propio dominio)
 
-- [ ] Cambiar `CONTACT_EMAIL` en `js/main.js` (hoy `hola@arkhaorigin.com`). El formulario abre el correo del usuario (`mailto:`); se puede conectar a Formspree o similar.
-- [ ] Poner las URLs reales de Instagram, TikTok, YouTube y Spotify en el footer.
-- [ ] Revisar las cifras de la sección de estadísticas (son de ejemplo).
-- [ ] Añadir fotos/videos reales de artistas y del estudio.
+- [ ] Contacto: hoy la sección muestra "Próximamente". Añadir correo o formulario cuando exista el dominio de Orvita.
+- [ ] Redes sociales en el footer (Instagram, TikTok, YouTube, Spotify).
+- [ ] Cifras / estadísticas, cuando haya resultados que mostrar.
+- [ ] Fotos: generarlas con los prompts de `PROMPTS-FOTOS.md` y guardarlas en `assets/img/`.

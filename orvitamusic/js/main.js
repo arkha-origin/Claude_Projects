@@ -23,20 +23,6 @@ document.querySelectorAll("#navLinks a").forEach((a) =>
   })
 );
 
-/* ---------- Contadores (arrancan al revelarse su bloque) ---------- */
-const startCounter = (el) => {
-  const target = Number(el.dataset.count);
-  const suffix = el.dataset.suffix || "";
-  const dur = reduceMotion ? 1 : 1800;
-  const t0 = performance.now();
-  const tick = (now) => {
-    const p = Math.min((now - t0) / dur, 1);
-    el.textContent = Math.round(target * (1 - Math.pow(1 - p, 3))) + suffix;
-    if (p < 1) requestAnimationFrame(tick);
-  };
-  requestAnimationFrame(tick);
-};
-
 /* ---------- Reveal on scroll ----------
    Se revisa en cada scroll (throttle con rAF) para que nada quede oculto
    si el usuario salta con un ancla o hace scroll muy rápido. */
@@ -48,7 +34,6 @@ const checkReveal = () => {
   pendingReveal = pendingReveal.filter((el) => {
     if (el.getBoundingClientRect().top < limit) {
       el.classList.add("is-in");
-      el.querySelectorAll("[data-count]").forEach(startCounter);
       return false;
     }
     return true;
@@ -120,35 +105,13 @@ if (finePointer && !reduceMotion) {
     requestAnimationFrame(loop);
   };
   loop();
-  document.querySelectorAll("a, button, .card, input, select, textarea").forEach((el) => {
+  document.querySelectorAll("a, button, .card").forEach((el) => {
     el.addEventListener("pointerenter", () => cursor.classList.add("is-hover"));
     el.addEventListener("pointerleave", () => cursor.classList.remove("is-hover"));
   });
 } else {
   document.querySelector(".cursor")?.remove();
 }
-
-/* ---------- Formulario ---------- */
-const form = document.getElementById("contactForm");
-const formMsg = document.getElementById("formMsg");
-// Cambia este correo por el oficial de Orvita Music.
-const CONTACT_EMAIL = "hola@arkhaorigin.com";
-form.addEventListener("submit", (e) => {
-  e.preventDefault();
-  if (!form.checkValidity()) {
-    formMsg.textContent = "Completa nombre, un email válido y tu proyecto.";
-    formMsg.classList.add("is-error");
-    form.reportValidity();
-    return;
-  }
-  const d = new FormData(form);
-  const subject = `Orvita Music — ${d.get("servicio")} — ${d.get("nombre")}`;
-  const body = `Nombre: ${d.get("nombre")}\nEmail: ${d.get("email")}\nServicio: ${d.get("servicio")}\nMúsica: ${d.get("link") || "-"}\n\n${d.get("mensaje")}`;
-  window.location.href = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-  formMsg.classList.remove("is-error");
-  formMsg.textContent = "¡Listo! Abrimos tu correo para enviar el mensaje. 🚀";
-  form.reset();
-});
 
 /* =========================================================
    ESCENA 3D — Planeta sonoro con anillos orbitales
