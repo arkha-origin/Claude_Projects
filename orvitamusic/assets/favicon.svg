@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" fill="none" role="img" aria-label="Orvita Music">
+  <defs>
+    <linearGradient id="om-g" x1="10" y1="110" x2="110" y2="10" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#39FF88"/>
+      <stop offset=".55" stop-color="#5CD6FF"/>
+      <stop offset="1" stop-color="#B026FF"/>
+    </linearGradient>
+  </defs>
+  <!-- Órbita -->
+  <ellipse cx="60" cy="60" rx="54" ry="22" transform="rotate(-28 60 60)" stroke="url(#om-g)" stroke-width="5"/>
+  <!-- Planeta / onda -->
+  <circle cx="60" cy="60" r="26" stroke="url(#om-g)" stroke-width="5"/>
+  <path d="M44 60h5l4-9 6 18 5-14 3 5h9" stroke="url(#om-g)" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Satélite -->
+  <circle cx="104" cy="35" r="6" fill="#39FF88"/>
+</svg>
