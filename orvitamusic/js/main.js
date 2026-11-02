@@ -45,6 +45,80 @@ window.addEventListener("scroll", queueReveal, { passive: true });
 window.addEventListener("resize", queueReveal);
 checkReveal();
 
+/* ---------- Pestañas (servicios y etapa) ----------
+   Todo el contenido está en el HTML; sin JS se ve completo. Aquí solo se
+   muestra un panel a la vez y se sincroniza con los enlaces #s-… */
+function makeTabs(tabSelector, panelClass) {
+  const tabs = [...document.querySelectorAll(tabSelector)];
+  const select = (tab, focus = false) => {
+    tabs.forEach((t) => {
+      const on = t === tab;
+      t.setAttribute("aria-selected", String(on));
+      t.tabIndex = on ? 0 : -1;
+      document.getElementById(t.getAttribute("aria-controls")).classList.toggle(panelClass, on);
+    });
+    if (focus) tab.focus();
+    tab.scrollIntoView({ block: "nearest", inline: "center", behavior: reduceMotion ? "auto" : "smooth" });
+  };
+  tabs.forEach((t, i) => {
+    t.addEventListener("click", () => select(t));
+    t.addEventListener("keydown", (e) => {
+      const dir = { ArrowRight: 1, ArrowDown: 1, ArrowLeft: -1, ArrowUp: -1 }[e.key];
+      if (!dir) return;
+      e.preventDefault();
+      select(tabs[(i + dir + tabs.length) % tabs.length], true);
+    });
+  });
+  const initial = tabs.find((t) => t.getAttribute("aria-selected") === "true") || tabs[0];
+  if (initial) {
+    tabs.forEach((t) => { t.tabIndex = -1; });
+    document.getElementById(initial.getAttribute("aria-controls")).classList.add(panelClass);
+    initial.tabIndex = 0;
+  }
+  return { tabs, select };
+}
+const services = makeTabs(".explorer .tab", "is-active");
+makeTabs(".stage__picker .chip", "is-active");
+
+// Cualquier enlace a #s-… abre esa área del explorador.
+const openService = (id) => {
+  const tab = services.tabs.find((t) => t.getAttribute("aria-controls") === id);
+  if (!tab) return false;
+  tab.click();
+  const target = window.innerWidth <= 960 ? document.getElementById("explorer") : document.getElementById(id);
+  target.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "start" });
+  history.replaceState(null, "", `#${id}`);
+  return true;
+};
+document.querySelectorAll('a[href^="#s-"]').forEach((a) =>
+  a.addEventListener("click", (e) => {
+    if (openService(a.getAttribute("href").slice(1))) {
+      e.preventDefault();
+      nav.classList.remove("is-open");
+      navToggle.setAttribute("aria-expanded", "false");
+    }
+  })
+);
+if (location.hash.startsWith("#s-")) requestAnimationFrame(() => openService(location.hash.slice(1)));
+
+/* ---------- Progreso, volver arriba y sección actual ---------- */
+const progressBar = document.getElementById("progressBar");
+const toTop = document.getElementById("toTop");
+const navAnchors = [...document.querySelectorAll('#navLinks a:not(.btn)')];
+const navSections = navAnchors.map((a) => document.querySelector(a.getAttribute("href")));
+let uiQueued = false;
+const updateUI = () => {
+  uiQueued = false;
+  const max = document.documentElement.scrollHeight - innerHeight;
+  progressBar.style.transform = `scaleX(${max > 0 ? Math.min(scrollY / max, 1) : 0})`;
+  toTop.classList.toggle("is-on", scrollY > innerHeight);
+  let current = -1;
+  navSections.forEach((sec, i) => { if (sec && sec.getBoundingClientRect().top < innerHeight * 0.4) current = i; });
+  navAnchors.forEach((a, i) => a.classList.toggle("is-current", i === current));
+};
+window.addEventListener("scroll", () => { if (!uiQueued) { uiQueued = true; requestAnimationFrame(updateUI); } }, { passive: true });
+updateUI();
+
 /* ---------- Timeline progress ---------- */
 const timeline = document.querySelector(".timeline");
 const updateTimeline = () => {
@@ -64,8 +138,8 @@ if (finePointer && !reduceMotion) {
       const r = card.getBoundingClientRect();
       const x = (e.clientX - r.left) / r.width;
       const y = (e.clientY - r.top) / r.height;
-      card.style.setProperty("--ry", `${(x - 0.5) * 16}deg`);
-      card.style.setProperty("--rx", `${(0.5 - y) * 16}deg`);
+      card.style.setProperty("--ry", `${(x - 0.5) * 6}deg`);
+      card.style.setProperty("--rx", `${(0.5 - y) * 6}deg`);
       card.style.setProperty("--mx", `${x * 100}%`);
       card.style.setProperty("--my", `${y * 100}%`);
     });
@@ -105,7 +179,7 @@ if (finePointer && !reduceMotion) {
     requestAnimationFrame(loop);
   };
   loop();
-  document.querySelectorAll("a, button, .card").forEach((el) => {
+  document.querySelectorAll("a, button, .panel, summary").forEach((el) => {
     el.addEventListener("pointerenter", () => cursor.classList.add("is-hover"));
     el.addEventListener("pointerleave", () => cursor.classList.remove("is-hover"));
   });
