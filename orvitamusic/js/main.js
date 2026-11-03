@@ -67,12 +67,60 @@ const orbitLinks = [...orbitbar.querySelectorAll("a")];
 const stopsEls = orbitLinks.map((a) => document.querySelector(a.getAttribute("href")));
 const mapEl = document.getElementById("servicios");
 
+/* ---------- Recorrido horizontal de planetas ----------
+   La sección mide 7 pantallas de alto; su interior queda fijo y el scroll
+   vertical lo desplaza de lado. Con una pausa suave en cada planeta. */
+const journey = document.getElementById("recorrido");
+const track = document.getElementById("journeyTrack");
+const jHint = document.getElementById("jHint");
+const N = stopsEls.length;
+let journeyIndex = 0;
+const journeyProgress = () => {
+  const r = journey.getBoundingClientRect();
+  return Math.min(Math.max(-r.top / (r.height - innerHeight), 0), 1);
+};
+const updateJourney = () => {
+  const seg = journeyProgress() * (N - 1);
+  const i = Math.min(Math.floor(seg), N - 2);
+  let f = Math.min(Math.max((seg - i - 0.15) / 0.7, 0), 1);
+  f = f * f * (3 - 2 * f);
+  track.style.transform = `translate3d(${-(i + f) * 100}vw, 0, 0)`;
+  journeyIndex = Math.round(i + f);
+  jHint.classList.toggle("is-gone", seg > 0.3);
+};
+// Ir al planeta i: el scroll vertical que le corresponde.
+const goToPlanet = (i) => {
+  i = Math.min(Math.max(i, 0), N - 1);
+  const top = journey.getBoundingClientRect().top + scrollY;
+  const y = top + (i / (N - 1)) * (journey.offsetHeight - innerHeight) + 1;
+  window.scrollTo({ top: y, behavior: smooth });
+};
+window.goToPlanet = goToPlanet;
+document.querySelectorAll('a[href^="#s-"]').forEach((a) => {
+  const i = stopsEls.findIndex((el) => el.id === a.getAttribute("href").slice(1));
+  a.addEventListener("click", (e) => { e.preventDefault(); closeMenu(); goToPlanet(i); });
+});
+document.getElementById("jPrev").addEventListener("click", () => goToPlanet(journeyIndex - 1));
+document.getElementById("jNext").addEventListener("click", () => goToPlanet(journeyIndex + 1));
+addEventListener("keydown", (e) => {
+  if (!["ArrowRight", "ArrowLeft"].includes(e.key) || e.target.closest("input, textarea, [role=tab]")) return;
+  const r = journey.getBoundingClientRect();
+  if (r.top > 1 || r.bottom < innerHeight - 1) return;
+  e.preventDefault();
+  goToPlanet(journeyIndex + (e.key === "ArrowRight" ? 1 : -1));
+});
+if (location.hash.startsWith("#s-")) {
+  const i = stopsEls.findIndex((el) => el.id === location.hash.slice(1));
+  if (i >= 0) requestAnimationFrame(() => { history.replaceState(null, "", location.pathname); goToPlanet(i); });
+}
+
 const updateUI = () => {
+  updateJourney();
   checkReveal();
   nav.classList.toggle("is-scrolled", scrollY > 40);
   const max = document.documentElement.scrollHeight - innerHeight;
   progressBar.style.transform = `scaleX(${max > 0 ? Math.min(scrollY / max, 1) : 0})`;
-  toTop.classList.toggle("is-on", scrollY > innerHeight);
+  
 
   let current = -1;
   navSections.forEach((sec, i) => { if (sec && sec.getBoundingClientRect().top < innerHeight * 0.4) current = i; });
@@ -81,11 +129,12 @@ const updateUI = () => {
   // Barra de planetas: visible desde el mapa hasta el último planeta.
   const mid = innerHeight / 2;
   const first = mapEl.getBoundingClientRect().top;
-  const last = stopsEls[stopsEls.length - 1].getBoundingClientRect().bottom;
+  const last = journey.getBoundingClientRect().bottom;
   orbitbar.classList.toggle("is-on", first < mid && last > mid);
-  let planet = -1;
-  stopsEls.forEach((el, i) => { const r = el.getBoundingClientRect(); if (r.top < mid && r.bottom > mid) planet = i; });
+  const jr = journey.getBoundingClientRect();
+  const planet = jr.top <= 1 && jr.bottom >= innerHeight - 1 ? journeyIndex : -1;
   orbitLinks.forEach((a, i) => a.classList.toggle("is-current", i === planet));
+  toTop.classList.toggle("is-on", scrollY > innerHeight && !orbitbar.classList.contains("is-on"));
 
   if (timeline) {
     const r = timeline.getBoundingClientRect();
@@ -353,7 +402,7 @@ function initUniverse(THREE) {
     b.className = "plabel"; b.type = "button"; b.style.setProperty("--c", p.atm);
     b.innerHTML = `<i></i><span>0${i + 1}</span>${p.name}`;
     b.tabIndex = -1; // ya existen enlaces equivalentes en la lista del mapa
-    b.addEventListener("click", () => document.getElementById(p.id).scrollIntoView({ behavior: smooth }));
+    b.addEventListener("click", () => window.goToPlanet(i));
     labelLayer.appendChild(b);
     return b;
   });
@@ -384,8 +433,11 @@ function initUniverse(THREE) {
 
   // Qué estaciones rodean el centro de la pantalla, y cuánto se avanzó entre ellas.
   const blend = () => {
-    const mid = innerHeight / 2;
-    const c = stops.map((el) => { const r = el.getBoundingClientRect(); return r.top + r.height / 2 - mid; });
+    const midY = innerHeight / 2, midX = innerWidth / 2;
+    const c = stops.map((el) => {
+      const r = el.getBoundingClientRect();
+      return (r.top + r.height / 2 - midY) + (r.left + r.width / 2 - midX) * (innerHeight / innerWidth);
+    });
     if (c[0] >= 0) return [0, 0, 0];
     for (let i = 0; i < c.length - 1; i++) {
       if (c[i] <= 0 && c[i + 1] > 0) {
@@ -445,8 +497,19 @@ function initUniverse(THREE) {
     // Cámara: mezcla entre las dos estaciones más cercanas
     const [ia, ib, k] = blend();
     const A = stateOf(keys[ia]), B = stateOf(keys[ib]);
+    // Entre dos planetas, la cámara viaja en arco alrededor del sol (no lo atraviesa).
+    const arc = (a, b) => {
+      const ra = Math.hypot(a.x, a.z), rb = Math.hypot(b.x, b.z);
+      const aa = Math.atan2(a.z, a.x);
+      let d = Math.atan2(b.z, b.x) - aa;
+      d = Math.atan2(Math.sin(d), Math.cos(d));
+      const ang = aa + d * k, r = ra + (rb - ra) * k;
+      return V(Math.cos(ang) * r, a.y + (b.y - a.y) * k, Math.sin(ang) * r);
+    };
+    const bothPlanets = /^p\d$/.test(keys[ia]) && /^p\d$/.test(keys[ib]);
     const goal = {
-      pos: A.pos.lerp(B.pos, k), target: A.target.lerp(B.target, k),
+      pos: bothPlanets ? arc(A.pos, B.pos) : A.pos.lerp(B.pos, k),
+      target: bothPlanets ? arc(A.target, B.target) : A.target.lerp(B.target, k),
       sx: A.sx + (B.sx - A.sx) * k, sy: A.sy + (B.sy - A.sy) * k,
       veil: A.veil + (B.veil - A.veil) * k, labels: A.labels + (B.labels - A.labels) * k,
     };
