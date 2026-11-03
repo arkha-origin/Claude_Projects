@@ -38,7 +38,7 @@ Todas las rutas son relativas, así que basta con subir la carpeta a `/orvitamus
 
 - [ ] Contacto: hoy la sección muestra "Próximamente". Añadir correo o formulario cuando exista el dominio de Orvita.
 - [ ] Funciones de cada planeta (hoy marcadas "Próximamente"): Book Artist, showreel y cotizador audiovisual, paquetes de contenido, biblioteca de beats, agenda y pago de mentorías, inscripción a camps.
-- [ ] Ficha de Mad House Music: fotos, música y trayectoria.
+- [ ] Fichas de los artistas del roster: fotos, música y trayectoria.
 - [ ] Redes sociales en el footer (Instagram, TikTok, YouTube, Spotify).
 - [ ] Cifras / estadísticas, cuando haya resultados que mostrar.
 - [ ] Fotos: generarlas con los prompts de `PROMPTS-FOTOS.md` y guardarlas en `assets/img/`.

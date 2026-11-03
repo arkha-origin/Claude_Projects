@@ -372,30 +372,7 @@ main, .footer { position: relative; z-index: 1; }
 }
 .panel__strength strong { color: var(--c); }
 .panel__note { margin-top: .9rem; font-size: .85rem; color: var(--muted); font-style: italic; }
-.panel__label { font-size: .75rem; letter-spacing: .2em; text-transform: uppercase; color: var(--muted); margin-bottom: .6rem; }
 .panel__list strong { color: var(--c); }
-.tags { list-style: none; display: flex; flex-wrap: wrap; gap: .45rem; }
-.tags li {
-  padding: .4rem .85rem; border-radius: 999px; font-size: .85rem; font-weight: 600;
-  border: 1px solid color-mix(in srgb, var(--c) 55%, transparent); background: color-mix(in srgb, var(--c) 10%, transparent);
-}
-.artist {
-  display: flex; align-items: center; gap: 1rem; padding: 1rem; border-radius: 18px;
-  background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.1);
-}
-.artist__orb {
-  flex: 0 0 auto; width: 58px; height: 58px; border-radius: 50%;
-  background: radial-gradient(circle at 30% 30%, #b6ffd4, var(--c) 45%, #0b3a2c 75%);
-  box-shadow: 0 0 24px color-mix(in srgb, var(--c) 60%, transparent); animation: spin 12s linear infinite;
-}
-.artist small { display: block; font-size: .7rem; letter-spacing: .2em; text-transform: uppercase; color: var(--c); }
-.artist strong { display: block; font-family: var(--font-display); font-size: 1.25rem; }
-.artist em { font-style: normal; font-size: .85rem; color: var(--muted); }
-.tiers { display: grid; grid-template-columns: 1fr 1fr; gap: .7rem; }
-.tiers div { padding: .9rem 1rem; border-radius: 16px; background: rgba(255,255,255,.04); border: 1px solid color-mix(in srgb, var(--c) 35%, transparent); }
-.tiers small { display: block; font-size: .7rem; letter-spacing: .2em; text-transform: uppercase; color: var(--c); }
-.tiers strong { display: block; font-family: var(--font-display); font-size: 1.05rem; margin: .15rem 0 .3rem; }
-.tiers span { font-size: .82rem; color: var(--muted); line-height: 1.35; display: block; }
 .panel__cta {
   display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin-top: 1.2rem;
   padding: .85rem 1rem .85rem 1.2rem; border-radius: 999px; font-weight: 600; color: var(--night); background: var(--c);
@@ -630,9 +607,6 @@ main, .footer { position: relative; z-index: 1; }
   .js .journey .panel__strength { font-size: .82rem; padding: .65rem .8rem; margin-top: .8rem; }
   .js .journey .panel__cta { margin-top: .8rem; padding: .7rem .9rem; font-size: .9rem; }
   .js .journey .panel__note { font-size: .78rem; }
-  .js .journey .tiers span { display: none; }
-  .js .journey .artist { padding: .7rem; }
-  .js .journey .artist__orb { width: 44px; height: 44px; }
   .js .journey__arrow { top: 6.2rem; transform: none; width: 42px; height: 42px; }
   .js .journey__arrow--next { animation: none; }
   .js .journey__hint { display: none; }

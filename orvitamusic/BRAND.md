@@ -15,9 +15,9 @@
 
 ## 2. Servicios (los 7 planetas)
 
-1. **Roster & Showcase** — representación artística de talentos. Caso piloto: Mad House Music.
-2. **Booking Directo** — fechas, giras, DJ sets y live performances; entrada directa a Altavoz, Disonarte, Ibagué Ciudad Rock, Zona Sur Fest e Ibagué Festival.
-3. **Producción Audiovisual 4K** — videoclips (Nivel 1 Indie y Nivel 2 Cine / Alta estética), visualizers y contenido narrativo, con equipo técnico propio.
+1. **Roster & Showcase** — representación artística de talentos.
+2. **Booking Directo** — fechas, giras, DJ sets y live performances; entrada directa a los festivales insignia del país.
+3. **Producción Audiovisual 4K** — videoclips cinematográficos, visualizers y contenido narrativo, con equipo técnico propio.
 4. **Live Sessions & Content Factory** — sesiones multicámara y paquetes mensuales de 12 a 16 piezas verticales.
 5. **Sync & Music Placement** — obras y beats para licenciar en publicidad, cine y series (recaudación global vía Songtrust u ONErpm).
 6. **Consultoría & Estrategia 360°** — asesoría por horas o por proyecto para artistas fuera del roster.
