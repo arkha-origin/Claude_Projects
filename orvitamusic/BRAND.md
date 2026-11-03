@@ -13,14 +13,15 @@
 | **Tagline principal** | *Tu música en órbita.* |
 | **Taglines alternos** | *Del estudio al mundo.* · *Donde el talento encuentra gravedad.* · *Lanza. Crece. Orbita.* |
 
-## 2. Servicios (las 6 órbitas)
+## 2. Servicios (los 7 planetas)
 
-1. Representación artística (management, booking, negociación)
-2. Marketing musical (lanzamientos, ads, playlists, PR)
-3. Grabación
-4. Producción, mezcla y mastering
-5. Asesoramiento artístico (A&R, imagen, coaching)
-6. Music business (publishing, regalías, distribución, contratos)
+1. **Roster & Showcase** — representación artística de talentos. Caso piloto: Mad House Music.
+2. **Booking Directo** — fechas, giras, DJ sets y live performances; entrada directa a Altavoz, Disonarte, Ibagué Ciudad Rock, Zona Sur Fest e Ibagué Festival.
+3. **Producción Audiovisual 4K** — videoclips (Nivel 1 Indie y Nivel 2 Cine / Alta estética), visualizers y contenido narrativo, con equipo técnico propio.
+4. **Live Sessions & Content Factory** — sesiones multicámara y paquetes mensuales de 12 a 16 piezas verticales.
+5. **Sync & Music Placement** — obras y beats para licenciar en publicidad, cine y series (recaudación global vía Songtrust u ONErpm).
+6. **Consultoría & Estrategia 360°** — asesoría por horas o por proyecto para artistas fuera del roster.
+7. **Songwriting Camps & Alianzas** — campamentos de composición con compositores, beatmakers y realizadores.
 
 ## 3. Logotipo
 

@@ -225,13 +225,13 @@ float snoise(vec3 v){
 
 /* Los siete planetas: uno por servicio, en el mismo orden que el HTML. */
 const PLANETS = [
-  { id: "s-representacion", name: "Representación", a: "#5dffa0", b: "#0b3a2c", atm: "#39ff88", r: 0.62, orbit: 4.6, bands: 5 },
-  { id: "s-marketing", name: "Marketing", a: "#dd9bff", b: "#3a0a6b", atm: "#b026ff", r: 0.82, orbit: 6.3, bands: 9, ring: true },
-  { id: "s-grabacion", name: "Grabación", a: "#a8ecff", b: "#123a5a", atm: "#5cd6ff", r: 0.56, orbit: 7.9, bands: 4 },
-  { id: "s-produccion", name: "Producción", a: "#7dffc0", b: "#1d2b6b", atm: "#5cd6ff", r: 1.02, orbit: 9.6, bands: 12, ring: true },
-  { id: "s-asesoria", name: "Asesoría", a: "#ff9be0", b: "#4a0d5c", atm: "#b026ff", r: 0.66, orbit: 11.6, bands: 6 },
-  { id: "s-business", name: "Music business", a: "#6fdcff", b: "#0a1d3d", atm: "#39ff88", r: 0.86, orbit: 13.3, bands: 14 },
-  { id: "s-audiovisual", name: "Audiovisual", a: "#d2ff7a", b: "#0f3d22", atm: "#39ff88", r: 0.72, orbit: 15.0, bands: 7, moon: true },
+  { id: "s-roster", name: "Roster & Showcase", a: "#5dffa0", b: "#0b3a2c", atm: "#39ff88", r: 0.62, orbit: 4.6, bands: 5 },
+  { id: "s-booking", name: "Booking Directo", a: "#dd9bff", b: "#3a0a6b", atm: "#b026ff", r: 0.82, orbit: 6.3, bands: 9, ring: true },
+  { id: "s-audiovisual", name: "Audiovisual 4K", a: "#a8ecff", b: "#123a5a", atm: "#5cd6ff", r: 0.56, orbit: 7.9, bands: 4 },
+  { id: "s-live", name: "Live Sessions", a: "#7dffc0", b: "#1d2b6b", atm: "#5cd6ff", r: 1.02, orbit: 9.6, bands: 12, ring: true },
+  { id: "s-sync", name: "Sync & Placement", a: "#ff9be0", b: "#4a0d5c", atm: "#b026ff", r: 0.66, orbit: 11.6, bands: 6 },
+  { id: "s-consultoria", name: "Consultoría 360°", a: "#6fdcff", b: "#0a1d3d", atm: "#39ff88", r: 0.86, orbit: 13.3, bands: 14 },
+  { id: "s-camps", name: "Songwriting Camps", a: "#d2ff7a", b: "#0f3d22", atm: "#39ff88", r: 0.72, orbit: 15.0, bands: 7, moon: true },
 ];
 
 function initUniverse(THREE) {
@@ -383,7 +383,7 @@ function initUniverse(THREE) {
     return { ...d, group, mesh, halo, moon, uniforms, orbitMat, angle: i * 2.35 + 0.6, speed: 0.42 / Math.pow(d.orbit, 1.5) };
   });
 
-  /* Cinturón de asteroides entre Producción y Asesoría */
+  /* Cinturón de asteroides entre Live Sessions y Sync */
   {
     const n = mobileNow ? 700 : 1600, pos = new Float32Array(n * 3);
     for (let i = 0; i < n; i++) {
