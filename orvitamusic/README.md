@@ -1,6 +1,6 @@
 # Orvita Music — arkhaorigin.com/orvitamusic
 
-Sitio web de **Orvita Music**, un sello de Arkha Origin: representación artística, marketing musical, grabación, producción, mezcla, asesoramiento artístico y music business.
+Sitio web de **Orvita Music**: representación artística, marketing musical, grabación, producción, mezcla, asesoramiento artístico y music business.
 
 Sitio **estático** (HTML + CSS + JS), sin build. Escena 3D con Three.js (r169, incluido en `js/vendor/`, licencia MIT).
 

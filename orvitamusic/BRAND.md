@@ -1,7 +1,6 @@
 # Orvita Music — Identidad de marca
 
 > **Tu música en órbita.**
-> Un sello de Arkha Origin.
 
 ## 1. Esencia
 
