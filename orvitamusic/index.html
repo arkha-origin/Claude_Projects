@@ -48,6 +48,18 @@
 <body>
   <a class="skip" href="#servicios">Saltar a los servicios</a>
   <div class="progress" aria-hidden="true"><span id="progressBar"></span></div>
+  <canvas id="universe" class="universe" aria-hidden="true"></canvas>
+  <div class="veil" id="veil" aria-hidden="true"></div>
+  <div class="plabels" id="plabels"></div>
+  <nav class="orbitbar" id="orbitbar" aria-label="Planetas de servicios">
+    <a href="#s-representacion" style="--c:var(--green)"><i></i><span>Representación artística</span></a>
+    <a href="#s-marketing" style="--c:var(--purple)"><i></i><span>Marketing musical</span></a>
+    <a href="#s-grabacion" style="--c:var(--sky)"><i></i><span>Grabación</span></a>
+    <a href="#s-produccion" style="--c:var(--green)"><i></i><span>Producción, mezcla y mastering</span></a>
+    <a href="#s-asesoria" style="--c:var(--purple)"><i></i><span>Asesoramiento artístico</span></a>
+    <a href="#s-business" style="--c:var(--sky)"><i></i><span>Music business</span></a>
+    <a href="#s-audiovisual" style="--c:var(--green)"><i></i><span>Producción audiovisual</span></a>
+  </nav>
   <div class="noise" aria-hidden="true"></div>
   <div class="cursor" aria-hidden="true"><span class="cursor__dot"></span><span class="cursor__ring"></span></div>
 
@@ -70,8 +82,7 @@
 
   <main>
     <!-- ============ HERO ============ -->
-    <section class="hero" id="inicio">
-      <canvas id="orbit3d" class="hero__canvas" aria-hidden="true"></canvas>
+    <section class="hero" id="inicio" data-cam="hero">
       <div class="hero__fallback" aria-hidden="true"></div>
       <div class="hero__content">
         <p class="eyebrow reveal">Sello musical de <strong>Arkha Origin</strong> · Bogotá</p>
@@ -81,8 +92,8 @@
         </h1>
         <p class="hero__lead reveal">Un solo equipo para toda tu carrera: representación, marketing, grabación, producción, music business y video. Del primer demo al escenario.</p>
         <div class="hero__cta reveal">
-          <a href="#servicios" class="btn btn--neon magnetic">Ver todos los servicios</a>
-          <a href="#etapa" class="btn btn--ghost magnetic">Encuentra lo que necesitas</a>
+          <a href="#servicios" class="btn btn--neon magnetic">Explorar el universo</a>
+          <a href="#etapa" class="btn btn--ghost magnetic">¿Qué necesitas?</a>
         </div>
         <ul class="hero__quick reveal" aria-label="Accesos rápidos a servicios">
           <li><a href="#s-representacion">Representación</a></li>
@@ -97,7 +108,7 @@
       <div class="hero__eq" aria-hidden="true">
         <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
       </div>
-      <a href="#servicios" class="hero__scroll" aria-label="Bajar a servicios"><span></span></a>
+      <a href="#servicios" class="hero__scroll" aria-label="Bajar al sistema"><span></span><em>Baja para despegar</em></a>
     </section>
 
     <!-- ============ RESPALDO ============ -->
@@ -116,29 +127,28 @@
       </div>
     </div>
 
-    <!-- ============ SERVICIOS ============ -->
-    <section class="section" id="servicios">
-      <div class="section__head">
-        <p class="eyebrow reveal">01 — Servicios</p>
-        <h2 class="reveal">Todo lo que tu carrera<br />necesita, <span class="grad">en un solo lugar</span></h2>
-        <p class="section__lead reveal">Siete áreas que trabajan en sincronía alrededor de un solo centro: el artista. Elige un área para ver todo lo que incluye.</p>
+    <!-- ============ SISTEMA ORVITA (servicios) ============ -->
+    <section class="section map" id="servicios" data-cam="map">
+      <div class="map__text">
+        <p class="eyebrow reveal">01 — El sistema Orvita</p>
+        <h2 class="reveal">Siete planetas,<br /><span class="grad">un solo universo</span></h2>
+        <p class="section__lead reveal">Cada planeta es un área de servicio y todos giran alrededor del mismo centro: el artista. Toca un planeta o sigue bajando para recorrer el sistema.</p>
+        <ol class="planet-index reveal">
+          <li><a href="#s-representacion" style="--c:var(--green)"><i></i><span class="pi__n">01</span>Representación artística</a></li>
+          <li><a href="#s-marketing" style="--c:var(--purple)"><i></i><span class="pi__n">02</span>Marketing musical</a></li>
+          <li><a href="#s-grabacion" style="--c:var(--sky)"><i></i><span class="pi__n">03</span>Grabación</a></li>
+          <li><a href="#s-produccion" style="--c:var(--green)"><i></i><span class="pi__n">04</span>Producción, mezcla y mastering</a></li>
+          <li><a href="#s-asesoria" style="--c:var(--purple)"><i></i><span class="pi__n">05</span>Asesoramiento artístico</a></li>
+          <li><a href="#s-business" style="--c:var(--sky)"><i></i><span class="pi__n">06</span>Music business</a></li>
+          <li><a href="#s-audiovisual" style="--c:var(--green)"><i></i><span class="pi__n">07</span>Producción audiovisual</a></li>
+        </ol>
       </div>
+    </section>
 
-      <div class="explorer" id="explorer">
-        <div class="explorer__tabs" role="tablist" aria-label="Áreas de servicio">
-          <button role="tab" class="tab" id="t-representacion" aria-controls="s-representacion" aria-selected="true" style="--c:var(--green)"><span class="tab__n">01</span>Representación artística</button>
-          <button role="tab" class="tab" id="t-marketing" aria-controls="s-marketing" aria-selected="false" style="--c:var(--purple)"><span class="tab__n">02</span>Marketing musical</button>
-          <button role="tab" class="tab" id="t-grabacion" aria-controls="s-grabacion" aria-selected="false" style="--c:var(--sky)"><span class="tab__n">03</span>Grabación</button>
-          <button role="tab" class="tab" id="t-produccion" aria-controls="s-produccion" aria-selected="false" style="--c:var(--green)"><span class="tab__n">04</span>Producción, mezcla y mastering</button>
-          <button role="tab" class="tab" id="t-asesoria" aria-controls="s-asesoria" aria-selected="false" style="--c:var(--purple)"><span class="tab__n">05</span>Asesoramiento artístico</button>
-          <button role="tab" class="tab" id="t-business" aria-controls="s-business" aria-selected="false" style="--c:var(--sky)"><span class="tab__n">06</span>Music business</button>
-          <button role="tab" class="tab" id="t-audiovisual" aria-controls="s-audiovisual" aria-selected="false" style="--c:var(--green)"><span class="tab__n">07</span>Producción audiovisual</button>
-        </div>
-
-        <div class="explorer__panels">
-          <article class="panel tilt" id="s-representacion" role="tabpanel" aria-labelledby="t-representacion" style="--c:var(--green)">
-            <div class="card__glow"></div>
+    <section class="stop" id="s-representacion" data-cam="p0" style="--c:var(--green)">
+      <article class="panel reveal">
             <svg class="card__icon" viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="16" r="8"/><path d="M8 42c2-9 9-14 16-14s14 5 16 14"/><path d="M38 6l2 4 4 1-3 3 1 4-4-2-4 2 1-4-3-3 4-1z"/></svg>
+            <p class="panel__kicker">Planeta 01 de 07</p>
             <h3>Representación artística</h3>
             <p class="panel__lead">Dirigimos tu carrera como un proyecto profesional: estrategia, agenda, alianzas y negociación, para que tú te concentres en crear.</p>
             <ul class="panel__list">
@@ -150,11 +160,14 @@
               <li>Construcción del equipo del artista</li>
             </ul>
             <p class="panel__ideal"><strong>Ideal para:</strong> artistas con una propuesta definida que quieren crecer de forma profesional.</p>
-          </article>
+            <a class="panel__next" href="#s-marketing">Siguiente planeta: Marketing musical <span aria-hidden="true">↓</span></a>
+      </article>
+    </section>
 
-          <article class="panel tilt" id="s-marketing" role="tabpanel" aria-labelledby="t-marketing" style="--c:var(--purple)">
-            <div class="card__glow"></div>
+    <section class="stop" id="s-marketing" data-cam="p1" style="--c:var(--purple)">
+      <article class="panel reveal">
             <svg class="card__icon" viewBox="0 0 48 48" aria-hidden="true"><path d="M6 30V18l26-10v32L6 30z"/><path d="M32 18c4 0 8 2 8 6s-4 6-8 6"/><path d="M12 30l4 12h6l-3-11"/></svg>
+            <p class="panel__kicker">Planeta 02 de 07</p>
             <h3>Marketing musical</h3>
             <p class="panel__lead">Cada lanzamiento con un plan: a quién le hablamos, en qué canales y con qué contenido, medido de principio a fin.</p>
             <ul class="panel__list">
@@ -167,11 +180,14 @@
               <li>Analítica y reportes de cada campaña</li>
             </ul>
             <p class="panel__ideal"><strong>Ideal para:</strong> artistas que tienen música lista y quieren que llegue a más personas.</p>
-          </article>
+            <a class="panel__next" href="#s-grabacion">Siguiente planeta: Grabación <span aria-hidden="true">↓</span></a>
+      </article>
+    </section>
 
-          <article class="panel tilt" id="s-grabacion" role="tabpanel" aria-labelledby="t-grabacion" style="--c:var(--sky)">
-            <div class="card__glow"></div>
+    <section class="stop" id="s-grabacion" data-cam="p2" style="--c:var(--sky)">
+      <article class="panel reveal">
             <svg class="card__icon" viewBox="0 0 48 48" aria-hidden="true"><rect x="16" y="4" width="16" height="26" rx="8"/><path d="M10 22c0 8 6 14 14 14s14-6 14-14"/><path d="M24 36v8M16 44h16"/></svg>
+            <p class="panel__kicker">Planeta 03 de 07</p>
             <h3>Grabación</h3>
             <p class="panel__lead">Sesiones de estudio con ingenieros y dirección artística, para capturar tu mejor interpretación con calidad de industria.</p>
             <ul class="panel__list">
@@ -183,11 +199,14 @@
               <li>Sesiones en vivo grabadas en video con Arkha Origin</li>
             </ul>
             <p class="panel__ideal"><strong>Ideal para:</strong> artistas con canciones compuestas que necesitan grabarlas bien desde la primera toma.</p>
-          </article>
+            <a class="panel__next" href="#s-produccion">Siguiente planeta: Producción, mezcla y mastering <span aria-hidden="true">↓</span></a>
+      </article>
+    </section>
 
-          <article class="panel tilt" id="s-produccion" role="tabpanel" aria-labelledby="t-produccion" style="--c:var(--green)">
-            <div class="card__glow"></div>
+    <section class="stop" id="s-produccion" data-cam="p3" style="--c:var(--green)">
+      <article class="panel reveal">
             <svg class="card__icon" viewBox="0 0 48 48" aria-hidden="true"><path d="M10 6v36M24 6v36M38 6v36"/><rect x="5" y="26" width="10" height="6" rx="2"/><rect x="19" y="12" width="10" height="6" rx="2"/><rect x="33" y="20" width="10" height="6" rx="2"/></svg>
+            <p class="panel__kicker">Planeta 04 de 07</p>
             <h3>Producción, mezcla y mastering</h3>
             <p class="panel__lead">Le damos a tu canción el sonido que merece, listo para sonar al lado de cualquier lanzamiento en las plataformas.</p>
             <ul class="panel__list">
@@ -199,11 +218,14 @@
               <li>Entrega de stems para shows y sincronización</li>
             </ul>
             <p class="panel__ideal"><strong>Ideal para:</strong> artistas y productores que buscan un sonido competitivo y profesional.</p>
-          </article>
+            <a class="panel__next" href="#s-asesoria">Siguiente planeta: Asesoramiento artístico <span aria-hidden="true">↓</span></a>
+      </article>
+    </section>
 
-          <article class="panel tilt" id="s-asesoria" role="tabpanel" aria-labelledby="t-asesoria" style="--c:var(--purple)">
-            <div class="card__glow"></div>
+    <section class="stop" id="s-asesoria" data-cam="p4" style="--c:var(--purple)">
+      <article class="panel reveal">
             <svg class="card__icon" viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="18"/><path d="M30 18l-4 8-8 4 4-8z"/><circle cx="24" cy="24" r="2"/></svg>
+            <p class="panel__kicker">Planeta 05 de 07</p>
             <h3>Asesoramiento artístico</h3>
             <p class="panel__lead">Definimos quién eres como artista y cómo te va a recordar el público: sonido, imagen, concepto y presencia.</p>
             <ul class="panel__list">
@@ -215,11 +237,14 @@
               <li>Plan de desarrollo artístico</li>
             </ul>
             <p class="panel__ideal"><strong>Ideal para:</strong> artistas que empiezan o que quieren renovar su propuesta.</p>
-          </article>
+            <a class="panel__next" href="#s-business">Siguiente planeta: Music business <span aria-hidden="true">↓</span></a>
+      </article>
+    </section>
 
-          <article class="panel tilt" id="s-business" role="tabpanel" aria-labelledby="t-business" style="--c:var(--sky)">
-            <div class="card__glow"></div>
+    <section class="stop" id="s-business" data-cam="p5" style="--c:var(--sky)">
+      <article class="panel reveal">
             <svg class="card__icon" viewBox="0 0 48 48" aria-hidden="true"><path d="M6 40h36"/><path d="M10 34l9-10 7 6 12-16"/><path d="M32 14h6v6"/></svg>
+            <p class="panel__kicker">Planeta 06 de 07</p>
             <h3>Music business</h3>
             <p class="panel__lead">Convertimos tu música en un negocio ordenado: que esté protegida, distribuida y que cada reproducción se cobre.</p>
             <ul class="panel__list">
@@ -231,11 +256,14 @@
               <li>Asesoría en contratos y modelos de negocio</li>
             </ul>
             <p class="panel__ideal"><strong>Ideal para:</strong> artistas, compositores y sellos que quieren ordenar y hacer crecer sus ingresos.</p>
-          </article>
+            <a class="panel__next" href="#s-audiovisual">Siguiente planeta: Producción audiovisual <span aria-hidden="true">↓</span></a>
+      </article>
+    </section>
 
-          <article class="panel tilt" id="s-audiovisual" role="tabpanel" aria-labelledby="t-audiovisual" style="--c:var(--green)">
-            <div class="card__glow"></div>
+    <section class="stop" id="s-audiovisual" data-cam="p6" style="--c:var(--green)">
+      <article class="panel reveal">
             <svg class="card__icon" viewBox="0 0 48 48" aria-hidden="true"><rect x="4" y="12" width="30" height="24" rx="4"/><path d="M34 21l10-6v18l-10-6z"/><circle cx="14" cy="24" r="4"/></svg>
+            <p class="panel__kicker">Planeta 07 de 07</p>
             <h3>Producción audiovisual</h3>
             <p class="panel__lead">Con el equipo de Arkha Origin, tu música se ve tan bien como suena: video y contenido con estándar de cine.</p>
             <ul class="panel__list">
@@ -247,13 +275,12 @@
               <li>Kit de prensa (EPK)</li>
             </ul>
             <p class="panel__ideal"><strong>Ideal para:</strong> cada lanzamiento que necesita imagen, video y contenido para redes.</p>
-          </article>
-        </div>
-      </div>
+            <a class="panel__next" href="#etapa">Encuentra tu ruta en el sistema <span aria-hidden="true">↓</span></a>
+      </article>
     </section>
 
     <!-- ============ ETAPA ============ -->
-    <section class="section stage" id="etapa">
+    <section class="section stage" id="etapa" data-cam="overview">
       <div class="section__head">
         <p class="eyebrow reveal">02 — Tu etapa</p>
         <h2 class="reveal">¿En qué etapa de<br />tu <span class="grad">carrera</span> estás?</h2>
@@ -310,7 +337,7 @@
     </section>
 
     <!-- ============ PARA QUIÉN ============ -->
-    <section class="section audience">
+    <section class="section audience" data-cam="side">
       <div class="section__head">
         <p class="eyebrow reveal">03 — Para quién</p>
         <h2 class="reveal">Para todo el <span class="grad">ecosistema musical</span></h2>
@@ -325,7 +352,7 @@
     </section>
 
     <!-- ============ PROCESO ============ -->
-    <section class="section" id="proceso">
+    <section class="section" id="proceso" data-cam="process">
       <div class="section__head">
         <p class="eyebrow reveal">04 — Cómo trabajamos</p>
         <h2 class="reveal">Del primer demo<br />al <span class="grad">escenario</span></h2>
@@ -341,16 +368,12 @@
     </section>
 
     <!-- ============ POR QUÉ ============ -->
-    <section class="section studio" id="por-que">
-      <div class="studio__visual reveal">
-        <div class="vinyl"><div class="vinyl__label"><img src="assets/logo-mark.svg" alt="" /></div></div>
-        <div class="studio__ring r1"></div>
-        <div class="studio__ring r2"></div>
-      </div>
+    <section class="section studio" id="por-que" data-cam="sun">
+      <div class="studio__space" aria-hidden="true"></div>
       <div class="studio__text">
         <p class="eyebrow reveal">05 — Por qué Orvita</p>
         <h2 class="reveal">Donde el talento<br />encuentra <span class="grad">gravedad</span></h2>
-        <p class="reveal">Orvita Music nace dentro de <strong>Arkha Origin</strong>, productora audiovisual de Bogotá, para darle a los artistas un centro de gravedad: un equipo creativo, técnico y de negocio que trabaja en sincronía.</p>
+        <p class="reveal">En el centro del sistema está el artista. Orvita Music nace dentro de <strong>Arkha Origin</strong>, productora audiovisual de Bogotá, para darle a los artistas un centro de gravedad: un equipo creativo, técnico y de negocio que trabaja en sincronía.</p>
         <ul class="reasons">
           <li class="reveal"><h3>Todo en un solo equipo</h3><p>Música, video, marketing y negocio coordinados, sin tener que buscar un proveedor para cada cosa.</p></li>
           <li class="reveal"><h3>Respaldo audiovisual</h3><p>Tus videoclips y tu contenido los produce el equipo de Arkha Origin, con estándar de cine.</p></li>
@@ -361,7 +384,7 @@
     </section>
 
     <!-- ============ FAQ ============ -->
-    <section class="section faq" id="preguntas">
+    <section class="section faq" id="preguntas" data-cam="far">
       <div class="section__head">
         <p class="eyebrow reveal">06 — Preguntas frecuentes</p>
         <h2 class="reveal">Lo que más nos <span class="grad">preguntan</span></h2>
@@ -376,7 +399,7 @@
     </section>
 
     <!-- ============ CONTACTO ============ -->
-    <section class="section contact" id="contacto">
+    <section class="section contact" id="contacto" data-cam="contact">
       <div class="contact__box reveal">
         <div class="contact__bg" aria-hidden="true"></div>
         <p class="eyebrow">07 — Contacto</p>
