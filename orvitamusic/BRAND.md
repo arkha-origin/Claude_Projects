@@ -31,13 +31,22 @@
 6. **Consultoría & Estrategia 360°** — asesoría por horas o por proyecto para artistas fuera del roster.
 7. **Songwriting Camps & Alianzas** — campamentos de composición con compositores, beatmakers y realizadores.
 
-## 3. Logotipo
+## 3. Logotipo (oficial)
 
-- **Símbolo** (`assets/logo-mark.svg`): un planeta atravesado por una onda de sonido, rodeado por una órbita inclinada con un satélite verde. Representa al artista (planeta), su voz (onda) y el equipo que lo acompaña (satélite).
-- **Logotipo completo** (`assets/logo.svg`): símbolo + **ORVITA** en Syne ExtraBold con degradado, y **MUSIC** espaciado debajo.
-- **Área de respeto**: dejar alrededor un margen igual al diámetro del satélite × 2.
-- **Tamaño mínimo**: símbolo 24 px; logotipo completo 120 px de ancho.
-- **No hacer**: deformar, rotar la órbita, cambiar los colores del degradado, ponerlo sobre fondos claros sin versión monocroma.
+Archivos en `assets/brand/`:
+
+| Archivo | Uso |
+|---|---|
+| `orvita-horizontal-color-fondo-oscuro.svg` | **Principal.** Web, redes y piezas sobre fondo oscuro (anillo verde, planeta morado, letras claras). |
+| `orvita-horizontal-verde-fondo-oscuro.svg` | Alternativa monocromática verde sobre oscuro. |
+| `orvita-horizontal-color-fondo-claro.svg` | Sobre fondos claros (símbolo morado, letras negras). |
+| `orvita-horizontal-blanco.svg` | Una tinta blanca: sobre fotos o video. |
+| `orvita-horizontal-negro.svg` | Una tinta negra: documentos, impresión, sellos. |
+| `orvita-simbolo-color.svg` | Solo el símbolo (planeta con botón de play y anillo): favicon, avatar de redes. |
+
+- **Símbolo:** un planeta con un botón de *play* recortado, atravesado por un anillo orbital.
+- **Tamaño mínimo:** horizontal 120 px de ancho; símbolo 24 px.
+- **No hacer:** deformar, cambiar colores fuera de estas versiones, ni separar «MUSIC.» del wordmark.
 
 ## 4. Paleta de color
 
