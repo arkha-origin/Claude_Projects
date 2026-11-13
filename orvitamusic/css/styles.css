@@ -585,6 +585,9 @@ main, .footer { position: relative; z-index: 1; }
 .wa-float svg { width: 30px; height: 30px; }
 @media (max-width: 640px) { .wa-float { left: 1rem; bottom: 1rem; width: 52px; height: 52px; } .wa-btn { font-size: .95rem; padding: .9rem 1.2rem; } }
 
+.contact__legal { margin-top: 1rem; font-size: .85rem; color: var(--muted); }
+.contact__legal a, .footer small a { color: var(--green); text-decoration: underline; text-underline-offset: 3px; }
+
 /* ---------- Footer ---------- */
 .footer { padding: 4rem clamp(1.2rem, 6vw, 6rem) 2.4rem; border-top: 1px solid rgba(255,255,255,.06); color: var(--muted); background: rgba(7,6,13,.86); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); }
 .footer__top { display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 2.4rem; margin-bottom: 3rem; }
