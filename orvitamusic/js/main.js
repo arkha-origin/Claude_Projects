@@ -59,6 +59,7 @@ const checkReveal = () => {
 /* ---------- Ayudas de navegación ---------- */
 const progressBar = document.getElementById("progressBar");
 const toTop = document.getElementById("toTop");
+const waFloat = document.getElementById("waFloat");
 const timeline = document.querySelector(".timeline");
 const navAnchors = [...document.querySelectorAll("#navLinks a:not(.btn)")];
 const navSections = navAnchors.map((a) => document.querySelector(a.getAttribute("href")));
@@ -135,6 +136,8 @@ const updateUI = () => {
   const planet = jr.top <= 1 && jr.bottom >= innerHeight - 1 ? journeyIndex : -1;
   orbitLinks.forEach((a, i) => a.classList.toggle("is-current", i === planet));
   toTop.classList.toggle("is-on", scrollY > innerHeight && !orbitbar.classList.contains("is-on"));
+  // El botón de WhatsApp se esconde mientras la barra de planetas ocupa la parte de abajo.
+  waFloat?.classList.toggle("is-hidden", orbitbar.classList.contains("is-on"));
 
   if (timeline) {
     const r = timeline.getBoundingClientRect();

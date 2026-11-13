@@ -36,8 +36,9 @@ Todas las rutas son relativas, así que basta con subir la carpeta a `/orvitamus
 
 ## Pendientes (cuando Orvita tenga su propio dominio)
 
-- [ ] Contacto: hoy la sección muestra "Próximamente". Añadir correo o formulario cuando exista el dominio de Orvita.
-- [ ] Funciones de cada planeta (hoy marcadas "Próximamente"): Book Artist, showreel y cotizador audiovisual, paquetes de contenido, biblioteca de beats, agenda y pago de mentorías, inscripción a camps.
+- [x] Contacto: WhatsApp +57 314 440 9823 en todos los botones (mensajes prellenados por servicio).
+- [ ] Correo @orvitamusic.com y formulario propio (opcional).
+- [ ] Funciones propias de cada planeta (hoy llevan a WhatsApp): Book Artist, showreel y cotizador audiovisual, paquetes de contenido, biblioteca de beats, agenda y pago de mentorías, inscripción a camps.
 - [ ] Fichas de los artistas del roster: fotos, música y trayectoria.
 - [ ] Redes sociales en el footer (Instagram, TikTok, YouTube, Spotify).
 - [ ] Cifras / estadísticas, cuando haya resultados que mostrar.

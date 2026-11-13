@@ -562,6 +562,29 @@ main, .footer { position: relative; z-index: 1; }
 .soon__eq i:nth-child(4) { animation-delay: -.2s; animation-duration: 1.3s; }
 .soon__eq i:nth-child(5) { animation-delay: -.6s; }
 
+/* ---------- WhatsApp ---------- */
+.contact__topics a { display: flex; justify-content: space-between; gap: .6rem; color: var(--star); transition: color .3s; }
+.contact__topics li { transition: border-color .3s, background .3s; }
+.contact__topics li:hover { border-color: #25d366; background: rgba(37,211,102,.08); }
+.contact__topics li::before { content: none; }
+.contact__topics a span { color: #25d366; }
+.wa-btn {
+  display: inline-flex; align-items: center; gap: .8rem; margin-top: 2rem; padding: 1rem 1.6rem; border-radius: 999px;
+  background: #25d366; color: #062b14; font-weight: 600; font-size: 1.05rem; box-shadow: 0 0 40px rgba(37,211,102,.45);
+  transition: box-shadow .3s, transform .3s var(--ease);
+}
+.wa-btn:hover { box-shadow: 0 0 60px rgba(37,211,102,.7); }
+.wa-btn svg, .wa-float svg { width: 26px; height: 26px; fill: currentColor; flex: 0 0 auto; }
+.wa-float {
+  position: fixed; left: 1.4rem; bottom: 1.4rem; z-index: 40; width: 56px; height: 56px; border-radius: 50%;
+  display: grid; place-items: center; color: #fff; background: #25d366; box-shadow: 0 6px 30px rgba(37,211,102,.5);
+  transition: opacity .4s, transform .4s var(--ease);
+}
+.wa-float:hover { transform: scale(1.08); }
+.wa-float.is-hidden { opacity: 0; pointer-events: none; transform: translateY(20px); }
+.wa-float svg { width: 30px; height: 30px; }
+@media (max-width: 640px) { .wa-float { left: 1rem; bottom: 1rem; width: 52px; height: 52px; } .wa-btn { font-size: .95rem; padding: .9rem 1.2rem; } }
+
 /* ---------- Footer ---------- */
 .footer { padding: 4rem clamp(1.2rem, 6vw, 6rem) 2.4rem; border-top: 1px solid rgba(255,255,255,.06); color: var(--muted); background: rgba(7,6,13,.86); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); }
 .footer__top { display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 2.4rem; margin-bottom: 3rem; }
