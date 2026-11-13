@@ -2,9 +2,14 @@
    ORVITA MUSIC — Analítica (Google Analytics 4 y Pixel de Meta)
    ---------------------------------------------------------
    Los códigos se ponen en index.html, en window.ORVITA_ANALYTICS:
-     ga4:       "G-XXXXXXXXXX"   (Google Analytics → Administrar → Flujos de datos)
+     gtm:       "GTM-XXXXXXX"    (Google Tag Manager: Analytics y demás etiquetas
+                                  se configuran dentro del contenedor)
+     ga4:       "G-XXXXXXXXXX"   (opcional: GA4 directo, sin Tag Manager)
      metaPixel: "123456789012345" (Meta Business → Administrador de eventos)
    Si un código está vacío, esa herramienta no se carga.
+
+   Cada evento también se empuja al dataLayer ({ event: "generate_lead", … })
+   para usarlo como activador en Tag Manager.
 
    Eventos que se envían:
    - Clic en cualquier botón de WhatsApp → GA4 «generate_lead» y Meta «Contact»
@@ -15,14 +20,22 @@
    ========================================================= */
 (function () {
   const cfg = window.ORVITA_ANALYTICS || {};
+  const gtm = /^GTM-[A-Z0-9]+$/.test(cfg.gtm || "") ? cfg.gtm : "";
   const ga4 = /^G-[A-Z0-9]+$/.test(cfg.ga4 || "") ? cfg.ga4 : "";
   const pixel = /^\d{8,20}$/.test(cfg.metaPixel || "") ? cfg.metaPixel : "";
-  if (!ga4 && !pixel) return;
+  if (!gtm && !ga4 && !pixel) return;
+
+  window.dataLayer = window.dataLayer || [];
+  if (gtm) {
+    /* Código oficial de Google Tag Manager. */
+    window.dataLayer.push({ "gtm.start": Date.now(), event: "gtm.js" });
+  }
 
   const load = (src) => { const s = document.createElement("script"); s.async = true; s.src = src; document.head.appendChild(s); };
 
+  if (gtm) load(`https://www.googletagmanager.com/gtm.js?id=${gtm}`);
+
   if (ga4) {
-    window.dataLayer = window.dataLayer || [];
     window.gtag = function () { window.dataLayer.push(arguments); };
     window.gtag("js", new Date());
     window.gtag("config", ga4, { anonymize_ip: true });
@@ -40,7 +53,10 @@
     window.fbq("track", "PageView");
   }
 
-  const gaEvent = (name, params) => { if (ga4 && window.gtag) window.gtag("event", name, params); };
+  const gaEvent = (name, params) => {
+    if (gtm) window.dataLayer.push({ event: name, ...params });
+    if (ga4 && window.gtag) window.gtag("event", name, params);
+  };
   const fbEvent = (name, params) => { if (pixel && window.fbq) window.fbq("track", name, params); };
 
   // Qué servicio pidió: el planeta donde está el botón, o el texto del enlace.
@@ -72,7 +88,7 @@
 
   // Planetas vistos en el recorrido horizontal (una vez cada uno por visita).
   const bar = document.getElementById("orbitbar");
-  if (ga4 && bar) {
+  if ((gtm || ga4) && bar) {
     const seen = new Set();
     new MutationObserver(() => {
       const cur = bar.querySelector("a.is-current");
